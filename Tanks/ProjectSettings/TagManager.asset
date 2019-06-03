@@ -38,6 +38,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Tank
+    uniqueID: 10098615
+    locked: 0
+  - name: Trees
+    uniqueID: 3045025045
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

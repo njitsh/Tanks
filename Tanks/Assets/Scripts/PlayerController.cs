@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     private float angle = 0;
     private float target_angle = 0;
     private float turn_speed = 3;
+    private float mag;
     private Rigidbody2D rb;
     private Vector2 moveVelocity;
 
@@ -23,10 +24,12 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 moveInput = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0);
 
-        if (((target_angle - angle) > -1) && ((target_angle - angle) < 1)) moveVelocity = moveInput.normalized * speed;
+        if (Mathf.Abs(target_angle - angle) < 1)
+        {
+            mag = Mathf.Clamp01(new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")).magnitude);
+            moveVelocity = moveInput.normalized * speed * mag;
+        }
         else moveVelocity = moveInput.normalized * 0;
-        float delta_angle = (target_angle - angle);
-        print(delta_angle);
 
         RotateTank();
     }
@@ -42,11 +45,12 @@ public class PlayerController : MonoBehaviour
 
         if ((Input.GetAxisRaw("Vertical") != 0) || (Input.GetAxisRaw("Horizontal") != 0))
         {
-            target_angle = (Mathf.Atan2(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal")) * Mathf.Rad2Deg + 360) % 360;
+            target_angle = (Mathf.Atan2(Input.GetAxisRaw("Vertical"), Input.GetAxisRaw("Horizontal")) * Mathf.Rad2Deg + 360) % 360;
             for (int times = 0; times < turn_speed; times++)
             {
+                if (Mathf.Abs(target_angle - angle) < 1) times = 3;
                 // Turn clockwise
-                if (((angle > target_angle) && (angle - target_angle <= 180)) || ((angle < target_angle) && (target_angle - angle >= 180))) angle = (angle - 1 + 360) % 360;
+                else if (((angle > target_angle) && (angle - target_angle <= 180)) || ((angle < target_angle) && (target_angle - angle >= 180))) angle = (angle - 1 + 360) % 360;
                 // Turn anti-clockwise
                 else if (((angle < target_angle) && (target_angle - angle < 180)) || ((angle > target_angle) && (angle - target_angle > 180))) angle = (angle + 1 + 360) % 360;
             }
