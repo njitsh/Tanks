@@ -13,10 +13,15 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 moveVelocity;
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        Cursor.visible = false;
     }
 
     // Update is called once per frame

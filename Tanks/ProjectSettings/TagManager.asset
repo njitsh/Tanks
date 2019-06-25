@@ -38,6 +38,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Bullets
+    uniqueID: 2356741565
+    locked: 0
   - name: Tank
     uniqueID: 10098615
     locked: 0
