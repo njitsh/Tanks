@@ -9,22 +9,24 @@ using System;
 public class StartGame : MonoBehaviour
 {
 
-    public Button StartButton;
-   
+    public Button NewSceneButton;
     // Start is called before the first frame update
     void Start()
     {
-        if (StartButton != null)
-        {
-            StartButton.onClick.AddListener(LoadMainScene);
-        }
-        
-    }
-    void LoadMainScene()
-    {
-        SceneManager.LoadScene("MainGameScene");
-    }
 
+    }
+    public void StartMainScene()
+    {
+      
+        SceneManager.LoadScene("MainGameScene");
+     
+       
+    }
+    public void StartEditorScene()
+    {
+        SceneManager.LoadScene("MapEditorScene");
+
+    }
     // Update is called once per frame
     void Update()
     {

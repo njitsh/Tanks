@@ -1,0 +1,2 @@
+D:\School\Games\Tanks\Tanks\Tanks\obj\Debug\Assembly-CSharp.csprojAssemblyReference.cache
+D:\School\Games\Tanks\Tanks\Tanks\obj\Debug\Assembly-CSharp.csproj.CoreCompileInputs.cache
