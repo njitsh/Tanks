@@ -1,9 +1,10 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
+    - MainMenu
+    - PauseMenu
     - PlayerController
     - PlayerGun
-    - StartGame
     Unity.TextMeshPro.dll:
     - TMPro.TMP_FontAsset
     - TMPro.TMP_Settings
@@ -20,7 +21,117 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.GraphicRaycaster
     - UnityEngine.UI.Image
   sceneClasses:
-    Assets/Scenes/HomeScene.unity:
+    Assets/Scenes/LocalGameScene.unity:
+    - Class: 1
+      Script: {instanceID: 0}
+    - Class: 4
+      Script: {instanceID: 0}
+    - Class: 20
+      Script: {instanceID: 0}
+    - Class: 21
+      Script: {instanceID: 0}
+    - Class: 28
+      Script: {instanceID: 0}
+    - Class: 48
+      Script: {instanceID: 0}
+    - Class: 50
+      Script: {instanceID: 0}
+    - Class: 61
+      Script: {instanceID: 0}
+    - Class: 74
+      Script: {instanceID: 0}
+    - Class: 81
+      Script: {instanceID: 0}
+    - Class: 91
+      Script: {instanceID: 0}
+    - Class: 95
+      Script: {instanceID: 0}
+    - Class: 104
+      Script: {instanceID: 0}
+    - Class: 114
+      Script: {instanceID: 9344}
+    - Class: 114
+      Script: {instanceID: 9346}
+    - Class: 114
+      Script: {instanceID: 9352}
+    - Class: 114
+      Script: {instanceID: 9358}
+    - Class: 114
+      Script: {instanceID: 9366}
+    - Class: 114
+      Script: {instanceID: 9402}
+    - Class: 114
+      Script: {instanceID: 9424}
+    - Class: 114
+      Script: {instanceID: 9838}
+    - Class: 114
+      Script: {instanceID: 10084}
+    - Class: 114
+      Script: {instanceID: 10228}
+    - Class: 114
+      Script: {instanceID: 23204}
+    - Class: 115
+      Script: {instanceID: 0}
+    - Class: 128
+      Script: {instanceID: 0}
+    - Class: 157
+      Script: {instanceID: 0}
+    - Class: 212
+      Script: {instanceID: 0}
+    - Class: 213
+      Script: {instanceID: 0}
+    - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
+    - Class: 224
+      Script: {instanceID: 0}
+    Assets/Scenes/MapEditorScene.unity:
+    - Class: 1
+      Script: {instanceID: 0}
+    - Class: 4
+      Script: {instanceID: 0}
+    - Class: 20
+      Script: {instanceID: 0}
+    - Class: 21
+      Script: {instanceID: 0}
+    - Class: 28
+      Script: {instanceID: 0}
+    - Class: 48
+      Script: {instanceID: 0}
+    - Class: 81
+      Script: {instanceID: 0}
+    - Class: 104
+      Script: {instanceID: 0}
+    - Class: 114
+      Script: {instanceID: 9344}
+    - Class: 114
+      Script: {instanceID: 9346}
+    - Class: 114
+      Script: {instanceID: 9358}
+    - Class: 114
+      Script: {instanceID: 9366}
+    - Class: 114
+      Script: {instanceID: 10084}
+    - Class: 114
+      Script: {instanceID: 10228}
+    - Class: 115
+      Script: {instanceID: 0}
+    - Class: 128
+      Script: {instanceID: 0}
+    - Class: 157
+      Script: {instanceID: 0}
+    - Class: 212
+      Script: {instanceID: 0}
+    - Class: 213
+      Script: {instanceID: 0}
+    - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
+    - Class: 224
+      Script: {instanceID: 0}
+    Assets/Scenes/MenuScene.unity:
     - Class: 1
       Script: {instanceID: 0}
     - Class: 4
@@ -56,8 +167,6 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 9756}
     - Class: 114
-      Script: {instanceID: 9826}
-    - Class: 114
       Script: {instanceID: 10084}
     - Class: 114
       Script: {instanceID: 10094}
@@ -65,6 +174,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 10228}
     - Class: 114
       Script: {instanceID: 10464}
+    - Class: 114
+      Script: {instanceID: 13770}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -79,38 +190,20 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 224
       Script: {instanceID: 0}
-    Assets/Scenes/MainGameScene.unity:
+    Assets/Scenes/OnlineGameScene.unity:
     - Class: 1
       Script: {instanceID: 0}
     - Class: 4
       Script: {instanceID: 0}
     - Class: 20
       Script: {instanceID: 0}
-    - Class: 21
-      Script: {instanceID: 0}
     - Class: 28
-      Script: {instanceID: 0}
-    - Class: 48
-      Script: {instanceID: 0}
-    - Class: 50
-      Script: {instanceID: 0}
-    - Class: 61
       Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
     - Class: 104
       Script: {instanceID: 0}
-    - Class: 114
-      Script: {instanceID: 9424}
-    - Class: 114
-      Script: {instanceID: 9838}
-    - Class: 115
-      Script: {instanceID: 0}
     - Class: 157
-      Script: {instanceID: 0}
-    - Class: 212
-      Script: {instanceID: 0}
-    - Class: 213
       Script: {instanceID: 0}
   scriptHashData:
   - hash:
@@ -601,12 +694,6 @@ ScriptsOnlyBuild:
     className: ControlTrack
   - hash:
       serializedVersion: 2
-      Hash: 7accccfa4ce42911726ce05d90eba05f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: StartGame
-  - hash:
-      serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
@@ -767,8 +854,22 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: MainMenu
+  - hash:
+      serializedVersion: 2
+      Hash: c8c5e65e9fb858572516474d6e2102bc
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: PauseMenu
   platform: 19
   scenePathNames:
-  - Assets/Scenes/HomeScene.unity
-  - Assets/Scenes/MainGameScene.unity
+  - Assets/Scenes/MenuScene.unity
+  - Assets/Scenes/LocalGameScene.unity
+  - Assets/Scenes/OnlineGameScene.unity
+  - Assets/Scenes/MapEditorScene.unity
   playerPath: D:/Tanks/Build/Tanks.exe
