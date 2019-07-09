@@ -26,16 +26,19 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 moveInput = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0);
-
-        if (Mathf.Abs(target_angle - angle) < 1)
+        if (!PauseMenu.GameIsPaused)
         {
-            mag = Mathf.Clamp01(new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")).magnitude);
-            moveVelocity = moveInput.normalized * speed * mag;
-        }
-        else moveVelocity = moveInput.normalized * 0;
+            Vector3 moveInput = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0);
 
-        RotateTank();
+            if (Mathf.Abs(target_angle - angle) < 1)
+            {
+                mag = Mathf.Clamp01(new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")).magnitude);
+                moveVelocity = moveInput.normalized * speed * mag;
+            }
+            else moveVelocity = moveInput.normalized * 0;
+
+            RotateTank();
+        }
     }
 
     void FixedUpdate()

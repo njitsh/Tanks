@@ -12,9 +12,6 @@ public class Bullet : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        GameObject barrel = GameObject.Find("Barrel");
-        PlayerGun playerGun = barrel.GetComponent<PlayerGun>();
-        angle_shot = playerGun.angle;
     }
 
     // Update is called once per frame
@@ -24,8 +21,8 @@ public class Bullet : MonoBehaviour
 
         rb.velocity = new Vector2(Mathf.Cos(angle)*vel, Mathf.Sin(angle) * vel);
 
-        Ray ray = new Ray(transform.position, transform.forward);
-        RaycastHit hit;
+        //Ray ray = new Ray(transform.position, transform.forward);
+        //RaycastHit hit;
 
         /*if (Physics.Raycast(ray, out hit, Time.deltaTime * vel + 0.1f, collisionMask))
         {
@@ -35,5 +32,12 @@ public class Bullet : MonoBehaviour
         }*/
 
         Destroy(gameObject, 1f);
+    }
+
+    public void setTankNumber(int tanknr)
+    {
+        string player_b = "Barrel " + tanknr;
+        PlayerGun playerGun = GameObject.Find(player_b).GetComponent<PlayerGun>();
+        angle_shot = playerGun.angle;
     }
 }

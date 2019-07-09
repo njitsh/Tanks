@@ -10,10 +10,9 @@ public class MainMenu : MonoBehaviour
         Cursor.lockState = CursorLockMode.Confined;
     }
 
-    public void LocalGame()
+    public void LocalGameLobby()
     {
-        SceneManager.LoadScene("LocalGameScene");
-        Cursor.visible = false;
+        SceneManager.LoadScene("LocalLobbyScene");
     }
 
     public void OnlineGame()

@@ -47,6 +47,9 @@ TagManager:
   - name: Trees
     uniqueID: 3045025045
     locked: 0
+  - name: Crosshair
+    uniqueID: 3479164617
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
