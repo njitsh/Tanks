@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Crosshair : MonoBehaviour
 {
+    private float crosshairSpeed = 0.1f;
+    private float crosshairMag;
+    private Vector2 moveCrosshairVelocity;
     public int tank_number;
     private float x_co = 0, y_co = 0;
     private bool isKeyboard = false;
@@ -16,7 +19,7 @@ public class Crosshair : MonoBehaviour
             case 1:
                 x_co = 2;
                 y_co = -2;
-                isKeyboard = true;
+                isKeyboard = false;
                 break;
             case 2:
                 x_co = 1;
@@ -36,8 +39,19 @@ public class Crosshair : MonoBehaviour
         {
             if (isKeyboard)
             {
-                transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10));
+                x_co = Camera.main.ScreenToWorldPoint(new Vector2(Input.mousePosition.x, Input.mousePosition.y)).x;
+                y_co = Camera.main.ScreenToWorldPoint(new Vector2(Input.mousePosition.x, Input.mousePosition.y)).y;
             }
+            else
+            {
+                Vector3 moveCrosshairInput = new Vector3(Input.GetAxisRaw("J" + tank_number + "RightHorizontal"), Input.GetAxisRaw("J" + tank_number + "RightVertical"), 0);
+
+                crosshairMag = Mathf.Clamp01(new Vector2(Input.GetAxis("J" + tank_number + "RightHorizontal"), Input.GetAxis("J" + tank_number + "RightVertical")).magnitude);
+                moveCrosshairVelocity = moveCrosshairInput.normalized * crosshairSpeed * crosshairMag;
+                x_co += moveCrosshairVelocity.x;
+                y_co += moveCrosshairVelocity.y;
+            }
+            transform.position = new Vector2(x_co, y_co);
         }
     }
 }

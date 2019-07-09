@@ -16,6 +16,7 @@ public class PlayerGun : MonoBehaviour
     private float barrel_length = 0.4f;
 
     public GameObject parentTank;
+    public GameObject crosshair;
     public int tank_number;
 
     // Start is called before the first frame update
@@ -31,12 +32,12 @@ public class PlayerGun : MonoBehaviour
         if (!PauseMenu.GameIsPaused)
         {
             transform.position = parentTank.transform.position;
-            var pos = Camera.main.WorldToScreenPoint(transform.position);
-            var dir = Input.mousePosition - pos;
+            var dir = crosshair.transform.position - transform.position;
             angle = (Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + 360) % 360;
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
-            if (Input.GetButtonDown("Fire1") && Time.time > nextFire)
+
+            if (Input.GetButtonDown("J" + tank_number + "X") && Time.time > nextFire)
             {
                 nextFire = Time.time + fireRate;
                 fire();
@@ -53,11 +54,6 @@ public class PlayerGun : MonoBehaviour
             bulletPos += new Vector2(Mathf.Cos(rAngle) * barrel_length, Mathf.Sin(rAngle) * barrel_length);
             GameObject bullet = Instantiate(Bullet, bulletPos, Quaternion.AngleAxis(angle, Vector3.forward));
             bullet.GetComponent<Bullet>().setTankNumber(tank_number);
-            transform.position = parentTank.transform.position;
-            var pos = Camera.main.WorldToScreenPoint(transform.position);
-            var dir = Input.mousePosition - pos;
-            angle = (Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + 360) % 360;
-            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
     }
 }
