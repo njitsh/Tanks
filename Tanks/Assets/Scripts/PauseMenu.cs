@@ -11,6 +11,20 @@ public class PauseMenu : MonoBehaviour
     
     void Update()
     {
+        for (int i = 1; i <= 4; i++)
+        {
+            if (Input.GetButtonDown("J" + i + "Start"))
+            {
+                if (GameIsPaused)
+                {
+                    Resume();
+                }
+                else
+                {
+                    Pause();
+                }
+            }
+        }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (GameIsPaused)

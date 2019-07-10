@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     private string verticalAxis;
     private string aButton;
     private string xButton;
-    private string startButton;
+    public string startButton;
     private int controllerNumber;
     public int tank_number;
 
@@ -62,6 +62,9 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameObject PCBinding = GameObject.Find("PCBinding");
+        ControllerPlayerBinding cpBinding = PCBinding.GetComponent<ControllerPlayerBinding>();
+        SetControllerNumber(cpBinding.getControllerBinding(tank_number));
         rb = GetComponent<Rigidbody2D>();
     }
 

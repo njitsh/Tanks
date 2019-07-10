@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class Crosshair : MonoBehaviour
 {
-    private float crosshairSpeed = 0.1f;
+    private float crosshairSpeed = 0.15f;
     private float crosshairMag;
     private Vector2 moveCrosshairVelocity;
     public int tank_number;
     private float x_co = 0, y_co = 0;
     private bool isKeyboard = false;
+    private int crosshairSize = 50;
 
     // Start is called before the first frame update
     void Start()
@@ -45,11 +46,18 @@ public class Crosshair : MonoBehaviour
             else
             {
                 Vector3 moveCrosshairInput = new Vector3(Input.GetAxisRaw("J" + tank_number + "RightHorizontal"), Input.GetAxisRaw("J" + tank_number + "RightVertical"), 0);
-
-                crosshairMag = Mathf.Clamp01(new Vector2(Input.GetAxis("J" + tank_number + "RightHorizontal"), Input.GetAxis("J" + tank_number + "RightVertical")).magnitude);
-                moveCrosshairVelocity = moveCrosshairInput.normalized * crosshairSpeed * crosshairMag;
-                x_co += moveCrosshairVelocity.x;
-                y_co += moveCrosshairVelocity.y;
+                //Variable crosshair speed
+                //crosshairMag = Mathf.Clamp01(new Vector2(Input.GetAxisRaw("J" + tank_number + "RightHorizontal"), Input.GetAxisRaw("J" + tank_number + "RightVertical")).magnitude);
+                //moveCrosshairVelocity = moveCrosshairInput.normalized * crosshairSpeed * crosshairMag;
+                moveCrosshairVelocity = moveCrosshairInput.normalized * crosshairSpeed * Time.fixedDeltaTime;
+                if ((x_co + moveCrosshairVelocity.x < Camera.main.ScreenToWorldPoint(new Vector2(Screen.width - (crosshairSize / 2), Screen.height)).x) && (x_co + moveCrosshairVelocity.x > Camera.main.ScreenToWorldPoint(new Vector2((crosshairSize / 2), 0)).x))
+                {
+                    x_co += moveCrosshairVelocity.x;
+                }
+                if ((y_co + moveCrosshairVelocity.y < Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height - (crosshairSize / 2))).y) && (y_co + moveCrosshairVelocity.y > Camera.main.ScreenToWorldPoint(new Vector2(0, (crosshairSize / 2))).y))
+                {
+                    y_co += moveCrosshairVelocity.y;
+                }
             }
             transform.position = new Vector2(x_co, y_co);
         }

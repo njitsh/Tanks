@@ -67,17 +67,17 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 9424}
     - Class: 114
-      Script: {instanceID: 9820}
+      Script: {instanceID: 9822}
     - Class: 114
-      Script: {instanceID: 9838}
+      Script: {instanceID: 9840}
     - Class: 114
-      Script: {instanceID: 9860}
+      Script: {instanceID: 9862}
     - Class: 114
-      Script: {instanceID: 10090}
+      Script: {instanceID: 10092}
     - Class: 114
-      Script: {instanceID: 10206}
+      Script: {instanceID: 10208}
     - Class: 114
-      Script: {instanceID: 10236}
+      Script: {instanceID: 10238}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -124,13 +124,13 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 9402}
     - Class: 114
-      Script: {instanceID: 9920}
+      Script: {instanceID: 9922}
     - Class: 114
-      Script: {instanceID: 10090}
+      Script: {instanceID: 10092}
     - Class: 114
-      Script: {instanceID: 10236}
+      Script: {instanceID: 10238}
     - Class: 114
-      Script: {instanceID: 10554}
+      Script: {instanceID: 10556}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -171,9 +171,9 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 9366}
     - Class: 114
-      Script: {instanceID: 10090}
+      Script: {instanceID: 10092}
     - Class: 114
-      Script: {instanceID: 10236}
+      Script: {instanceID: 10238}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -224,17 +224,17 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 9402}
     - Class: 114
-      Script: {instanceID: 9756}
+      Script: {instanceID: 9758}
     - Class: 114
-      Script: {instanceID: 9970}
+      Script: {instanceID: 9972}
     - Class: 114
-      Script: {instanceID: 10090}
+      Script: {instanceID: 10092}
     - Class: 114
-      Script: {instanceID: 10100}
+      Script: {instanceID: 10102}
     - Class: 114
-      Script: {instanceID: 10236}
+      Script: {instanceID: 10238}
     - Class: 114
-      Script: {instanceID: 10472}
+      Script: {instanceID: 10474}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -723,6 +723,12 @@ ScriptsOnlyBuild:
     className: AnimationPlayableAsset
   - hash:
       serializedVersion: 2
+      Hash: 439f6906866281df69a5cb8a91bba5ca
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: PlayerPanel
+  - hash:
+      serializedVersion: 2
       Hash: 303ad70ce203ad874efe2965d0fbcff9
     assemblyName: Unity.Analytics.Tracker.dll
     namespaceName: UnityEngine.Analytics
@@ -789,7 +795,7 @@ ScriptsOnlyBuild:
     className: AnalyticsEventTrackerEditor
   - hash:
       serializedVersion: 2
-      Hash: 7d2921aabe2fac58164ca298b7c07eea
+      Hash: e66c64384db7a1ceefd028df7766187e
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerToControllerAssigner
@@ -807,7 +813,7 @@ ScriptsOnlyBuild:
     className: TextContainer
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+      Hash: 3c810e7272c44f2d47e6ac1fe95e8d52
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: MainMenu
@@ -949,12 +955,6 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
-  - hash:
-      serializedVersion: 2
-      Hash: 439f6906866281df69a5cb8a91bba5ca
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: PlayerPanel
   platform: 19
   scenePathNames:
   - Assets/Scenes/MenuScene.unity

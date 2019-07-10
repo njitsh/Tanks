@@ -13,6 +13,7 @@ public class PlayerGun : MonoBehaviour
     private Vector2 bulletPos;
     private float fireRate = 0.2f;
     private float nextFire = 0.0f;
+    private bool releasedFireTrigger = true;
     private float barrel_length = 0.4f;
 
     public GameObject parentTank;
@@ -37,10 +38,15 @@ public class PlayerGun : MonoBehaviour
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
 
-            if (Input.GetButtonDown("J" + tank_number + "X") && Time.time > nextFire)
+            if ((Input.GetButtonDown("J" + tank_number + "X") || Input.GetAxis("J" + tank_number + "RightTrigger") > 0) && Time.time > nextFire && releasedFireTrigger)
             {
                 nextFire = Time.time + fireRate;
+                releasedFireTrigger = false;
                 fire();
+            }
+            else if (!Input.GetButtonDown("J" + tank_number + "X") && Input.GetAxis("J" + tank_number + "RightTrigger") == 0)
+            {
+                releasedFireTrigger = true;
             }
         }
     }
