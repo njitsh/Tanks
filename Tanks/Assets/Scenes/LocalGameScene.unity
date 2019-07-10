@@ -667,6 +667,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c4aeb02951c6404b8f0df2cd726ea1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startButton: 
   tank_number: 4
 --- !u!50 &669187794
 Rigidbody2D:
@@ -783,6 +784,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c4aeb02951c6404b8f0df2cd726ea1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startButton: 
   tank_number: 2
 --- !u!50 &724686264
 Rigidbody2D:
@@ -1197,6 +1199,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c4aeb02951c6404b8f0df2cd726ea1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startButton: 
   tank_number: 3
 --- !u!50 &955902729
 Rigidbody2D:
@@ -2424,6 +2427,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c4aeb02951c6404b8f0df2cd726ea1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startButton: 
   tank_number: 1
 --- !u!212 &1903134311
 SpriteRenderer:

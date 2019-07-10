@@ -2,7 +2,9 @@ ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
     - Bullet
+    - ControllerPlayerBinding
     - Crosshair
+    - Editor
     - LobbyMenu
     - MainMenu
     - PauseMenu
@@ -78,6 +80,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 10208}
     - Class: 114
       Script: {instanceID: 10238}
+    - Class: 114
+      Script: {instanceID: 10540}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -130,7 +134,9 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 10238}
     - Class: 114
-      Script: {instanceID: 10556}
+      Script: {instanceID: 10540}
+    - Class: 114
+      Script: {instanceID: 10558}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -158,7 +164,13 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 48
       Script: {instanceID: 0}
+    - Class: 74
+      Script: {instanceID: 0}
     - Class: 81
+      Script: {instanceID: 0}
+    - Class: 91
+      Script: {instanceID: 0}
+    - Class: 95
       Script: {instanceID: 0}
     - Class: 104
       Script: {instanceID: 0}
@@ -167,13 +179,21 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 9346}
     - Class: 114
+      Script: {instanceID: 9352}
+    - Class: 114
       Script: {instanceID: 9358}
     - Class: 114
       Script: {instanceID: 9366}
     - Class: 114
+      Script: {instanceID: 9402}
+    - Class: 114
       Script: {instanceID: 10092}
     - Class: 114
+      Script: {instanceID: 10208}
+    - Class: 114
       Script: {instanceID: 10238}
+    - Class: 114
+      Script: {instanceID: 19744}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -495,7 +515,7 @@ ScriptsOnlyBuild:
     className: VerticalLayoutGroup
   - hash:
       serializedVersion: 2
-      Hash: a5f346c48f2cfd0d686a73b2204cfa92
+      Hash: a0469bc99620d586dec6f675c81163a8
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerController
@@ -921,6 +941,12 @@ ScriptsOnlyBuild:
     className: TMP_StyleSheet
   - hash:
       serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: ControllerPlayerBinding
+  - hash:
+      serializedVersion: 2
       Hash: 5372ed2ce39229b1ac910757999a8be2
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
@@ -955,6 +981,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
+  - hash:
+      serializedVersion: 2
+      Hash: f9e43320ee2399e53792a59a76f6fa75
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Editor
   platform: 19
   scenePathNames:
   - Assets/Scenes/MenuScene.unity

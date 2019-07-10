@@ -73,11 +73,11 @@ public class PlayerController : MonoBehaviour
     {
         if (!PauseMenu.GameIsPaused)
         {
-            Vector3 moveInput = new Vector3(Input.GetAxisRaw("J" + tank_number + "Horizontal"), Input.GetAxisRaw("J" + tank_number + "Vertical"), 0);
+            Vector3 moveInput = new Vector3(Input.GetAxisRaw(horizontalAxis), Input.GetAxisRaw(verticalAxis), 0);
 
             if (Mathf.Abs(target_angle - angle) < 1)
             {
-                mag = Mathf.Clamp01(new Vector2(Input.GetAxis("J" + tank_number + "Horizontal"), Input.GetAxis("J" + tank_number + "Vertical")).magnitude);
+                mag = Mathf.Clamp01(new Vector2(Input.GetAxis(horizontalAxis), Input.GetAxis(verticalAxis)).magnitude);
                 moveVelocity = moveInput.normalized * speed * mag;
             }
             else moveVelocity = moveInput.normalized * 0;
@@ -95,9 +95,9 @@ public class PlayerController : MonoBehaviour
     {
         // Get Target Angle
 
-        if ((Input.GetAxis("J" + tank_number + "Vertical") != 0) || (Input.GetAxis("J" + tank_number + "Horizontal") != 0))
+        if ((Input.GetAxis(verticalAxis) != 0) || (Input.GetAxis(horizontalAxis) != 0))
         {
-            target_angle = (Mathf.Atan2(Input.GetAxis("J" + tank_number + "Vertical"), Input.GetAxis("J" + tank_number +  "Horizontal")) * Mathf.Rad2Deg + 360) % 360;
+            target_angle = (Mathf.Atan2(Input.GetAxis(verticalAxis), Input.GetAxis(horizontalAxis)) * Mathf.Rad2Deg + 360) % 360;
             for (int times = 0; times < turn_speed; times++)
             {
                 if (Mathf.Abs(target_angle - angle) < 1) times = 3;
