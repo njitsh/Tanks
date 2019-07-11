@@ -15,6 +15,9 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 moveVelocity;
 
+    public int health;
+    public int healthMax;
+
     private string horizontalAxis;
     private string verticalAxis;
     public string horizontalRightAxis;
@@ -29,6 +32,14 @@ public class PlayerController : MonoBehaviour
 
     public GameObject player_tank_crosshair;
     public GameObject player_tank_gun;
+
+    // TODO ?
+    // setup custom constructed class with HP, ammo?, and wich class is currently being used.
+    
+    public PlayerController(int controllerNumber, int color, int health)
+    {
+
+    }
 
     public void SetCrosshair(GameObject crosshair_tank)
     {
@@ -74,19 +85,28 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (other.tag == "player") {
+            //player
+
+
+        }
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        health = healthMax;
+
         GameObject PCBinding = GameObject.Find("PCBinding");
         ControllerPlayerBinding cpBinding = PCBinding.GetComponent<ControllerPlayerBinding>();
         if (cpBinding.getControllerBinding(tank_number) != 0)
         {
             SetControllerNumber(cpBinding.getControllerBinding(tank_number));
+
             Crosshair player_tank_crosshair_script = player_tank_crosshair.GetComponent<Crosshair>();
             if (cpBinding.getControllerBinding(tank_number) == 5) isKeyboard = true;
             player_tank_crosshair_script.SetCrosshairControls(horizontalRightAxis, verticalRightAxis, isKeyboard);
+
             PlayerGun player_tank_gun_script = player_tank_gun.GetComponent<PlayerGun>();
             player_tank_gun_script.SetGunController(xButton, rightTriggerButton);
         }

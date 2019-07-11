@@ -41,7 +41,7 @@ TagManager:
   - name: Bullets
     uniqueID: 2356741565
     locked: 0
-  - name: Tank
+  - name: Tanks
     uniqueID: 10098615
     locked: 0
   - name: Trees
@@ -49,6 +49,12 @@ TagManager:
     locked: 0
   - name: Crosshair
     uniqueID: 3479164617
+    locked: 0
+  - name: PlacedBlocks
+    uniqueID: 3868237243
+    locked: 0
+  - name: SelectedBlock
+    uniqueID: 1020959041
     locked: 0
   - name: Default
     uniqueID: 0

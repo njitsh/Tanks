@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 86118700}
   - component: {fileID: 86118699}
   - component: {fileID: 86118698}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: MenuButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -578,7 +578,7 @@ GameObject:
   - component: {fileID: 281748954}
   - component: {fileID: 281748953}
   - component: {fileID: 281748952}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: PauseMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -779,6 +779,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedPart: {fileID: 0}
   target: {fileID: 0}
+  sLayer: 0
 --- !u!1 &344087624
 GameObject:
   m_ObjectHideFlags: 0
@@ -947,7 +948,7 @@ GameObject:
   - component: {fileID: 610528276}
   - component: {fileID: 610528278}
   - component: {fileID: 610528277}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1104,7 +1105,7 @@ GameObject:
   - component: {fileID: 645089692}
   - component: {fileID: 645089694}
   - component: {fileID: 645089693}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1261,7 +1262,7 @@ GameObject:
   - component: {fileID: 795902168}
   - component: {fileID: 795902170}
   - component: {fileID: 795902169}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1501,6 +1502,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 312699480}
+        m_MethodName: SetSortingLayer
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1232261163
@@ -1634,6 +1646,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 312699480}
+        m_MethodName: SetSortingLayer
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1397289529
@@ -1751,7 +1774,7 @@ GameObject:
   - component: {fileID: 1600497273}
   - component: {fileID: 1600497272}
   - component: {fileID: 1600497271}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: QuitButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1884,7 +1907,7 @@ GameObject:
   - component: {fileID: 1735716933}
   - component: {fileID: 1735716932}
   - component: {fileID: 1735716931}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Canvas (PM)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2078,6 +2101,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 312699480}
+        m_MethodName: SetSortingLayer
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1831488045
@@ -2129,7 +2163,7 @@ GameObject:
   - component: {fileID: 1948482109}
   - component: {fileID: 1948482108}
   - component: {fileID: 1948482107}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: ResumeButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}

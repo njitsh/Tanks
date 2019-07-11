@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Crosshair : MonoBehaviour
 {
-    private float crosshairSpeed = 5f;
+    private float crosshairSpeed = 10f;
     private float crosshairMag;
     private Vector2 moveCrosshairVelocity;
 
-    private static string horizontalRightAxis;
-    private static string verticalRightAxis;
+    public string horizontalRightAxis;
+    public string verticalRightAxis;
 
     private float x_co = 0, y_co = 0;
     private bool isKeyboard = false;
@@ -41,9 +41,9 @@ public class Crosshair : MonoBehaviour
             {
                 Vector3 moveCrosshairInput = new Vector3(Input.GetAxisRaw(horizontalRightAxis), Input.GetAxisRaw(verticalRightAxis), 0);
                 //Variable crosshair speed
-                //crosshairMag = Mathf.Clamp01(new Vector2(Input.GetAxisRaw(horizontalRightAxis), Input.GetAxisRaw(verticalRightAxis)).magnitude);
-                //moveCrosshairVelocity = moveCrosshairInput.normalized * crosshairSpeed * crosshairMag;
-                moveCrosshairVelocity = moveCrosshairInput.normalized * crosshairSpeed * Time.fixedDeltaTime;
+                crosshairMag = Mathf.Clamp01(new Vector2(Input.GetAxisRaw(horizontalRightAxis), Input.GetAxisRaw(verticalRightAxis)).magnitude);
+                moveCrosshairVelocity = moveCrosshairInput.normalized * crosshairSpeed * crosshairMag * Time.fixedDeltaTime;
+                //moveCrosshairVelocity = moveCrosshairInput.normalized * crosshairSpeed * Time.fixedDeltaTime;
                 if ((x_co + moveCrosshairVelocity.x < Camera.main.ScreenToWorldPoint(new Vector2(Screen.width - (crosshairSize / 2), Screen.height)).x) && (x_co + moveCrosshairVelocity.x > Camera.main.ScreenToWorldPoint(new Vector2((crosshairSize / 2), 0)).x))
                 {
                     x_co += moveCrosshairVelocity.x;

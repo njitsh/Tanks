@@ -11,33 +11,36 @@ public class PlayerToControllerAssigner : MonoBehaviour
     public TextMeshProUGUI player4_text;
 
     private List<int> assignedControllers = new List<int>();
-    public int[] player_controller_array = new int[4];
-    public bool[] player_controller_array_isKeyboard = new bool[4];
+    public int[,] player_controller_array = new int[4,2];
 
     private bool keyboardExists;
     private bool playersFull;
 
+    private int tank_color = 1;
+    private int tank_barrel = 1;
+
     private void Start()
     {
-        for (int i = 0; i < player_controller_array.Length; i++)
+        for (int i = 0; i < 4; i++)
         {
-            player_controller_array[i] = 0;
+            player_controller_array[i,0] = 0;
         }
     }
 
     // Update is called once per frame
     private void Update()
     {
+        // Join / Remove check button
         playersFull = true;
-        for (int i = 0; i < player_controller_array.Length; i++)
+        for (int i = 0; i < 4; i++)
         {
-            if (player_controller_array[i] == 0) playersFull = false;
+            if (player_controller_array[i,0] == 0) playersFull = false;
         }
         for (int i = 1; i <= 4; i++)
         {
             if (Input.GetButton("J" + i + "A") && !assignedControllers.Contains(i) && !playersFull)
             {
-                AddPlayerController(i);
+                AddPlayerController(i,tank_color,tank_barrel);
                 break;
             }
             else if (Input.GetButton("J" + i + "B") && assignedControllers.Contains(i))
@@ -48,7 +51,7 @@ public class PlayerToControllerAssigner : MonoBehaviour
         }
         if (Input.GetButton("J5A") && !assignedControllers.Contains(5) && !playersFull)
         {
-            AddPlayerController(5);
+            AddPlayerController(5, tank_color, tank_barrel);
         }
         else if (Input.GetButton("J5B") && assignedControllers.Contains(5))
         {
@@ -56,17 +59,21 @@ public class PlayerToControllerAssigner : MonoBehaviour
         }
     }
 
-    public void AddPlayerController(int controller)
+    // Add player to array
+    public void AddPlayerController(int controller, int color, int barrel)
     {
         assignedControllers.Add(controller);
         for (int i = 0; i < player_controller_array.Length; i++)
         {
-            if (player_controller_array[i] == 0)
+            if (player_controller_array[i,0] == 0)
             {
-                player_controller_array[i] = controller;
+                player_controller_array[i, 0] = controller;
+                player_controller_array[i, 1] = color;
+                player_controller_array[i, 2] = barrel;
                 switch (i + 1)
                 {
                     case 1:
+                        
                         player1_text.SetText("P1 joined ");
                         break;
 
@@ -87,14 +94,15 @@ public class PlayerToControllerAssigner : MonoBehaviour
         }
     }
 
+    // Remove player from array
     public void RemovePlayerController(int controller)
     {
         assignedControllers.Remove(controller);
         for (int i = 0; i < player_controller_array.Length; i++)
         {
-            if (player_controller_array[i] == controller)
+            if (player_controller_array[i,0] == controller)
             {
-                player_controller_array[i] = 0;
+                player_controller_array[i,0] = 0;
                 switch (i + 1)
                 {
                     case 1:

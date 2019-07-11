@@ -14,11 +14,26 @@ public class GameManager : MonoBehaviour
     public GameObject tank_4;
     public GameObject crosshair_4;
 
+    PlayerController player;
+
+    public int[,] player_info = new int[4, 3];
+
     // Start is called before the first frame update
     void Start()
-    {
-        GameObject PCBinding = GameObject.Find("PCBinding");
+    {GameObject PCBinding = GameObject.Find("PCBinding");
         ControllerPlayerBinding cpBinding = PCBinding.GetComponent<ControllerPlayerBinding>();
+
+        player_info = cpBinding.getPlayerInfo();
+
+
+        for (int i = 0; i < 0; i++)
+        {
+            if (player_info[i, 0] != 0)
+            {
+                player = new PlayerController(player_info[i, 0], player_info[i, 1], player_info[i, 2]);
+            }
+        }
+
         if (cpBinding.getControllerBinding(1) != 0)
         {
             GameObject tank_crosshair_1 = Instantiate(crosshair_1) as GameObject;
