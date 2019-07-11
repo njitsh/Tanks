@@ -5,6 +5,7 @@ using UnityEngine;
 public class ControllerPlayerBinding : MonoBehaviour
 {
     public static int[] bindingsControllers = new int[4];
+
     // Start is called before the first frame update
     public static void TempControllerBinding()
     {
@@ -15,6 +16,6 @@ public class ControllerPlayerBinding : MonoBehaviour
 
     public int getControllerBinding(int number)
     {
-        return bindingsControllers[number-1];
+        return bindingsControllers[number - 1];
     }
 }

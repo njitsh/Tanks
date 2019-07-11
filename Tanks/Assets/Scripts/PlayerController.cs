@@ -14,14 +14,28 @@ public class PlayerController : MonoBehaviour
     private float mag;
     private Rigidbody2D rb;
     private Vector2 moveVelocity;
-    
+
     private string horizontalAxis;
     private string verticalAxis;
+    public string horizontalRightAxis;
+    public string verticalRightAxis;
     private string aButton;
     private string xButton;
-    public string startButton;
+    private string rightTriggerButton;
+    private string startButton;
     private int controllerNumber;
+    private bool isKeyboard;
     public int tank_number;
+
+    public GameObject player_tank_crosshair;
+    public GameObject player_tank_gun;
+
+    public void SetCrosshair(GameObject crosshair_tank)
+    {
+        player_tank_crosshair = crosshair_tank;
+        PlayerGun player_tank_gun_script = player_tank_gun.GetComponent<PlayerGun>();
+        player_tank_gun_script.SetCrosshairBarrel(player_tank_crosshair);
+    }
 
     public enum Button
     {
@@ -50,8 +64,11 @@ public class PlayerController : MonoBehaviour
         controllerNumber = number;
         horizontalAxis = "J" + controllerNumber + "Horizontal";
         verticalAxis = "J" + controllerNumber + "Vertical";
+        horizontalRightAxis = "J" + controllerNumber + "RightHorizontal";
+        verticalRightAxis = "J" + controllerNumber + "RightVertical";
         aButton = "J" + controllerNumber + "A";
         xButton = "J" + controllerNumber + "X";
+        rightTriggerButton = "J" + controllerNumber + "RightTrigger";
         startButton = "J" + controllerNumber + "Start";
     }
 
@@ -64,7 +81,15 @@ public class PlayerController : MonoBehaviour
     {
         GameObject PCBinding = GameObject.Find("PCBinding");
         ControllerPlayerBinding cpBinding = PCBinding.GetComponent<ControllerPlayerBinding>();
-        SetControllerNumber(cpBinding.getControllerBinding(tank_number));
+        if (cpBinding.getControllerBinding(tank_number) != 0)
+        {
+            SetControllerNumber(cpBinding.getControllerBinding(tank_number));
+            Crosshair player_tank_crosshair_script = player_tank_crosshair.GetComponent<Crosshair>();
+            if (cpBinding.getControllerBinding(tank_number) == 5) isKeyboard = true;
+            player_tank_crosshair_script.SetCrosshairControls(horizontalRightAxis, verticalRightAxis, isKeyboard);
+            PlayerGun player_tank_gun_script = player_tank_gun.GetComponent<PlayerGun>();
+            player_tank_gun_script.SetGunController(xButton, rightTriggerButton);
+        }
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -95,9 +120,9 @@ public class PlayerController : MonoBehaviour
     {
         // Get Target Angle
 
-        if ((Input.GetAxis(verticalAxis) != 0) || (Input.GetAxis(horizontalAxis) != 0))
+        if ((Input.GetAxisRaw(verticalAxis) != 0) || (Input.GetAxisRaw(horizontalAxis) != 0))
         {
-            target_angle = (Mathf.Atan2(Input.GetAxis(verticalAxis), Input.GetAxis(horizontalAxis)) * Mathf.Rad2Deg + 360) % 360;
+            target_angle = (Mathf.Atan2(Input.GetAxisRaw(verticalAxis), Input.GetAxisRaw(horizontalAxis)) * Mathf.Rad2Deg + 360) % 360;
             for (int times = 0; times < turn_speed; times++)
             {
                 if (Mathf.Abs(target_angle - angle) < 1) times = 3;

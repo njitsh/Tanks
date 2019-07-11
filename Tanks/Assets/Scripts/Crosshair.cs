@@ -4,33 +4,27 @@ using UnityEngine;
 
 public class Crosshair : MonoBehaviour
 {
-    private float crosshairSpeed = 0.15f;
+    private float crosshairSpeed = 5f;
     private float crosshairMag;
     private Vector2 moveCrosshairVelocity;
-    public int tank_number;
+
+    private static string horizontalRightAxis;
+    private static string verticalRightAxis;
+
     private float x_co = 0, y_co = 0;
     private bool isKeyboard = false;
     private int crosshairSize = 50;
 
+    public void SetCrosshairControls(string hRightAxis, string vRightAxis, bool isKB)
+    {
+        horizontalRightAxis = hRightAxis;
+        verticalRightAxis = vRightAxis;
+        isKeyboard = isKB;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        switch (tank_number)
-        {
-            case 1:
-                x_co = 2;
-                y_co = -2;
-                isKeyboard = false;
-                break;
-            case 2:
-                x_co = 1;
-                y_co = -1;
-                break;
-            case 3:
-                x_co = 3;
-                y_co = -3;
-                break;
-        }
     }
 
     // Update is called once per frame
@@ -45,9 +39,9 @@ public class Crosshair : MonoBehaviour
             }
             else
             {
-                Vector3 moveCrosshairInput = new Vector3(Input.GetAxisRaw("J" + tank_number + "RightHorizontal"), Input.GetAxisRaw("J" + tank_number + "RightVertical"), 0);
+                Vector3 moveCrosshairInput = new Vector3(Input.GetAxisRaw(horizontalRightAxis), Input.GetAxisRaw(verticalRightAxis), 0);
                 //Variable crosshair speed
-                //crosshairMag = Mathf.Clamp01(new Vector2(Input.GetAxisRaw("J" + tank_number + "RightHorizontal"), Input.GetAxisRaw("J" + tank_number + "RightVertical")).magnitude);
+                //crosshairMag = Mathf.Clamp01(new Vector2(Input.GetAxisRaw(horizontalRightAxis), Input.GetAxisRaw(verticalRightAxis)).magnitude);
                 //moveCrosshairVelocity = moveCrosshairInput.normalized * crosshairSpeed * crosshairMag;
                 moveCrosshairVelocity = moveCrosshairInput.normalized * crosshairSpeed * Time.fixedDeltaTime;
                 if ((x_co + moveCrosshairVelocity.x < Camera.main.ScreenToWorldPoint(new Vector2(Screen.width - (crosshairSize / 2), Screen.height)).x) && (x_co + moveCrosshairVelocity.x > Camera.main.ScreenToWorldPoint(new Vector2((crosshairSize / 2), 0)).x))

@@ -20,6 +20,20 @@ public class PlayerGun : MonoBehaviour
     public GameObject crosshair;
     public int tank_number;
 
+    private string xButton;
+    private string rightTriggerButton;
+
+    public void SetGunController(string xControllerButton, string rightControllerTriggerButton)
+    {
+        xButton = xControllerButton;
+        rightTriggerButton = rightControllerTriggerButton;
+    }
+
+    public void SetCrosshairBarrel(GameObject crosshair_tank)
+    {
+        crosshair = crosshair_tank;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,22 +50,21 @@ public class PlayerGun : MonoBehaviour
             var dir = crosshair.transform.position - transform.position;
             angle = (Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + 360) % 360;
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-
-
-            if ((Input.GetButtonDown("J" + tank_number + "X") || Input.GetAxis("J" + tank_number + "RightTrigger") > 0) && Time.time > nextFire && releasedFireTrigger)
+            
+            if ((Input.GetButtonDown(xButton) || Input.GetButtonDown(rightTriggerButton)) && Time.time > nextFire && releasedFireTrigger)
             {
                 nextFire = Time.time + fireRate;
                 releasedFireTrigger = false;
-                fire();
+                Fire();
             }
-            else if (!Input.GetButtonDown("J" + tank_number + "X") && Input.GetAxis("J" + tank_number + "RightTrigger") == 0)
+            else if (!Input.GetButtonDown(xButton) && !Input.GetButtonDown(rightTriggerButton))
             {
                 releasedFireTrigger = true;
             }
         }
     }
 
-    void fire()
+    void Fire()
     {
         if (!PauseMenu.GameIsPaused)
         {
