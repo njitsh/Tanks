@@ -11,7 +11,7 @@ public class PlayerToControllerAssigner : MonoBehaviour
     public TextMeshProUGUI player4_text;
 
     private List<int> assignedControllers = new List<int>();
-    public int[,] player_controller_array = new int[4,2];
+    public int[,] player_controller_array = new int[4,3];
 
     private bool keyboardExists;
     private bool playersFull;
@@ -63,7 +63,7 @@ public class PlayerToControllerAssigner : MonoBehaviour
     public void AddPlayerController(int controller, int color, int barrel)
     {
         assignedControllers.Add(controller);
-        for (int i = 0; i < player_controller_array.Length; i++)
+        for (int i = 0; i < 4; i++)
         {
             if (player_controller_array[i,0] == 0)
             {
@@ -98,7 +98,7 @@ public class PlayerToControllerAssigner : MonoBehaviour
     public void RemovePlayerController(int controller)
     {
         assignedControllers.Remove(controller);
-        for (int i = 0; i < player_controller_array.Length; i++)
+        for (int i = 0; i < 4; i++)
         {
             if (player_controller_array[i,0] == controller)
             {

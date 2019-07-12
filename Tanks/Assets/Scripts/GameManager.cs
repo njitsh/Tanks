@@ -20,25 +20,27 @@ public class GameManager : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {GameObject PCBinding = GameObject.Find("PCBinding");
+    {
+        GameObject PCBinding = GameObject.Find("PCBinding");
         ControllerPlayerBinding cpBinding = PCBinding.GetComponent<ControllerPlayerBinding>();
 
         player_info = cpBinding.getPlayerInfo();
 
-
+        /* Possibly use constructor (maybe not a good idea) http://ilkinulas.github.io/development/unity/2016/05/30/monobehaviour-constructor.html
         for (int i = 0; i < 0; i++)
         {
             if (player_info[i, 0] != 0)
             {
                 player = new PlayerController(player_info[i, 0], player_info[i, 1], player_info[i, 2]);
             }
-        }
+        }*/
 
         if (cpBinding.getControllerBinding(1) != 0)
         {
             GameObject tank_crosshair_1 = Instantiate(crosshair_1) as GameObject;
             GameObject tank = Instantiate(tank_1);
             tank.GetComponent<PlayerController>().SetCrosshair(tank_crosshair_1);
+            tank.GetComponent<PlayerController>().SendPlayerInfo(player_info);
         }
         if (cpBinding.getControllerBinding(2) != 0)
         {
