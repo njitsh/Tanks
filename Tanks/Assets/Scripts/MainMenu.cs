@@ -30,4 +30,8 @@ public class MainMenu : MonoBehaviour
     {
         Application.Quit();
     }
+    public void OptionsScreen()
+    {
+        SceneManager.LoadScene("OptionsScene");
+    }
 }
