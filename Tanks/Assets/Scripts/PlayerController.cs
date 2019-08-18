@@ -103,18 +103,10 @@ public class PlayerController : MonoBehaviour
         player_tank_gun_script.SetGunController(xButton, rightTriggerButton);
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.tag == "player") {
-            //player
-
-
-        }
-    }
-
     // Start is called before the first frame update
     void Start()
     {
+        healthMax = 100; // temp
         health = healthMax;
         GameObject PCBinding = GameObject.Find("PCBinding");
         ControllerPlayerBinding cpBinding = PCBinding.GetComponent<ControllerPlayerBinding>();
@@ -164,5 +156,24 @@ public class PlayerController : MonoBehaviour
             // Rotate tank
             transform.rotation = Quaternion.Euler(0, 0, angle);
         }
+    }
+
+    public void Hit(int damage)
+    {
+        if (health > 0)
+        {
+            health -= damage;
+            Debug.Log("Took damage");
+        }
+        else
+        {
+            Die();
+        }
+    }
+
+    void Die()
+    {
+        gameObject.SetActive(false);
+        player_tank_crosshair.SetActive(false);
     }
 }

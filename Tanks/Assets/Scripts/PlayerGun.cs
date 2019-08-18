@@ -12,7 +12,7 @@ public class PlayerGun : MonoBehaviour
     public GameObject Bullet;
     private Vector2 bulletPos;
     private float fireRate = 0.2f;
-    private float nextFire = 0.0f;
+    private float nextFire;
     private bool releasedFireTrigger = true;
     private float barrel_length = 0.4f;
 

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7041584878639639364}
   - component: {fileID: 7041584878639639366}
   - component: {fileID: 7041584878639639365}
+  - component: {fileID: 4741766756658659139}
   m_Layer: 0
   m_Name: Player 1
   m_TagString: Player
@@ -123,6 +124,32 @@ MonoBehaviour:
   tank_number: 1
   player_tank_crosshair: {fileID: 0}
   player_tank_gun: {fileID: 7041584879932866226}
+--- !u!61 &4741766756658659139
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7041584878639639367}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.84, y: 0.84}
+    newSize: {x: 0.91, y: 0.84}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.84, y: 0.84}
+  m_EdgeRadius: 0
 --- !u!1 &7041584879932866226
 GameObject:
   m_ObjectHideFlags: 0
