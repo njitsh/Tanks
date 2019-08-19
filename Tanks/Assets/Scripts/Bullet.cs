@@ -38,7 +38,7 @@ public class Bullet : MonoBehaviour
                 transform.eulerAngles = new Vector3(0, rot, 0);
             }*/
 
-            Destroy(gameObject, 1f);
+            //Destroy(gameObject, 1f);
         }
     }
 
@@ -52,6 +52,12 @@ public class Bullet : MonoBehaviour
                 playerscript.Hit(10); // Hit player with 10 damage
                 Destroy(gameObject); // Destroy Bullet
             }
+        }
+        else if (other.tag == "Wall")
+        {
+            // ADD BOUNCE
+
+            Destroy(gameObject); // Destroy Bullet
         }
     }
 

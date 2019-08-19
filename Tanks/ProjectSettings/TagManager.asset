@@ -3,7 +3,10 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Wall
+  - Ground
+  - Tree
   layers:
   - Default
   - TransparentFX
@@ -38,6 +41,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Ground
+    uniqueID: 256745217
+    locked: 0
+  - name: Walls
+    uniqueID: 1792233981
+    locked: 0
   - name: Bullets
     uniqueID: 2356741565
     locked: 0
@@ -55,6 +64,9 @@ TagManager:
     locked: 0
   - name: SelectedBlock
     uniqueID: 1020959041
+    locked: 0
+  - name: HealthBar
+    uniqueID: 2078065985
     locked: 0
   - name: Default
     uniqueID: 0

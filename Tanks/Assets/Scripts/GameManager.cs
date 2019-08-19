@@ -7,12 +7,16 @@ public class GameManager : MonoBehaviour
 {
     public GameObject tank_1;
     public GameObject crosshair_1;
+    public GameObject health_bar_1;
     public GameObject tank_2;
     public GameObject crosshair_2;
+    public GameObject health_bar_2;
     public GameObject tank_3;
     public GameObject crosshair_3;
+    public GameObject health_bar_3;
     public GameObject tank_4;
     public GameObject crosshair_4;
+    public GameObject health_bar_4;
 
     PlayerController player;
 
@@ -40,6 +44,7 @@ public class GameManager : MonoBehaviour
             GameObject tank_crosshair_1 = Instantiate(crosshair_1) as GameObject;
             GameObject tank = Instantiate(tank_1);
             tank.GetComponent<PlayerController>().SetCrosshair(tank_crosshair_1);
+            tank.GetComponent<PlayerController>().SetHealthBar(health_bar_1);
             tank.GetComponent<PlayerController>().SendPlayerInfo(player_info);
         }
         if (cpBinding.getControllerBinding(2) != 0)
@@ -47,18 +52,21 @@ public class GameManager : MonoBehaviour
             GameObject tank_crosshair_2 = Instantiate(crosshair_2) as GameObject;
             GameObject tank = Instantiate(tank_2);
             tank.GetComponent<PlayerController>().SetCrosshair(tank_crosshair_2);
+            tank.GetComponent<PlayerController>().SetHealthBar(health_bar_2);
         }
         if (cpBinding.getControllerBinding(3) != 0)
         {
             GameObject tank_crosshair_3 = Instantiate(crosshair_3) as GameObject;
             GameObject tank = Instantiate(tank_3);
             tank.GetComponent<PlayerController>().SetCrosshair(tank_crosshair_3);
+            tank.GetComponent<PlayerController>().SetHealthBar(health_bar_3);
         }
         if (cpBinding.getControllerBinding(4) != 0)
         {
             GameObject tank_crosshair_4 = Instantiate(crosshair_4) as GameObject;
             GameObject tank = Instantiate(tank_4);
             tank.GetComponent<PlayerController>().SetCrosshair(tank_crosshair_4);
+            tank.GetComponent<PlayerController>().SetHealthBar(health_bar_4);
         }
     }
 

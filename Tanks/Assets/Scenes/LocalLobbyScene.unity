@@ -368,8 +368,6 @@ MonoBehaviour:
   player2_text: {fileID: 1804805179}
   player3_text: {fileID: 1491543726}
   player4_text: {fileID: 1392074497}
-  player_controller_array: 00000000000000000000000000000000
-  player_controller_array_isKeyboard: 00000000
 --- !u!4 &522296767
 Transform:
   m_ObjectHideFlags: 0
