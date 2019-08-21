@@ -17,6 +17,9 @@ public class PlayerController : MonoBehaviour
     public int health;
     public int healthMax;
 
+    public GameObject HealthBar;
+    private HealthBar HBar;
+
     public int tank_color;
 
     private string horizontalAxis;
@@ -44,6 +47,11 @@ public class PlayerController : MonoBehaviour
         player_tank_crosshair = crosshair_tank;
         PlayerGun player_tank_gun_script = player_tank_gun.GetComponent<PlayerGun>();
         player_tank_gun_script.SetCrosshairBarrel(player_tank_crosshair);
+    }
+
+    public void SetHealthBar(GameObject healthbar_tank)
+    {
+        HealthBar = healthbar_tank;
     }
 
     public void SendPlayerInfo(int[,] player_info)
@@ -103,18 +111,10 @@ public class PlayerController : MonoBehaviour
         player_tank_gun_script.SetGunController(xButton, rightTriggerButton);
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.tag == "player") {
-            //player
-
-
-        }
-    }
-
     // Start is called before the first frame update
     void Start()
     {
+        healthMax = 100; // temp
         health = healthMax;
         GameObject PCBinding = GameObject.Find("PCBinding");
         ControllerPlayerBinding cpBinding = PCBinding.GetComponent<ControllerPlayerBinding>();
@@ -164,5 +164,26 @@ public class PlayerController : MonoBehaviour
             // Rotate tank
             transform.rotation = Quaternion.Euler(0, 0, angle);
         }
+    }
+
+    public void Hit(int damage)
+    {
+        if (health > damage)
+        {
+            health -= damage;
+        }
+        else
+        {
+            health = 0;
+            Die();
+        }
+        HealthBar HBar = HealthBar.GetComponent<HealthBar>();
+        HBar.SetHealthState((float)health / healthMax);
+    }
+
+    void Die()
+    {
+        gameObject.SetActive(false);
+        player_tank_crosshair.SetActive(false);
     }
 }

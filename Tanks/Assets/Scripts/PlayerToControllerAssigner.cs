@@ -19,6 +19,8 @@ public class PlayerToControllerAssigner : MonoBehaviour
     private int tank_color = 1;
     private int tank_barrel = 1;
 
+    private int player_amount = 0;
+
     private void Start()
     {
         for (int i = 0; i < 4; i++)
@@ -60,8 +62,15 @@ public class PlayerToControllerAssigner : MonoBehaviour
     }
 
     // Add player to array
+    public int GetPlayerAmount()
+    {
+        return player_amount;
+    }
+
+    // Add player to array
     public void AddPlayerController(int controller, int color, int barrel)
     {
+        player_amount++;
         assignedControllers.Add(controller);
         for (int i = 0; i < 4; i++)
         {
@@ -97,6 +106,7 @@ public class PlayerToControllerAssigner : MonoBehaviour
     // Remove player from array
     public void RemovePlayerController(int controller)
     {
+        player_amount--;
         assignedControllers.Remove(controller);
         for (int i = 0; i < 4; i++)
         {

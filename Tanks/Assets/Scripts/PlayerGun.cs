@@ -12,7 +12,7 @@ public class PlayerGun : MonoBehaviour
     public GameObject Bullet;
     private Vector2 bulletPos;
     private float fireRate = 0.2f;
-    private float nextFire = 0.0f;
+    private float nextFire;
     private bool releasedFireTrigger = true;
     private float barrel_length = 0.4f;
 
@@ -21,7 +21,7 @@ public class PlayerGun : MonoBehaviour
     public int tank_number;
 
     private string xButton;
-    private string rightTriggerButton;
+    public string rightTriggerButton;
 
     public void SetGunController(string xControllerButton, string rightControllerTriggerButton)
     {
@@ -50,8 +50,8 @@ public class PlayerGun : MonoBehaviour
             var dir = crosshair.transform.position - transform.position;
             angle = (Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + 360) % 360;
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-            
-            if ((Input.GetButtonDown(xButton) || Input.GetButtonDown(rightTriggerButton)) && Time.time > nextFire && releasedFireTrigger)
+
+            if ((Input.GetButtonDown(xButton) || Input.GetAxisRaw(rightTriggerButton) >= 1) && Time.time > nextFire && releasedFireTrigger)
             {
                 nextFire = Time.time + fireRate;
                 releasedFireTrigger = false;

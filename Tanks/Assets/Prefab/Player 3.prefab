@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6724812254292285664}
   - component: {fileID: 6724812254292285667}
   - component: {fileID: 6724812254292285666}
+  - component: {fileID: -8177713898706063709}
   m_Layer: 0
   m_Name: Player 3
   m_TagString: Player
@@ -69,7 +70,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 10098615
-  m_SortingLayer: -5
+  m_SortingLayer: -6
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 55d8e17e0dab1534abcc5d8ed08550c1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -117,12 +118,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 0
   healthMax: 0
+  HealthBar: {fileID: 3095572969560943003, guid: 125f864981181504f9b881a5ce433cdb,
+    type: 3}
   tank_color: 0
   horizontalRightAxis: 
   verticalRightAxis: 
   tank_number: 3
   player_tank_crosshair: {fileID: 0}
   player_tank_gun: {fileID: 6724812254302929069}
+--- !u!61 &-8177713898706063709
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6724812254292285677}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.8, y: 0.76}
+    newSize: {x: 0.91, y: 0.84}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.8, y: 0.76}
+  m_EdgeRadius: 0
 --- !u!1 &6724812254302929069
 GameObject:
   m_ObjectHideFlags: 0
@@ -191,7 +220,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 10098615
-  m_SortingLayer: -5
+  m_SortingLayer: -6
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 60f1f06d52ed6e64caefff569aa33941, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -221,6 +250,7 @@ MonoBehaviour:
   parentTank: {fileID: 6724812254292285677}
   crosshair: {fileID: 0}
   tank_number: 3
+  rightTriggerButton: 
 --- !u!50 &6724812254302929059
 Rigidbody2D:
   serializedVersion: 4

@@ -18,9 +18,14 @@ public class LobbyMenu : MonoBehaviour
 
     public void StartLocalGame()
     {
-        ControllerPlayerBinding.TempControllerBinding();
-        SceneManager.LoadScene("LocalGameScene");
-        Cursor.visible = false;
+        GameObject Player_To_Controller_Assigner = GameObject.Find("Player_To_Controller_Assigner");
+        PlayerToControllerAssigner ptocAssigner = Player_To_Controller_Assigner.GetComponent<PlayerToControllerAssigner>();
+        if (ptocAssigner.GetPlayerAmount() > 0)
+        {
+            ControllerPlayerBinding.TempControllerBinding();
+            SceneManager.LoadScene("LocalGameScene");
+            Cursor.visible = false;
+        }
     }
 
     public void BackToMainMenu()
