@@ -117,6 +117,9 @@ public class Options : MonoBehaviour
     {
         print(userList[dropDown.value]);
         string currentUser = userList[dropDown.value];
+        // hier gebruik ik dus een custom constructor (user)
+       // User user = new User();
+        //user.sensitivity = 
         // TODO now enter all the options that belong to the user   
     }
     #endregion
