@@ -1,9 +1,1 @@
-sceneSetups:
-
-- path: Assets/Scenes/SampleScene.unity
-
-- path: Assets/Scenes/LocalLobbyScene.unity
-38258322f9784732e09cb3466ce3225ae9b916bf
-  isLoaded: 1
-  isActive: 1
-  isSubScene: 0
+sceneSetups: []
