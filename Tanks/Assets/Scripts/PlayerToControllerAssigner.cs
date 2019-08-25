@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class PlayerToControllerAssigner : MonoBehaviour
 {
@@ -9,8 +11,8 @@ public class PlayerToControllerAssigner : MonoBehaviour
     public TextMeshProUGUI player2_text;
     public TextMeshProUGUI player3_text;
     public TextMeshProUGUI player4_text;
-
-    private List<int> assignedControllers = new List<int>();
+    
+    public List<int> assignedControllers = new List<int>();
     public int[,] player_controller_array = new int[4,3];
 
     private bool keyboardExists;
@@ -20,6 +22,8 @@ public class PlayerToControllerAssigner : MonoBehaviour
     private int tank_barrel = 1;
 
     private int player_amount = 0;
+
+    public GameObject backButton;
 
     private void Start()
     {
@@ -50,14 +54,22 @@ public class PlayerToControllerAssigner : MonoBehaviour
                 RemovePlayerController(i);
                 break;
             }
+            else if (Input.GetButton("J" + i + "B") && !assignedControllers.Contains(i))
+            {
+                SceneManager.LoadScene("MenuScene");
+            }
         }
-        if (Input.GetButton("J5A") && !assignedControllers.Contains(5) && !playersFull)
+        if (Input.GetButton("J5A") && !assignedControllers.Contains(5) && !playersFull && EventSystem.current.currentSelectedGameObject != backButton)
         {
             AddPlayerController(5, tank_color, tank_barrel);
         }
         else if (Input.GetButton("J5B") && assignedControllers.Contains(5))
         {
             RemovePlayerController(5);
+        }
+        else if (Input.GetButton("J5Start") && !assignedControllers.Contains(5))
+        {
+            SceneManager.LoadScene("MenuScene");
         }
     }
 
