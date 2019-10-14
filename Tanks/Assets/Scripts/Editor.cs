@@ -1,78 +1,69 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class Editor : MonoBehaviour
 {
-    //public GameObject[] partsArray = new GameObject[4];
+    public Tile selectedTile = null;
 
-    // Selected Part
-    public GameObject selectedPart;
-    public GameObject target;
-    public int sLayer;
+    public Tilemap tilemap;
+    public Tilemap selectedTilemap; // Temp place tiles on this layer to show the selected block and location
 
-    private Vector2 mousePos;
+    Vector3Int currentCell;
+    Vector3Int previousCell;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        selectedPart = null;
-    }
+    bool destroyMode = false;
 
     // Update is called once per frame
     void Update()
     {
         if (!PauseMenu.GameIsPaused)
         {
-            if (selectedPart != null) Cursor.visible = false;
+            currentCell = tilemap.WorldToCell(Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10)));
+            if (selectedTile != null && currentCell != previousCell)
+            {
+                selectedTilemap.SetTile(currentCell, selectedTile);
+                selectedTilemap.SetTile(previousCell, null);
+                previousCell = currentCell;
+            };
+
+
+            if (selectedTile != null) Cursor.visible = false;
             else Cursor.visible = true;
-            if (Input.GetKeyDown(KeyCode.Mouse0) && selectedPart != null)
+            if (Input.GetKey(KeyCode.Mouse0))
             {
-                int grid_width = Screen.width / 33;
-                int grid_height = Screen.height / 14;
-                Vector3 placeLocation = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x - (Input.mousePosition.x % grid_width) + grid_width/2, Input.mousePosition.y - (Input.mousePosition.y % grid_height) + grid_height / 2, 10));
-                GameObject block = Instantiate(target, placeLocation, Quaternion.identity);
-                SpriteRenderer placed_block = block.GetComponent<SpriteRenderer>() as SpriteRenderer;
-                placed_block.sortingLayerName = "PlacedBlocks";
-                placed_block.sortingOrder = sLayer;
-                Destroy(target);
-                selectedPart = null;
+                if (!destroyMode && selectedTile != null)
+                {
+                    tilemap.SetTile(currentCell, selectedTile);
+                    selectedTilemap.SetTile(currentCell, null);
+                }
+                else if (destroyMode)
+                {
+                    tilemap.SetTile(currentCell, null);
+                }
+                else
+                {
+                    // Maybe add function to select blocks
+                }
             }
-            else if ((Input.GetKeyDown(KeyCode.Backspace) || Input.GetKeyDown(KeyCode.Delete) || Input.GetKeyDown(KeyCode.Mouse1)) && selectedPart != null)
+            else if ((Input.GetKeyDown(KeyCode.Backspace) || Input.GetKeyDown(KeyCode.Delete) || Input.GetKeyDown(KeyCode.Mouse1)) && selectedTile != null)
             {
-                Destroy(target);
-                selectedPart = null;
+                selectedTile = null;
+                selectedTilemap.SetTile(currentCell, null);
+                destroyMode = false;
             }
             else if (Input.GetKeyDown(KeyCode.X))
             {
-                // Delete object hover
+                selectedTile = null;
+                selectedTilemap.SetTile(currentCell, null);
+                destroyMode = !destroyMode;
             }
-            mousePos = Camera.main.ScreenToWorldPoint(new Vector2(Input.mousePosition.x, Input.mousePosition.y));
-            if (selectedPart != null) target.transform.position = mousePos;
         }
     }
 
-    void FindSelectedPart(GameObject lookforpart)
+    public void Select_Tile(Tile Selected_Tile)
     {
-        /*for (int i = 0; i < partsArray.Length; i++)
-        {
-            if (partsArray[i] == lookforpart)
-            {
-                selectedPart = i;
-                break;
-            }
-        }*/
-    }
-
-    public void Select_Object(GameObject Selected_Object)
-    {
-        selectedPart = Selected_Object;
-        Destroy(target);
-        target = (GameObject)Instantiate(Selected_Object);
-    }
-
-    public void SetSortingLayer(int sortingOrder)
-    {
-        sLayer = sortingOrder;
+        selectedTile = Selected_Tile;
     }
 }

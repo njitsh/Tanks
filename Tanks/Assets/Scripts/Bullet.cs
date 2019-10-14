@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    private readonly float vel = 1.5f;
+    private readonly float vel = 5f;
     private Rigidbody2D rb;
     private float angle_shot;
     private float angle;
@@ -15,14 +15,15 @@ public class Bullet : MonoBehaviour
     private float activation_moment;
     public int tank_number;
 
-    int layerMask = (1 << 9);
-    
+    LayerMask mask;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         angle = angle_shot * Mathf.Deg2Rad;
         activation_moment = Time.time + activation_period;
+        mask = LayerMask.GetMask("Wall");
     }
 
     // Update is called once per frame
@@ -32,64 +33,27 @@ public class Bullet : MonoBehaviour
         {
             rb.velocity = new Vector2(Mathf.Cos(angle) * vel, Mathf.Sin(angle) * vel);
 
-            //Ray ray_left = new Ray(new Vector2(Mathf.Cos(angle + 0.1f) + transform.position.x, Mathf.Sin(angle + 0.1f) + transform.position.y) - new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)), new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)));
-            //Debug.DrawRay(new Vector2(Mathf.Cos(angle + 0.1f) + transform.position.x, Mathf.Sin(angle + 0.1f) + transform.position.y) - new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)), new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)), Color.blue);
-            //Ray ray_right = new Ray(new Vector2(Mathf.Cos(angle - 0.1f) + transform.position.x, Mathf.Sin(angle - 0.1f) + transform.position.y) - new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)), new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)));
-            //Debug.DrawRay(new Vector2(Mathf.Cos(angle - 0.1f) + transform.position.x, Mathf.Sin(angle - 0.1f) + transform.position.y) - new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)), new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)), Color.red);
+            // Ricochet effect
+            //Debug.DrawRay(new Vector2(transform.position.x, transform.position.y) + new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * 0.15f, new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)), Color.red);
 
-            /*var tempangle = angle * Mathf.Rad2Deg;
-            RaycastHit2D rayHitLeft = Physics2D.Raycast(new Vector2(Mathf.Cos(angle + 0.1f) + transform.position.x, Mathf.Sin(angle + 0.1f) + transform.position.y) - new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)), new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)));
-            RaycastHit2D rayHitRight = Physics2D.Raycast(new Vector2(Mathf.Cos(angle - 0.1f) + transform.position.x, Mathf.Sin(angle - 0.1f) + transform.position.y) - new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)), new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)));
-            if (rayHitLeft && rayHitRight)
+            // Create RAY
+            Ray ray = new Ray(new Vector2(transform.position.x, transform.position.y) + new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * 0.15f, new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)));
+
+            // Create RAY HIT
+            RaycastHit2D hit = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y) + new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * 0.15f, new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)));
+
+            // Check if the ray hits something
+            if (hit)
             {
-                if (((rayHitLeft.transform.tag == "Wall") && (rayHitLeft.distance < 0.1f)) || ((rayHitRight.distance < 0.1f) && (rayHitRight.transform.tag == "Wall")))
+                // CHeck if the ray hits a wall within a distance of 0.15f
+                if (hit.distance < 0.15f && hit.transform.tag == "Wall")
                 {
-                    if (tempangle < 180 && tempangle >= 0)
-                    {
-                        tempangle = (tempangle + 2 * Mathf.Rad2Deg * Mathf.Atan(0.2f / (Mathf.Abs(rayHitLeft.distance - rayHitRight.distance))) + 360) % 360;
-                    }
-                    else if (tempangle >= 180 && tempangle < 360)
-                    {
-                        tempangle = (tempangle - 2 * Mathf.Rad2Deg * Mathf.Atan(0.2f / (Mathf.Abs(rayHitLeft.distance - rayHitRight.distance))) + 360) % 360;
-                    }
+                    // Reflect bullet
+                    Vector2 reflectDir = Vector2.Reflect(ray.direction, hit.normal);
+                    angle = Mathf.Atan2(reflectDir.y, reflectDir.x);
+                    transform.rotation = Quaternion.AngleAxis(angle * Mathf.Rad2Deg, Vector3.forward);
                 }
             }
-            else if (rayHitLeft && !rayHitRight)
-            {
-                if ((rayHitLeft.transform.tag == "Wall") && (rayHitLeft.distance < 0.1f))
-                {
-                    tempangle = (tempangle - 90 + 360) % 360;
-                }
-            }
-            else if (!rayHitLeft && rayHitRight)
-            {
-                if ((rayHitRight.transform.tag == "Wall") && (rayHitRight.distance < 0.1f))
-                {
-                    tempangle = (tempangle + 90) % 360;
-                }
-            }
-            transform.rotation = Quaternion.Euler(0, 0, tempangle);
-            angle = tempangle * Mathf.Deg2Rad;*/
-
-            // 2nd attempt
-            Ray ray = new Ray(new Vector2(Mathf.Cos(angle) + transform.position.x, Mathf.Sin(angle) + transform.position.y) - new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)), new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)));
-
-            RaycastHit2D hit = Physics2D.Raycast(new Vector2(Mathf.Cos(angle) + transform.position.x, Mathf.Sin(angle) + transform.position.y) - new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)), new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)));
-            if (hit.distance < 0.5f && hit.transform.tag != "Bullet")
-            {
-                Vector2 reflectDir = Vector2.Reflect(ray.direction, hit.normal);
-                angle = Mathf.Atan2(reflectDir.y, reflectDir.x) * Mathf.Rad2Deg;
-            }
-
-            /*Ray ray = new Ray(new Vector2(Mathf.Cos(angle) + transform.position.x, Mathf.Sin(angle) + transform.position.y) - new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)), new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)));
-
-            RaycastHit hit;
-
-            if (Physics.Raycast(ray, out hit, Time.deltaTime * vel + .1f))
-            {
-                Vector3 reflectDir = Vector3.Reflect(ray.direction, hit.normal);
-                angle = 90 - Mathf.Atan2(reflectDir.z, reflectDir.x) * Mathf.Rad2Deg;
-            }*/
         }
     }
 
