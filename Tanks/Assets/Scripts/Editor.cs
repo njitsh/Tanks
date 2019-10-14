@@ -13,7 +13,7 @@ public class Editor : MonoBehaviour
     Vector3Int currentCell;
     Vector3Int previousCell;
 
-    bool destroyMode = false;
+    bool eraseMode = false;
 
     // Update is called once per frame
     void Update()
@@ -33,12 +33,12 @@ public class Editor : MonoBehaviour
             else Cursor.visible = true;
             if (Input.GetKey(KeyCode.Mouse0))
             {
-                if (!destroyMode && selectedTile != null)
+                if (!eraseMode && selectedTile != null)
                 {
                     tilemap.SetTile(currentCell, selectedTile);
                     selectedTilemap.SetTile(currentCell, null);
                 }
-                else if (destroyMode)
+                else if (eraseMode)
                 {
                     tilemap.SetTile(currentCell, null);
                 }
@@ -51,13 +51,13 @@ public class Editor : MonoBehaviour
             {
                 selectedTile = null;
                 selectedTilemap.SetTile(currentCell, null);
-                destroyMode = false;
+                eraseMode = false;
             }
             else if (Input.GetKeyDown(KeyCode.X))
             {
                 selectedTile = null;
                 selectedTilemap.SetTile(currentCell, null);
-                destroyMode = !destroyMode;
+                eraseMode = !eraseMode;
             }
         }
     }
