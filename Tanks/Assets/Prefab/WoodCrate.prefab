@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8519728570079940936}
   - component: {fileID: 8601394975655214618}
   - component: {fileID: 1681806574699347800}
+  - component: {fileID: 9195745663751317692}
   m_Layer: 0
   m_Name: WoodCrate
   m_TagString: Wall
@@ -106,3 +107,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.56, y: 0.56}
   m_EdgeRadius: 0
+--- !u!114 &9195745663751317692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4584183013309241545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0f804a43cab8334ebc2526ac63ba3cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

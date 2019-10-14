@@ -71,7 +71,7 @@ public class PlayerGun : MonoBehaviour
             bulletPos = transform.position;
             var rAngle = angle * Mathf.Deg2Rad;
             bulletPos += new Vector2(Mathf.Cos(rAngle) * barrel_length, Mathf.Sin(rAngle) * barrel_length);
-            GameObject bullet = Instantiate(Bullet, bulletPos, Quaternion.AngleAxis(angle, Vector3.forward));
+            GameObject bullet = Instantiate(Bullet, bulletPos, Quaternion.AngleAxis(angle, transform.forward));
             bullet.GetComponent<Bullet>().setTankNumber(tank_number);
         }
     }

@@ -168,10 +168,7 @@ public class PlayerController : MonoBehaviour
 
     public void Hit(int damage)
     {
-        if (health > damage)
-        {
-            health -= damage;
-        }
+        if (health > damage) health -= damage;
         else
         {
             health = 0;
