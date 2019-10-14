@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    private readonly float vel = 0.5f;
+    private readonly float vel = 1.5f;
     private Rigidbody2D rb;
     private float angle_shot;
     private float angle;
@@ -16,7 +16,7 @@ public class Bullet : MonoBehaviour
     public int tank_number;
 
     int layerMask = (1 << 9);
-
+    
     // Start is called before the first frame update
     void Start()
     {
