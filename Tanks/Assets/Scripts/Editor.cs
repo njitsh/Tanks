@@ -10,6 +10,8 @@ public class Editor : MonoBehaviour
     public Tilemap tilemapGround;
     public Tilemap tilemapObjects;
 
+    public Tilemap tilemapSelectedGround;
+
     Vector3Int currentCell;
     Vector3Int previousCell;
 
@@ -25,6 +27,8 @@ public class Editor : MonoBehaviour
     {
         SaveSystem.Init();
         GameObject.Find("Main Camera").transform.position = tilemapGround.CellToWorld(new Vector3Int(maxWidth/2, maxHeight/2, 0)) + new Vector3Int(0,0,-10);
+        activeMap = tilemapGround;
+        activeSelectedMap = tilemapSelectedGround;
     }
 
     // Update is called once per frame
@@ -80,12 +84,12 @@ public class Editor : MonoBehaviour
         eraseMode = false;
     }
 
-    public void ActiveMap(Tilemap active_map)
+    public void SetActiveMap(Tilemap active_map)
     {
         activeMap = active_map;
     }
 
-    public void ActiveSelectedMap(Tilemap active_selected_map)
+    public void SetActiveSelectedMap(Tilemap active_selected_map)
     {
         activeSelectedMap = active_selected_map;
     }
