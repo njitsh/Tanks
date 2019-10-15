@@ -9,7 +9,7 @@ public class LobbyMenu : MonoBehaviour
     {
         GameObject Player_To_Controller_Assigner = GameObject.Find("Player_To_Controller_Assigner");
         PlayerToControllerAssigner ptocAssigner = Player_To_Controller_Assigner.GetComponent<PlayerToControllerAssigner>();
-        if (ptocAssigner.GetPlayerAmount() > 0)
+        if (ptocAssigner.GetPlayerAmount() >= 1)
         {
             ControllerPlayerBinding.TempControllerBinding();
             SceneManager.LoadScene("LocalGameScene");

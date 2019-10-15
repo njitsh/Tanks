@@ -167,12 +167,24 @@ public class Editor : MonoBehaviour
             }
         }
 
-        BoundsInt bounds_objects = tilemapGround.cellBounds;
+        BoundsInt bounds_objects = tilemapObjects.cellBounds;
         for (int x = 0; x < bounds_objects.size.x; x++)
         {
             for (int y = 0; y < bounds_objects.size.y; y++)
             {
                 tilemapObjects.SetTile(new Vector3Int(x, y, 0), null);
+            }
+        }
+    }
+
+    public void Clear_Layer()
+    {
+        BoundsInt bounds_objects = activeMap.cellBounds;
+        for (int x = 0; x < bounds_objects.size.x; x++)
+        {
+            for (int y = 0; y < bounds_objects.size.y; y++)
+            {
+                activeMap.SetTile(new Vector3Int(x, y, 0), null);
             }
         }
     }
