@@ -45,11 +45,8 @@ TagManager:
   - name: Ground
     uniqueID: 256745217
     locked: 0
-  - name: SelectedGround
-    uniqueID: 1020959041
-    locked: 0
-  - name: Walls
-    uniqueID: 1792233981
+  - name: Objects
+    uniqueID: 2124691279
     locked: 0
   - name: Bullets
     uniqueID: 2356741565
