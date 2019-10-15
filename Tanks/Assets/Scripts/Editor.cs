@@ -29,8 +29,8 @@ public class Editor : MonoBehaviour
             };
 
 
-            if (selectedTile != null) Cursor.visible = false;
-            else Cursor.visible = true;
+            //if (selectedTile != null) Cursor.visible = false;
+            //else Cursor.visible = true;
             if (Input.GetKey(KeyCode.Mouse0))
             {
                 if (!eraseMode && selectedTile != null)
