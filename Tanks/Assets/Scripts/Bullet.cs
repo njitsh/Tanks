@@ -68,12 +68,12 @@ public class Bullet : MonoBehaviour
                 Destroy(gameObject); // Destroy Bullet
             }
         }
-        else if (other.tag == "Wall")
+        /*else if (other.tag == "Wall")
         {
             Wall wallscript = other.gameObject.GetComponent<Wall>();
 
             wallscript.Hit(bullet_damage); // Hit wall with 10 damage
-        }
+        }*/
     }
 
     public void setTankNumber(int tanknr)

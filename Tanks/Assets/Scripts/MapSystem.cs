@@ -72,6 +72,13 @@ public static class MapSystem
 
         TileBase[] allTiles_ground = tMGround.GetTilesBlock(bounds_ground);
 
+        // Wall
+        BoundsInt bounds_wall = tMWall.cellBounds;
+        int bounds_wall_x = bounds_wall.size.x;
+        int bounds_wall_y = bounds_wall.size.y;
+
+        TileBase[] allTiles_wall = tMWall.GetTilesBlock(bounds_wall);
+
         // Objects
         BoundsInt bounds_objects = tMObjects.cellBounds;
         int bounds_objects_x = bounds_objects.size.x;
@@ -88,12 +95,22 @@ public static class MapSystem
 
         SaveObject saveObject = new SaveObject
         {
+            // Ground
             bounds_ground_x = bounds_ground_x,
             bounds_ground_y = bounds_ground_y,
             tile_list_ground = new List<TileBase>(allTiles_ground),
+
+            // Wall
+            bounds_wall_x = bounds_wall_x,
+            bounds_wall_y = bounds_wall_y,
+            tile_list_wall = new List<TileBase>(allTiles_wall),
+
+            // Objects
             bounds_objects_x = bounds_objects_x,
             bounds_objects_y = bounds_objects_y,
             tile_list_objects = new List<TileBase>(allTiles_objects),
+
+            // Top
             bounds_top_x = bounds_top_x,
             bounds_top_y = bounds_top_y,
             tile_list_top = new List<TileBase>(allTiles_top)
