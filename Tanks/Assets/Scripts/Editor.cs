@@ -26,7 +26,6 @@ public class Editor : MonoBehaviour
     private void Awake()
     {
         SaveSystem.Init();
-        GameObject.Find("Main Camera").transform.position = tilemapGround.CellToWorld(new Vector3Int(maxWidth/2, maxHeight/2, 0)) + new Vector3Int(0,0,-10);
         activeMap = tilemapGround;
         activeSelectedMap = tilemapSelectedGround;
     }
@@ -94,108 +93,23 @@ public class Editor : MonoBehaviour
         activeSelectedMap = active_selected_map;
     }
 
-    public void Save_Map()
-    {
-        // Get bounds
-        BoundsInt bounds_ground = tilemapGround.cellBounds;
-        int bounds_ground_x = bounds_ground.size.x;
-        int bounds_ground_y = bounds_ground.size.y;
-
-        TileBase[] allTiles_ground = tilemapGround.GetTilesBlock(bounds_ground);
-
-        BoundsInt bounds_objects = tilemapObjects.cellBounds;
-        int bounds_objects_x = bounds_objects.size.x;
-        int bounds_objects_y = bounds_objects.size.y;
-
-        TileBase[] allTiles_objects = tilemapObjects.GetTilesBlock(bounds_objects);
-
-        SaveObject saveObject = new SaveObject
-        {
-            bounds_ground_x = bounds_ground_x,
-            bounds_ground_y = bounds_ground_y,
-            tile_list_ground = new List<TileBase>(allTiles_ground),
-            bounds_objects_x = bounds_objects_x,
-            bounds_objects_y = bounds_objects_y,
-            tile_list_objects = new List<TileBase>(allTiles_objects)
-        };
-
-        string json = JsonUtility.ToJson(saveObject);
-        SaveSystem.Save(json);
-    }
-
     public void Load_Map()
     {
-        string mapString = SaveSystem.Load();
-        if (mapString != null)
-        {
-            SaveObject saveObject = JsonUtility.FromJson<SaveObject>(mapString);
-
-            Open_Map(saveObject.tile_list_ground.ToArray(), saveObject.bounds_ground_x, saveObject.bounds_ground_y, saveObject.tile_list_objects.ToArray(), saveObject.bounds_objects_x, saveObject.bounds_objects_y);
-        }
-        else
-        {
-            Debug.Log("No map was loaded!");
-        }
+        MapSystem.Load_Map(tilemapGround, tilemapObjects);
     }
 
-    private void Open_Map(TileBase[] map_ground, int bounds_g_x, int bounds_g_y, TileBase[] map_objects, int bounds_o_x, int bounds_o_y)
+    public void Save_Map()
     {
-        for (int x = 0; x < bounds_g_x; x++)
-        {
-            for (int y = 0; y < bounds_g_y; y++)
-            {
-                tilemapGround.SetTile(new Vector3Int(x, y, 0), map_ground[x + y * bounds_g_x]);
-            }
-        }
-        for (int x = 0; x < bounds_o_x; x++)
-        {
-            for (int y = 0; y < bounds_o_y; y++)
-            {
-                tilemapObjects.SetTile(new Vector3Int(x, y, 0), map_objects[x + y * bounds_o_x]);
-            }
-        }
+        MapSystem.Save_Map(tilemapGround, tilemapObjects);
     }
 
     public void Clear_Map()
     {
-        BoundsInt bounds_ground = tilemapGround.cellBounds;
-        for (int x = 0; x < bounds_ground.size.x; x++)
-        {
-            for (int y = 0; y < bounds_ground.size.y; y++)
-            {
-                tilemapGround.SetTile(new Vector3Int(x, y, 0), null);
-            }
-        }
-
-        BoundsInt bounds_objects = tilemapObjects.cellBounds;
-        for (int x = 0; x < bounds_objects.size.x; x++)
-        {
-            for (int y = 0; y < bounds_objects.size.y; y++)
-            {
-                tilemapObjects.SetTile(new Vector3Int(x, y, 0), null);
-            }
-        }
+        MapSystem.Clear_Whole_Map(tilemapGround, tilemapObjects);
     }
 
     public void Clear_Layer()
     {
-        BoundsInt bounds_objects = activeMap.cellBounds;
-        for (int x = 0; x < bounds_objects.size.x; x++)
-        {
-            for (int y = 0; y < bounds_objects.size.y; y++)
-            {
-                activeMap.SetTile(new Vector3Int(x, y, 0), null);
-            }
-        }
-    }
-
-    public class SaveObject
-    {
-        public int bounds_ground_x;
-        public int bounds_ground_y;
-        public List<TileBase> tile_list_ground;
-        public int bounds_objects_x;
-        public int bounds_objects_y;
-        public List<TileBase> tile_list_objects;
+        MapSystem.Clear_Layer(activeMap);
     }
 }

@@ -7,7 +7,6 @@ public static class SaveSystem
 {
     public static readonly string MAP_FOLDER = Application.dataPath + "/Maps/";
 
-    // Start is called before the first frame update
     public static void Init()
     {
         // Test if map folder exists

@@ -18,6 +18,9 @@ public class GameManager : MonoBehaviour
     public GameObject crosshair_4;
     public GameObject health_bar_4;
 
+    public UnityEngine.Tilemaps.Tilemap tilemapGround;
+    public UnityEngine.Tilemaps.Tilemap tilemapObjects;
+
     PlayerController player;
 
     public int[,] player_info = new int[4, 3];
@@ -68,11 +71,13 @@ public class GameManager : MonoBehaviour
             tank.GetComponent<PlayerController>().SetCrosshair(tank_crosshair_4);
             tank.GetComponent<PlayerController>().SetHealthBar(health_bar_4);
         }
+
+        MapSystem.Load_Map(tilemapGround, tilemapObjects);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

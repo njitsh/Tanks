@@ -281,11 +281,11 @@ RectTransform:
   m_Children:
   - {fileID: 1908959954}
   m_Father: {fileID: 249322168}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -200, y: 0}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &48666353
@@ -335,7 +335,7 @@ MonoBehaviour:
         m_MethodName: Select_Tile
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: e7a66e1b27935db448e70bb4e5343bba,
+          m_ObjectArgument: {fileID: 11400000, guid: 953f5b7feb53c2c4d98aaf1fbd12195c,
             type: 2}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Tilemaps.Tile, UnityEngine
           m_IntArgument: 0
@@ -690,8 +690,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1440133313}
   - {fileID: 48666352}
+  - {fileID: 1440133313}
   m_Father: {fileID: 312699479}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3820,11 +3820,11 @@ RectTransform:
   m_Children:
   - {fileID: 1400188337}
   m_Father: {fileID: 249322168}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -200.00002, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1440133314
@@ -3874,7 +3874,7 @@ MonoBehaviour:
         m_MethodName: Select_Tile
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 953f5b7feb53c2c4d98aaf1fbd12195c,
+          m_ObjectArgument: {fileID: 11400000, guid: e7a66e1b27935db448e70bb4e5343bba,
             type: 2}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Tilemaps.Tile, UnityEngine
           m_IntArgument: 0
@@ -5207,6 +5207,7 @@ GameObject:
   - component: {fileID: 1996020405}
   - component: {fileID: 1996020404}
   - component: {fileID: 1996020403}
+  - component: {fileID: 1996020406}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -5279,6 +5280,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1996020406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1996020402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f40352d93c471d04e905e7f6d87ac22f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  camera_speed: 0.3
+  tilemapGround: {fileID: 2099213742}
 --- !u!1 &2013787943
 GameObject:
   m_ObjectHideFlags: 0
