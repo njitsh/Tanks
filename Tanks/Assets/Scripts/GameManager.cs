@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour
             tank.GetComponent<PlayerController>().SetHealthBar(health_bar_4);
         }
 
-        MapSystem.Load_Map(tilemapGround, tilemapObjects);
+        MapSystem.Load_Map(tilemapGround, tilemapObjects, 1);
     }
 
     // Update is called once per frame

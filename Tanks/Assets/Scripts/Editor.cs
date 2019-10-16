@@ -95,12 +95,12 @@ public class Editor : MonoBehaviour
 
     public void Load_Map()
     {
-        MapSystem.Load_Map(tilemapGround, tilemapObjects);
+        MapSystem.Load_Map(tilemapGround, tilemapObjects, 0);
     }
 
     public void Save_Map()
     {
-        MapSystem.Save_Map(tilemapGround, tilemapObjects);
+        MapSystem.Save_Map(tilemapGround, tilemapObjects, 0);
     }
 
     public void Clear_Map()

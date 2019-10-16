@@ -5,41 +5,36 @@ using UnityEngine;
 
 public static class SaveSystem
 {
-    public static readonly string MAP_FOLDER_EDITOR = Application.dataPath + "/Maps/Editor/";
-    public static readonly string MAP_FOLDER_LOCAL = Application.dataPath + "/Maps/Local/";
+    public static readonly string[] MAP_FOLDER = { Application.dataPath + "/Maps/Editor/", Application.dataPath + "/Maps/Local/" }; // 0. Editor 1. Local
 
     public static void Init()
     {
-        // Test if map folder exists
-        if (!Directory.Exists(MAP_FOLDER_EDITOR))
+        for (int i = 0; i < MAP_FOLDER.Length; i++)
         {
-            // Create map folder
-            Directory.CreateDirectory(MAP_FOLDER_EDITOR);
-        }
-
-        // Test if map folder exists
-        if (!Directory.Exists(MAP_FOLDER_LOCAL))
-        {
-            // Create map folder
-            Directory.CreateDirectory(MAP_FOLDER_LOCAL);
+            // Test if map folder exists
+            if (!Directory.Exists(MAP_FOLDER[i]))
+            {
+                // Create map folder
+                Directory.CreateDirectory(MAP_FOLDER[i]);
+            }
         }
     }
 
     // SAVE MAP
-    public static void Save(string mapString)
+    public static void Save(string mapString, int folder)
     {
         int mapNumber = 1;
-        while (File.Exists(MAP_FOLDER_EDITOR + "map_" + mapNumber + ".json"))
+        while (File.Exists(MAP_FOLDER[folder] + "map_" + mapNumber + ".json"))
         {
             mapNumber++;
         }
-        File.WriteAllText(MAP_FOLDER_EDITOR + "map_" + mapNumber + ".json", mapString);
+        File.WriteAllText(MAP_FOLDER[folder] + "map_" + mapNumber + ".json", mapString);
     }
 
     // LOAD MAP
-    public static string Load()
+    public static string Load(int folder)
     {
-        DirectoryInfo directoryInfo = new DirectoryInfo(MAP_FOLDER_EDITOR);
+        DirectoryInfo directoryInfo = new DirectoryInfo(MAP_FOLDER[folder]);
         FileInfo[] mapFiles = directoryInfo.GetFiles("*.json");
         FileInfo mostRecentFile = null;
         foreach (FileInfo fileInfo in mapFiles)

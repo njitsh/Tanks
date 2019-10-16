@@ -5,9 +5,9 @@ using UnityEngine.Tilemaps;
 
 public static class MapSystem
 {
-    public static void Load_Map(Tilemap tMGround, Tilemap tMObjects)
+    public static void Load_Map(Tilemap tMGround, Tilemap tMObjects, int folder)
     {
-        string mapString = SaveSystem.Load();
+        string mapString = SaveSystem.Load(folder);
         if (mapString != null)
         {
             SaveObject saveObject = JsonUtility.FromJson<SaveObject>(mapString);
@@ -35,7 +35,7 @@ public static class MapSystem
         }
     }
 
-    public static void Save_Map(Tilemap tMGround, Tilemap tMObjects)
+    public static void Save_Map(Tilemap tMGround, Tilemap tMObjects, int folder)
     {
         // Get bounds
         BoundsInt bounds_ground = tMGround.cellBounds;
@@ -61,7 +61,7 @@ public static class MapSystem
         };
 
         string json = JsonUtility.ToJson(saveObject);
-        SaveSystem.Save(json);
+        SaveSystem.Save(json, folder);
     }
 
     public static void Clear_Whole_Map(Tilemap tMGround, Tilemap tMObjects)
