@@ -8,6 +8,7 @@ public class Editor : MonoBehaviour
     public Tile selectedTile = null;
 
     public Tilemap tilemapGround;
+    public Tilemap tilemapWall;
     public Tilemap tilemapObjects;
     public Tilemap tilemapTop;
 
@@ -31,7 +32,9 @@ public class Editor : MonoBehaviour
         // Resize maps
         tilemapGround.size = new Vector3Int(maxWidth, maxHeight, 1);
         tilemapGround.ResizeBounds();
-        tilemapObjects.size = new Vector3Int(maxWidth * 2, maxHeight * 2, 1);
+        tilemapWall.size = new Vector3Int(maxWidth * 2, maxHeight * 2, 1);
+        tilemapWall.ResizeBounds();
+        tilemapObjects.size = new Vector3Int(maxWidth, maxHeight, 1);
         tilemapObjects.ResizeBounds();
         tilemapTop.size = new Vector3Int(maxWidth, maxHeight, 1);
         tilemapTop.ResizeBounds();
@@ -59,7 +62,7 @@ public class Editor : MonoBehaviour
                 if (Input.GetKey(KeyCode.Mouse0))
                 {
                     // Place tile on active map
-                    if (!eraseMode && selectedTile != null && ((currentCell.x >= 0 && currentCell.x < maxWidth && currentCell.y >= 0 && currentCell.y < maxHeight && (activeMap == tilemapGround || activeMap == tilemapTop)) || (currentCell.x >= 0 && currentCell.x < maxWidth * 2 && currentCell.y >= 0 && currentCell.y < maxHeight * 2 && activeMap == tilemapObjects)))
+                    if (!eraseMode && selectedTile != null && ((currentCell.x >= 0 && currentCell.x < maxWidth && currentCell.y >= 0 && currentCell.y < maxHeight && (activeMap == tilemapGround || activeMap == tilemapObjects || activeMap == tilemapTop)) || (currentCell.x >= 0 && currentCell.x < maxWidth * 2 && currentCell.y >= 0 && currentCell.y < maxHeight * 2 && activeMap == tilemapWall)))
                     {
                         activeMap.SetTile(currentCell, selectedTile);
                         activeSelectedMap.SetTile(currentCell, null);
@@ -99,6 +102,13 @@ public class Editor : MonoBehaviour
         eraseMode = false;
     }
 
+    // Deselect active tile
+    public void Deselect_Tile()
+    {
+        selectedTile = null;
+        eraseMode = false;
+    }
+
     // Set active map
     public void SetActiveMap(Tilemap active_map)
     {
@@ -115,19 +125,19 @@ public class Editor : MonoBehaviour
     // Load last map (in editor folder)
     public void Load_Map()
     {
-        MapSystem.Load_Map(tilemapGround, tilemapObjects, tilemapTop, 0);
+        MapSystem.Load_Map(tilemapGround, tilemapWall, tilemapObjects, tilemapTop, 0);
     }
 
     // Save map (in editor folder)
     public void Save_Map()
     {
-        MapSystem.Save_Map(tilemapGround, tilemapObjects, tilemapTop, 0);
+        MapSystem.Save_Map(tilemapGround, tilemapWall, tilemapObjects, tilemapTop, 0);
     }
 
     // Clear current map fully
     public void Clear_Map()
     {
-        MapSystem.Clear_Whole_Map(tilemapGround, tilemapObjects, tilemapTop);
+        MapSystem.Clear_Whole_Map(tilemapGround, tilemapWall, tilemapObjects, tilemapTop);
     }
 
     // Clear current layer

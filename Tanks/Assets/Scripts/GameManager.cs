@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     public GameObject health_bar_4;
 
     public UnityEngine.Tilemaps.Tilemap tilemapGround;
+    public UnityEngine.Tilemaps.Tilemap tilemapWall;
     public UnityEngine.Tilemaps.Tilemap tilemapObjects;
     public UnityEngine.Tilemaps.Tilemap tilemapTop;
 
@@ -73,7 +74,7 @@ public class GameManager : MonoBehaviour
             tank.GetComponent<PlayerController>().SetHealthBar(health_bar_4);
         }
 
-        MapSystem.Load_Map(tilemapGround, tilemapObjects, tilemapTop, 1);
+        MapSystem.Load_Map(tilemapGround, tilemapWall, tilemapObjects, tilemapTop, 1);
     }
 
     // Update is called once per frame
