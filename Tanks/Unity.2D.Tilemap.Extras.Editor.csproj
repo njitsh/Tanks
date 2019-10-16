@@ -55,21 +55,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\2d-extras-master\Editor\Brushes\CoordinateBrush\CoordinateBrush.cs" />
-     <Compile Include="Assets\2d-extras-master\Editor\Brushes\GameObjectBrush\GameObjectBrush.cs" />
-     <Compile Include="Assets\2d-extras-master\Editor\Brushes\GroupBrush\GroupBrush.cs" />
-     <Compile Include="Assets\2d-extras-master\Editor\Brushes\LineBrush\LineBrush.cs" />
-     <Compile Include="Assets\2d-extras-master\Editor\Brushes\PrefabBrush\PrefabBrush.cs" />
-     <Compile Include="Assets\2d-extras-master\Editor\Brushes\RandomBrush\RandomBrush.cs" />
-     <Compile Include="Assets\2d-extras-master\Editor\Brushes\TintBrush\TintBrush.cs" />
-     <Compile Include="Assets\2d-extras-master\Editor\Brushes\TintBrushSmooth\TintBrushSmooth.cs" />
-     <Compile Include="Assets\2d-extras-master\Editor\Tiles\HexagonalRuleTile\HexagonalRuleTileEditor.cs" />
-     <Compile Include="Assets\2d-extras-master\Editor\Tiles\IsometricRuleTile\IsometricRuleTileEditor.cs" />
-     <Compile Include="Assets\2d-extras-master\Editor\Tiles\RuleOverrideTile\PopulateRuleOverrideTileWizard.cs" />
-     <Compile Include="Assets\2d-extras-master\Editor\Tiles\RuleOverrideTile\RuleOverrideTileEditor.cs" />
-     <Compile Include="Assets\2d-extras-master\Editor\Tiles\RuleTile\CustomRuleTileMenu.cs" />
-     <Compile Include="Assets\2d-extras-master\Editor\Tiles\RuleTile\RuleTileEditor.cs" />
-     <None Include="Assets\2d-extras-master\Editor\Tiles\RuleTile\ScriptTemplates\NewCustomRuleTile.cs.txt" />
+     <Compile Include="Packages\com.unity.2d.tilemap.extras\Editor\Brushes\CoordinateBrush\CoordinateBrush.cs" />
+     <Compile Include="Packages\com.unity.2d.tilemap.extras\Editor\Brushes\GameObjectBrush\GameObjectBrush.cs" />
+     <Compile Include="Packages\com.unity.2d.tilemap.extras\Editor\Brushes\GroupBrush\GroupBrush.cs" />
+     <Compile Include="Packages\com.unity.2d.tilemap.extras\Editor\Brushes\LineBrush\LineBrush.cs" />
+     <Compile Include="Packages\com.unity.2d.tilemap.extras\Editor\Brushes\PrefabBrush\PrefabBrush.cs" />
+     <Compile Include="Packages\com.unity.2d.tilemap.extras\Editor\Brushes\RandomBrush\RandomBrush.cs" />
+     <Compile Include="Packages\com.unity.2d.tilemap.extras\Editor\Brushes\TintBrush\TintBrush.cs" />
+     <Compile Include="Packages\com.unity.2d.tilemap.extras\Editor\Brushes\TintBrushSmooth\TintBrushSmooth.cs" />
+     <Compile Include="Packages\com.unity.2d.tilemap.extras\Editor\Tiles\HexagonalRuleTile\HexagonalRuleTileEditor.cs" />
+     <Compile Include="Packages\com.unity.2d.tilemap.extras\Editor\Tiles\IsometricRuleTile\IsometricRuleTileEditor.cs" />
+     <Compile Include="Packages\com.unity.2d.tilemap.extras\Editor\Tiles\RuleOverrideTile\PopulateRuleOverrideTileWizard.cs" />
+     <Compile Include="Packages\com.unity.2d.tilemap.extras\Editor\Tiles\RuleOverrideTile\RuleOverrideTileEditor.cs" />
+     <Compile Include="Packages\com.unity.2d.tilemap.extras\Editor\Tiles\RuleTile\CustomRuleTileMenu.cs" />
+     <Compile Include="Packages\com.unity.2d.tilemap.extras\Editor\Tiles\RuleTile\RuleTileEditor.cs" />
+     <None Include="Packages\com.unity.2d.tilemap.extras\Editor\Tiles\RuleTile\ScriptTemplates\NewCustomRuleTile.cs.txt" />
  <Reference Include="Unity.2D.Tilemap.Editor">
  <HintPath>D:/Tanks/Tanks/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
  </Reference>

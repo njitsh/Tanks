@@ -820,6 +820,10 @@ MonoBehaviour:
   tilemapWall: {fileID: 2051998294}
   tilemapObjects: {fileID: 1878585916}
   tilemapTop: {fileID: 480129997}
+  tile_prefab_array:
+  - tile: {fileID: 11400000, guid: e7a66e1b27935db448e70bb4e5343bba, type: 2}
+    prefab_object: {fileID: 4584183013309241545, guid: ec63903c6ea8eaf44ac1912c3e0cc6e0,
+      type: 3}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -1543,7 +1547,7 @@ PrefabInstance:
     - target: {fileID: 8601394975655214618, guid: ec63903c6ea8eaf44ac1912c3e0cc6e0,
         type: 3}
       propertyPath: m_SortingLayer
-      value: -7
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec63903c6ea8eaf44ac1912c3e0cc6e0, type: 3}
@@ -1926,7 +1930,7 @@ PrefabInstance:
     - target: {fileID: 8601394975655214618, guid: ec63903c6ea8eaf44ac1912c3e0cc6e0,
         type: 3}
       propertyPath: m_SortingLayer
-      value: -8
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec63903c6ea8eaf44ac1912c3e0cc6e0, type: 3}
@@ -2480,7 +2484,7 @@ PrefabInstance:
     - target: {fileID: 8601394975655214618, guid: ec63903c6ea8eaf44ac1912c3e0cc6e0,
         type: 3}
       propertyPath: m_SortingLayer
-      value: -7
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec63903c6ea8eaf44ac1912c3e0cc6e0, type: 3}
@@ -2724,7 +2728,17 @@ PrefabInstance:
     - target: {fileID: 8601394975655214618, guid: ec63903c6ea8eaf44ac1912c3e0cc6e0,
         type: 3}
       propertyPath: m_SortingLayer
-      value: -7
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1681806574699347800, guid: ec63903c6ea8eaf44ac1912c3e0cc6e0,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1681806574699347800, guid: ec63903c6ea8eaf44ac1912c3e0cc6e0,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec63903c6ea8eaf44ac1912c3e0cc6e0, type: 3}

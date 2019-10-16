@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using UnityEngine.Tilemaps;
 
 public class GameManager : MonoBehaviour
 {
+    // Linked tanks
     public GameObject tank_1;
     public GameObject crosshair_1;
     public GameObject health_bar_1;
@@ -18,13 +20,17 @@ public class GameManager : MonoBehaviour
     public GameObject crosshair_4;
     public GameObject health_bar_4;
 
-    public UnityEngine.Tilemaps.Tilemap tilemapGround;
-    public UnityEngine.Tilemaps.Tilemap tilemapWall;
-    public UnityEngine.Tilemaps.Tilemap tilemapObjects;
-    public UnityEngine.Tilemaps.Tilemap tilemapTop;
+    // Tilemaps
+    public Tilemap tilemapGround;
+    public Tilemap tilemapWall;
+    public Tilemap tilemapObjects;
+    public Tilemap tilemapTop;
+
+    // Tile to prefab array
+    public MapSystem.tile_to_prefab[] tile_prefab_array;
 
     PlayerController player;
-
+    
     public int[,] player_info = new int[4, 3];
 
     // Start is called before the first frame update
@@ -74,7 +80,7 @@ public class GameManager : MonoBehaviour
             tank.GetComponent<PlayerController>().SetHealthBar(health_bar_4);
         }
 
-        MapSystem.Load_Map(tilemapGround, tilemapWall, tilemapObjects, tilemapTop, 1);
+        MapSystem.Play_Map(tilemapGround, tilemapWall, tilemapObjects, tilemapTop, 1, tile_prefab_array);
     }
 
     // Update is called once per frame

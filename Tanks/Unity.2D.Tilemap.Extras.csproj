@@ -55,18 +55,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\2d-extras-master\Runtime\Brushes\TintTextureGenerator.cs" />
-     <Compile Include="Assets\2d-extras-master\Runtime\GridInformation\GridInformation.cs" />
-     <Compile Include="Assets\2d-extras-master\Runtime\Tiles\AnimatedTile\AnimatedTile.cs" />
-     <Compile Include="Assets\2d-extras-master\Runtime\Tiles\HexagonalRuleTile\HexagonalRuleTile.cs" />
-     <Compile Include="Assets\2d-extras-master\Runtime\Tiles\IsometricRuleTile\IsometricRuleTile.cs" />
-     <Compile Include="Assets\2d-extras-master\Runtime\Tiles\PipelineTile\PipelineTile.cs" />
-     <Compile Include="Assets\2d-extras-master\Runtime\Tiles\RandomTile\RandomTile.cs" />
-     <Compile Include="Assets\2d-extras-master\Runtime\Tiles\RuleOverrideTile\RuleOverrideTile.cs" />
-     <Compile Include="Assets\2d-extras-master\Runtime\Tiles\RuleTile\RuleTile.cs" />
-     <Compile Include="Assets\2d-extras-master\Runtime\Tiles\TerrainTile\TerrainTile.cs" />
-     <Compile Include="Assets\2d-extras-master\Runtime\Tiles\WeightedRandomTile\WeightedRandomTile.cs" />
-     <None Include="Assets\2d-extras-master\Runtime\Brushes\TintedTilemap.shader" />
+     <Compile Include="Packages\com.unity.2d.tilemap.extras\Runtime\Brushes\TintTextureGenerator.cs" />
+     <Compile Include="Packages\com.unity.2d.tilemap.extras\Runtime\GridInformation\GridInformation.cs" />
+     <Compile Include="Packages\com.unity.2d.tilemap.extras\Runtime\Tiles\AnimatedTile\AnimatedTile.cs" />
+     <Compile Include="Packages\com.unity.2d.tilemap.extras\Runtime\Tiles\HexagonalRuleTile\HexagonalRuleTile.cs" />
+     <Compile Include="Packages\com.unity.2d.tilemap.extras\Runtime\Tiles\IsometricRuleTile\IsometricRuleTile.cs" />
+     <Compile Include="Packages\com.unity.2d.tilemap.extras\Runtime\Tiles\PipelineTile\PipelineTile.cs" />
+     <Compile Include="Packages\com.unity.2d.tilemap.extras\Runtime\Tiles\RandomTile\RandomTile.cs" />
+     <Compile Include="Packages\com.unity.2d.tilemap.extras\Runtime\Tiles\RuleOverrideTile\RuleOverrideTile.cs" />
+     <Compile Include="Packages\com.unity.2d.tilemap.extras\Runtime\Tiles\RuleTile\RuleTile.cs" />
+     <Compile Include="Packages\com.unity.2d.tilemap.extras\Runtime\Tiles\TerrainTile\TerrainTile.cs" />
+     <Compile Include="Packages\com.unity.2d.tilemap.extras\Runtime\Tiles\WeightedRandomTile\WeightedRandomTile.cs" />
+     <None Include="Packages\com.unity.2d.tilemap.extras\Runtime\Brushes\TintedTilemap.shader" />
  <Reference Include="UnityEditor.UI">
  <HintPath>D:/Tanks/Tanks/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
  </Reference>

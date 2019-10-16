@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: 71d7aeb3412961141b056ed21fe44aed
+guid: 11b37b89056199f469bca7de5472f54d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5886947803055716310
-    second: object_tiles_0
-  - first:
-      213: 9044413248493611279
-    second: object_tiles_1
+      213: 1298503268049066318
+    second: object_tiles 1_0
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -51,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 64
+  spritePixelsToUnits: 128
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -92,43 +89,22 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: object_tiles_0
+      name: object_tiles 1_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 64
-        width: 64
-        height: 64
+        y: 128
+        width: 128
+        height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b2f3c111a24fbd44f8db6f1fc05bfc09
-      internalID: -5886947803055716310
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: object_tiles_1
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 64
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 09271c14cd74178439d9a06a01e6f475
-      internalID: 9044413248493611279
+      spriteID: 2fabe203f56acca4abcb2a657dd9c3a7
+      internalID: 1298503268049066318
       vertices: []
       indices: 
       edges: []

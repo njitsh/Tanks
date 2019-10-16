@@ -45,7 +45,7 @@ public class Bullet : MonoBehaviour
             // Check if the ray hits something
             if (hit)
             {
-                // CHeck if the ray hits a wall within a distance of 0.15f
+                // Check if the ray hits a wall within a distance of 0.15f
                 if (hit.distance < 0.15f && hit.transform.tag == "Wall")
                 {
                     // Reflect bullet
@@ -68,12 +68,17 @@ public class Bullet : MonoBehaviour
                 Destroy(gameObject); // Destroy Bullet
             }
         }
-        /*else if (other.tag == "Wall")
+        else if (other.tag == "Wall" && other.name == "WoodCrate(Clone)")
         {
             Wall wallscript = other.gameObject.GetComponent<Wall>();
 
             wallscript.Hit(bullet_damage); // Hit wall with 10 damage
-        }*/
+        }
+        else if (other.tag == "Bullet")
+        {
+            Destroy(other.gameObject);
+            Destroy(gameObject);
+        }
     }
 
     public void setTankNumber(int tanknr)
