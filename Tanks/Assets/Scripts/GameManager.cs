@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
 
     public UnityEngine.Tilemaps.Tilemap tilemapGround;
     public UnityEngine.Tilemaps.Tilemap tilemapObjects;
+    public UnityEngine.Tilemaps.Tilemap tilemapTop;
 
     PlayerController player;
 
@@ -31,7 +32,7 @@ public class GameManager : MonoBehaviour
         GameObject PCBinding = GameObject.Find("PCBinding");
         ControllerPlayerBinding cpBinding = PCBinding.GetComponent<ControllerPlayerBinding>();
 
-        player_info = cpBinding.getPlayerInfo();
+        //player_info = cpBinding.getPlayerInfo();
 
         /* Possibly use constructor (maybe not a good idea) http://ilkinulas.github.io/development/unity/2016/05/30/monobehaviour-constructor.html
         for (int i = 0; i < 0; i++)
@@ -48,7 +49,7 @@ public class GameManager : MonoBehaviour
             GameObject tank = Instantiate(tank_1);
             tank.GetComponent<PlayerController>().SetCrosshair(tank_crosshair_1);
             tank.GetComponent<PlayerController>().SetHealthBar(health_bar_1);
-            tank.GetComponent<PlayerController>().SendPlayerInfo(player_info);
+            //tank.GetComponent<PlayerController>().SendPlayerInfo(player_info);
         }
         if (cpBinding.getControllerBinding(2) != 0)
         {
@@ -72,7 +73,7 @@ public class GameManager : MonoBehaviour
             tank.GetComponent<PlayerController>().SetHealthBar(health_bar_4);
         }
 
-        MapSystem.Load_Map(tilemapGround, tilemapObjects, 1);
+        MapSystem.Load_Map(tilemapGround, tilemapObjects, tilemapTop, 1);
     }
 
     // Update is called once per frame

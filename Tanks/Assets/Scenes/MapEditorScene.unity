@@ -1296,6 +1296,7 @@ MonoBehaviour:
   selectedTile: {fileID: 0}
   tilemapGround: {fileID: 2099213742}
   tilemapObjects: {fileID: 1711252631}
+  tilemapTop: {fileID: 968736209}
   tilemapSelectedGround: {fileID: 1403638351}
 --- !u!1 &344087624
 GameObject:

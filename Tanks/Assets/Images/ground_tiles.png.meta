@@ -8,6 +8,9 @@ TextureImporter:
   - first:
       213: -2836822536050358539
     second: ground_tiles_1
+  - first:
+      213: -8922166342787202985
+    second: ground_tiles_2
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -106,7 +109,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 765b20209e6456e4f8e6ebba0be7c51a
+      spriteID: 686244e942770cb4c899e56a59c1c5e2
       internalID: -9205980483787862885
       vertices: []
       indices: 
@@ -127,8 +130,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2b4a133374119ac4497dc90ee979468a
+      spriteID: 6b0bf3b8672b2ef4d93879a0f1ade783
       internalID: -2836822536050358539
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ground_tiles_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 58a36813bcf6c8347b354ba582e437b1
+      internalID: -8922166342787202985
       vertices: []
       indices: 
       edges: []

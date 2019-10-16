@@ -818,6 +818,7 @@ MonoBehaviour:
   health_bar_4: {fileID: 4784792218929125326}
   tilemapGround: {fileID: 544544392}
   tilemapObjects: {fileID: 2051998294}
+  tilemapTop: {fileID: 480129997}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0

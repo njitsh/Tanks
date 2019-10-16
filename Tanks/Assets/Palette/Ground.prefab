@@ -41,16 +41,16 @@ Tilemap:
   m_GameObject: {fileID: 3123021991968102193}
   m_Enabled: 1
   m_Tiles:
-  - first: {x: -1, y: 0, z: 0}
+  - first: {x: -1, y: -1, z: 0}
     second:
-      m_TileIndex: 0
-      m_TileSpriteIndex: 0
+      m_TileIndex: 2
+      m_TileSpriteIndex: 2
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_ObjectToInstantiate: {fileID: 0}
       m_TileFlags: 1
       m_ColliderType: 1
-  - first: {x: 0, y: 0, z: 0}
+  - first: {x: -1, y: 0, z: 0}
     second:
       m_TileIndex: 1
       m_TileSpriteIndex: 1
@@ -59,21 +59,35 @@ Tilemap:
       m_ObjectToInstantiate: {fileID: 0}
       m_TileFlags: 1
       m_ColliderType: 1
+  - first: {x: 0, y: 0, z: 0}
+    second:
+      m_TileIndex: 0
+      m_TileSpriteIndex: 0
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_ObjectToInstantiate: {fileID: 0}
+      m_TileFlags: 1
+      m_ColliderType: 1
   m_AnimatedTiles: {}
   m_TileAssetArray:
   - m_RefCount: 1
-    m_Data: {fileID: 11400000, guid: a067690eca793dc41a5cb1c50782589a, type: 2}
+    m_Data: {fileID: 11400000, guid: 1a2171571bdf0644d9979e6278560742, type: 2}
   - m_RefCount: 1
-    m_Data: {fileID: 11400000, guid: 8d29d3174cd11464c91d278cd67972b1, type: 2}
+    m_Data: {fileID: 11400000, guid: 48ccc7a660b016f469c1374fbda3e2a4, type: 2}
+  - m_RefCount: 1
+    m_Data: {fileID: 11400000, guid: fc1c414eadabfb247b1e0e9524dab280, type: 2}
   m_TileSpriteArray:
+  - m_RefCount: 1
+    m_Data: {fileID: -2836822536050358539, guid: afa1edba9d9a03743b13577f5f162c07,
+      type: 3}
   - m_RefCount: 1
     m_Data: {fileID: -9205980483787862885, guid: afa1edba9d9a03743b13577f5f162c07,
       type: 3}
   - m_RefCount: 1
-    m_Data: {fileID: -2836822536050358539, guid: afa1edba9d9a03743b13577f5f162c07,
+    m_Data: {fileID: -8922166342787202985, guid: afa1edba9d9a03743b13577f5f162c07,
       type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 2
+  - m_RefCount: 3
     m_Data:
       e00: 1
       e01: 0
@@ -92,12 +106,12 @@ Tilemap:
       e32: 0
       e33: 1
   m_TileColorArray:
-  - m_RefCount: 2
+  - m_RefCount: 3
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Origin: {x: -1, y: 0, z: 0}
-  m_Size: {x: 2, y: 1, z: 1}
+  m_Origin: {x: -1, y: -1, z: 0}
+  m_Size: {x: 2, y: 2, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:
