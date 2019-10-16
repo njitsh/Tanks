@@ -9,6 +9,7 @@ public class Editor : MonoBehaviour
 
     public Tilemap tilemapGround;
     public Tilemap tilemapObjects;
+    public Tilemap tilemapTop;
 
     public Tilemap tilemapSelectedGround;
 
@@ -26,6 +27,15 @@ public class Editor : MonoBehaviour
     private void Awake()
     {
         SaveSystem.Init();
+
+        // Resize maps
+        tilemapGround.size = new Vector3Int(maxWidth, maxHeight, 0);
+        tilemapGround.ResizeBounds();
+        tilemapObjects.size = new Vector3Int(maxWidth * 2, maxHeight * 2, 0);
+        tilemapObjects.ResizeBounds();
+        tilemapTop.size = new Vector3Int(maxWidth, maxHeight, 0);
+        tilemapTop.ResizeBounds();
+
         activeMap = tilemapGround;
         activeSelectedMap = tilemapSelectedGround;
     }

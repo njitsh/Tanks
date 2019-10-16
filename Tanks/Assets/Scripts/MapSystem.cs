@@ -19,18 +19,24 @@ public static class MapSystem
 
     private static void Open_Map(Tilemap tMGround, TileBase[] map_ground, int bounds_g_x, int bounds_g_y, Tilemap tMObjects, TileBase[] map_objects, int bounds_o_x, int bounds_o_y)
     {
-        for (int x = 0; x < bounds_g_x; x++)
+        if (tMGround != null)
         {
-            for (int y = 0; y < bounds_g_y; y++)
+            for (int x = 0; x < bounds_g_x; x++)
             {
-                tMGround.SetTile(new Vector3Int(x, y, 0), map_ground[x + y * bounds_g_x]);
+                for (int y = 0; y < bounds_g_y; y++)
+                {
+                    tMGround.SetTile(new Vector3Int(x, y, 0), map_ground[x + y * bounds_g_x]);
+                }
             }
         }
-        for (int x = 0; x < bounds_o_x; x++)
+        if (tMObjects != null)
         {
-            for (int y = 0; y < bounds_o_y; y++)
+            for (int x = 0; x < bounds_o_x; x++)
             {
-                tMObjects.SetTile(new Vector3Int(x, y, 0), map_objects[x + y * bounds_o_x]);
+                for (int y = 0; y < bounds_o_y; y++)
+                {
+                    tMObjects.SetTile(new Vector3Int(x, y, 0), map_objects[x + y * bounds_o_x]);
+                }
             }
         }
     }
