@@ -28,16 +28,7 @@ public class Editor : MonoBehaviour
     private void Awake()
     {
         SaveSystem.Init();
-
-        // Resize maps
-        tilemapGround.size = new Vector3Int(maxWidth, maxHeight, 1);
-        tilemapGround.ResizeBounds();
-        tilemapWall.size = new Vector3Int(maxWidth * 2, maxHeight * 2, 1);
-        tilemapWall.ResizeBounds();
-        tilemapObjects.size = new Vector3Int(maxWidth, maxHeight, 1);
-        tilemapObjects.ResizeBounds();
-        tilemapTop.size = new Vector3Int(maxWidth, maxHeight, 1);
-        tilemapTop.ResizeBounds();
+        Reset_Bounds();
 
         activeMap = tilemapGround;
         activeSelectedMap = tilemapSelectedGround;
@@ -100,6 +91,19 @@ public class Editor : MonoBehaviour
         }
     }
 
+    public void Reset_Bounds()
+    {
+        // Resize maps
+        tilemapGround.size = new Vector3Int(maxWidth, maxHeight, 1);
+        tilemapGround.ResizeBounds();
+        tilemapWall.size = new Vector3Int(maxWidth * 2, maxHeight * 2, 1);
+        tilemapWall.ResizeBounds();
+        tilemapObjects.size = new Vector3Int(maxWidth, maxHeight, 1);
+        tilemapObjects.ResizeBounds();
+        tilemapTop.size = new Vector3Int(maxWidth, maxHeight, 1);
+        tilemapTop.ResizeBounds();
+    }
+
     // Select a tile
     public void Select_Tile(Tile Selected_Tile)
     {
@@ -121,13 +125,15 @@ public class Editor : MonoBehaviour
     // Set active map
     public void SetActiveMap(Tilemap active_map)
     {
+        Deselect_Tile();
         activeMap = active_map;
-        selectedTile = null;
     }
 
     // Set active selected map
     public void SetActiveSelectedMap(Tilemap active_selected_map)
     {
+        activeSelectedMap.ClearAllTiles();
+        Debug.Log(activeSelectedMap.cellBounds);
         activeSelectedMap = active_selected_map;
     }
 

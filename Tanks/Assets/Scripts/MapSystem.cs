@@ -85,11 +85,6 @@ public static class MapSystem
         return false;
     }
 
-    private static GameObject Instantiate(GameObject prefab_object)
-    {
-        throw new NotImplementedException();
-    }
-
     public static void Save_Map(Tilemap tMGround, Tilemap tMWall, Tilemap tMObjects, Tilemap tMTop, int folder)
     {
         // Get bounds

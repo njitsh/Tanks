@@ -57,10 +57,14 @@ public class GameManager : MonoBehaviour
             }
         }*/
 
+        MapSystem.Play_Map(tilemapGround, tilemapWall, tilemapObjects, tilemapTop, 1, tile_prefab_array);
+
         if (cpBinding.getControllerBinding(1) != 0)
         {
             GameObject tank_crosshair_1 = Instantiate(crosshair_1) as GameObject;
-            GameObject tank = Instantiate(tank_1);
+            GameObject spawn_p1 = GameObject.Find("PlayerSpawn(Clone)");
+            GameObject tank = Instantiate(tank_1, spawn_p1.transform.position, Quaternion.identity);
+            Destroy(spawn_p1);
             tank.GetComponent<PlayerController>().SetCrosshair(tank_crosshair_1);
             tank.GetComponent<PlayerController>().SetHealthBar(health_bar_1);
             //tank.GetComponent<PlayerController>().SendPlayerInfo(player_info);
@@ -86,8 +90,6 @@ public class GameManager : MonoBehaviour
             tank.GetComponent<PlayerController>().SetCrosshair(tank_crosshair_4);
             tank.GetComponent<PlayerController>().SetHealthBar(health_bar_4);
         }
-
-        MapSystem.Play_Map(tilemapGround, tilemapWall, tilemapObjects, tilemapTop, 1, tile_prefab_array);
         tilemapGround.CompressBounds();
         tilemapWall.CompressBounds();
         tilemapObjects.CompressBounds();
