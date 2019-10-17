@@ -78,11 +78,16 @@ public class Editor : MonoBehaviour
                     }
                 }
                 // Deselect active tile
-                else if ((Input.GetKeyDown(KeyCode.Backspace) || Input.GetKeyDown(KeyCode.Delete) || Input.GetKeyDown(KeyCode.Mouse1)) && selectedTile != null)
+                else if ((Input.GetKeyDown(KeyCode.Backspace) || Input.GetKeyDown(KeyCode.Delete)) && selectedTile != null)
                 {
                     selectedTile = null;
                     activeSelectedMap.SetTile(currentCell, null);
                     eraseMode = false;
+                }
+                // Drag screen
+                else if (Input.GetKeyDown(KeyCode.Mouse1))
+                {
+
                 }
                 // Toggle erase mode
                 else if (Input.GetKeyDown(KeyCode.X))
@@ -98,8 +103,12 @@ public class Editor : MonoBehaviour
     // Select a tile
     public void Select_Tile(Tile Selected_Tile)
     {
-        selectedTile = Selected_Tile;
-        eraseMode = false;
+        if (selectedTile == Selected_Tile) Deselect_Tile();
+        else
+        {
+            selectedTile = Selected_Tile;
+            eraseMode = false;
+        }
     }
 
     // Deselect active tile
