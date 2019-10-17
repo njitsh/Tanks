@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     private float turn_speed = 3;
     private float mag;
     private Rigidbody2D rb;
-    private Vector2 moveVelocity;
+    private Vector3 moveVelocity;
 
     public int health;
     public int healthMax;
@@ -120,6 +120,7 @@ public class PlayerController : MonoBehaviour
         ControllerPlayerBinding cpBinding = PCBinding.GetComponent<ControllerPlayerBinding>();
         SetControllerNumber(cpBinding.getControllerBinding(tank_number));
         rb = GetComponent<Rigidbody2D>();
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 
     // Update is called once per frame
@@ -128,13 +129,12 @@ public class PlayerController : MonoBehaviour
         if (!PauseMenu.GameIsPaused)
         {
             Vector3 moveInput = new Vector3(Input.GetAxisRaw(horizontalAxis), Input.GetAxisRaw(verticalAxis), 0);
-
             if (Mathf.Abs(target_angle - angle) < 1)
             {
-                mag = Mathf.Clamp01(new Vector2(Input.GetAxis(horizontalAxis), Input.GetAxis(verticalAxis)).magnitude);
+                mag = Mathf.Clamp01(new Vector3(Input.GetAxis(horizontalAxis), Input.GetAxis(verticalAxis), 0).magnitude);
                 moveVelocity = moveInput.normalized * speed * mag;
             }
-            else moveVelocity = moveInput.normalized * 0;
+            else moveVelocity = new Vector3(0,0,0);
 
             RotateTank();
         }
@@ -144,7 +144,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!PauseMenu.GameIsPaused)
         {
-            rb.MovePosition(rb.position + moveVelocity * Time.fixedDeltaTime);
+            transform.position += moveVelocity * Time.fixedDeltaTime;
         }
     }
 

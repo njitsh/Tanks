@@ -14,7 +14,7 @@ public class PlayerGun : MonoBehaviour
     private float fireRate = 0.2f;
     private float nextFire;
     private bool releasedFireTrigger = true;
-    private float barrel_length = 0.4f;
+    private float barrel_length = 0.5f;
 
     public GameObject parentTank;
     public GameObject crosshair;

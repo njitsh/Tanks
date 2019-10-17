@@ -52,6 +52,22 @@ public class Bullet : MonoBehaviour
                     Vector2 reflectDir = Vector2.Reflect(ray.direction, hit.normal);
                     angle = Mathf.Atan2(reflectDir.y, reflectDir.x);
                     transform.rotation = Quaternion.AngleAxis(angle * Mathf.Rad2Deg, Vector3.forward);
+                    
+                    if (hit.transform.name == "WoodCrate(Clone)")
+                    {
+                        Wall wallscript = hit.transform.gameObject.GetComponent<Wall>();
+
+                        wallscript.Hit(bullet_damage); // Hit wall with 10 damage
+                    }
+                }
+                else if (hit.transform.tag == "Player" && hit.distance < 0.05f)
+                {
+                    PlayerController playerscript = hit.transform.gameObject.GetComponent<PlayerController>();
+                    if ((Time.time > activation_moment) || playerscript.tank_number != tank_number)
+                    {
+                        playerscript.Hit(bullet_damage); // Hit player with 10 damage
+                        Destroy(gameObject); // Destroy Bullet
+                    }
                 }
             }
         }
@@ -59,22 +75,7 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Player")
-        {
-            PlayerController playerscript = other.gameObject.GetComponent<PlayerController>();
-            if ((Time.time > activation_moment) || playerscript.tank_number != tank_number)
-            {
-                playerscript.Hit(bullet_damage); // Hit player with 10 damage
-                Destroy(gameObject); // Destroy Bullet
-            }
-        }
-        else if (other.tag == "Wall" && other.name == "WoodCrate(Clone)")
-        {
-            Wall wallscript = other.gameObject.GetComponent<Wall>();
-
-            wallscript.Hit(bullet_damage); // Hit wall with 10 damage
-        }
-        else if (other.tag == "Bullet")
+        if (other.tag == "Bullet")
         {
             Destroy(other.gameObject);
             Destroy(gameObject);
