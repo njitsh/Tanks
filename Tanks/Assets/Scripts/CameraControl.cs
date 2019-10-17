@@ -58,7 +58,7 @@ public class CameraControl : MonoBehaviour
                 movement = new Vector3(Input.GetAxisRaw("J" + i + "Horizontal") * camera_speed, Input.GetAxisRaw("J" + i + "Vertical") * camera_speed, 0.0f);
             }
         }
-        if (tilemapGround.WorldToCell(transform.position + movement).x > 0 && tilemapGround.WorldToCell(transform.position + movement).x < maxWidth) transform.Translate(new Vector3(movement.x, 0, 0));
+        if (tilemapGround.WorldToCell(transform.position + movement).x > 0 && tilemapGround.WorldToCell(transform.position + movement).x < maxWidth) transform.Translate(movement.x, 0, 0);
         if (tilemapGround.WorldToCell(transform.position + movement).y > 0 && tilemapGround.WorldToCell(transform.position + movement).y < maxHeight) transform.Translate(0, movement.y, 0);
         movement = new Vector3();
     }
