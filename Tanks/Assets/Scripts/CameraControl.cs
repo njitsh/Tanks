@@ -23,7 +23,7 @@ public class CameraControl : MonoBehaviour
 
     void Start()
     {
-        transform.position = tilemapGround.CellToWorld(new Vector3Int(maxWidth / 2, maxHeight / 2, 0)) + new Vector3Int(0, 0, -10);
+        //transform.position = tilemapGround.CellToWorld(new Vector3Int(maxWidth / 2, maxHeight / 2, 0)) + new Vector3Int(0, 0, -10);
     }
 
     void Update()

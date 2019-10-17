@@ -33,6 +33,13 @@ public class GameManager : MonoBehaviour
     
     public int[,] player_info = new int[4, 3];
 
+    float xMin;
+    float xMax;
+    float yMin;
+    float yMax;
+
+    float borderSize = 1f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -81,11 +88,61 @@ public class GameManager : MonoBehaviour
         }
 
         MapSystem.Play_Map(tilemapGround, tilemapWall, tilemapObjects, tilemapTop, 1, tile_prefab_array);
-    }
+        tilemapGround.CompressBounds();
+        tilemapWall.CompressBounds();
+        tilemapObjects.CompressBounds();
+        tilemapTop.CompressBounds();
+        /*
+        Vector3 offset = transform.up * (transform.localScale.y / 2f) * -1f;
+        Vector3 pos = transform.position + offset; //This is the position
+        */
 
-    // Update is called once per frame
-    void Update()
-    {
+        // Center camera
+        xMin = -1;
+        xMax = -1;
+        yMin = -1;
+        yMax = -1;
 
+        if (tilemapGround.size.x != 0)
+        {
+            xMin = tilemapGround.CellToWorld(new Vector3Int(tilemapGround.cellBounds.xMin, 0, 0)).x;
+            xMax = tilemapGround.CellToWorld(new Vector3Int(tilemapGround.cellBounds.xMax, 0, 0)).x;
+            yMin = tilemapGround.CellToWorld(new Vector3Int(0, tilemapGround.cellBounds.yMin, 0)).y;
+            yMax = tilemapGround.CellToWorld(new Vector3Int(0, tilemapGround.cellBounds.yMax, 0)).y;
+        }
+        if (tilemapWall.size.x != 0)
+        {
+            if (tilemapWall.CellToWorld(new Vector3Int(tilemapWall.cellBounds.xMin, 0, 0)).x < xMin || xMin == -1) xMin = tilemapWall.CellToWorld(new Vector3Int(tilemapWall.cellBounds.xMin, 0, 0)).x;
+            if (tilemapWall.CellToWorld(new Vector3Int(tilemapWall.cellBounds.xMax, 0, 0)).x > xMax || xMax == -1) xMax = tilemapWall.CellToWorld(new Vector3Int(tilemapWall.cellBounds.xMax, 0, 0)).x;
+            if (tilemapWall.CellToWorld(new Vector3Int(0, tilemapWall.cellBounds.yMin, 0)).y < yMin || yMin == -1) yMin = tilemapWall.CellToWorld(new Vector3Int(0, tilemapWall.cellBounds.yMin, 0)).y;
+            if (tilemapWall.CellToWorld(new Vector3Int(0, tilemapWall.cellBounds.yMax, 0)).y > yMax || yMax == -1) yMax = tilemapWall.CellToWorld(new Vector3Int(0, tilemapWall.cellBounds.yMax, 0)).y;
+        }
+        if (tilemapObjects.size.x != 0)
+        {
+            if (tilemapObjects.CellToWorld(new Vector3Int(tilemapObjects.cellBounds.xMin, 0, 0)).x < xMin || xMin == -1) xMin = tilemapObjects.CellToWorld(new Vector3Int(tilemapObjects.cellBounds.xMin, 0, 0)).x;
+            if (tilemapObjects.CellToWorld(new Vector3Int(tilemapObjects.cellBounds.xMax, 0, 0)).x > xMax || xMax == -1) xMax = tilemapObjects.CellToWorld(new Vector3Int(tilemapObjects.cellBounds.xMax, 0, 0)).x;
+            if (tilemapObjects.CellToWorld(new Vector3Int(0, tilemapObjects.cellBounds.yMin, 0)).y < yMin || yMin == -1) yMin = tilemapObjects.CellToWorld(new Vector3Int(0, tilemapObjects.cellBounds.yMin, 0)).y;
+            if (tilemapObjects.CellToWorld(new Vector3Int(0, tilemapObjects.cellBounds.yMax, 0)).y > yMax || yMax == -1) yMax = tilemapObjects.CellToWorld(new Vector3Int(0, tilemapObjects.cellBounds.yMax, 0)).y;
+        }
+        if (tilemapTop.size.x != 0)
+        {
+            if (tilemapTop.CellToWorld(new Vector3Int(tilemapTop.cellBounds.xMin, 0, 0)).x < xMin || xMin == -1) xMin = tilemapTop.CellToWorld(new Vector3Int(tilemapTop.cellBounds.xMin, 0, 0)).x;
+            if (tilemapTop.CellToWorld(new Vector3Int(tilemapTop.cellBounds.xMax, 0, 0)).x > xMax || xMax == -1) xMax = tilemapTop.CellToWorld(new Vector3Int(tilemapTop.cellBounds.xMax, 0, 0)).x;
+            if (tilemapTop.CellToWorld(new Vector3Int(0, tilemapTop.cellBounds.yMin, 0)).y < yMin || yMin == -1) yMin = tilemapTop.CellToWorld(new Vector3Int(0, tilemapTop.cellBounds.yMin, 0)).y;
+            if (tilemapTop.CellToWorld(new Vector3Int(0, tilemapTop.cellBounds.yMax, 0)).y > yMax || yMax == -1) yMax = tilemapTop.CellToWorld(new Vector3Int(0, tilemapTop.cellBounds.yMax, 0)).y;
+        }
+        Camera.main.transform.position = new Vector3(xMin + (xMax-xMin)/2, yMin + (yMax - yMin) / 2, -10);
+
+        // Zoom camera
+        if (Camera.main.aspect > (xMax - xMin) / (yMax - yMin)) // Map height is higher than screen height compared to width of both
+        {
+            // Base camera size on map height
+            Camera.main.orthographicSize = (yMax - yMin) / 2 + borderSize * 2;
+        }
+        else
+        {
+            // Base camera size on map width
+            Camera.main.orthographicSize = (xMax - xMin) / 2 + borderSize * 2;
+        }
     }
 }
