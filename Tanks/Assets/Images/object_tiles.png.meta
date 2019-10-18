@@ -5,6 +5,18 @@ TextureImporter:
   - first:
       213: 1298503268049066318
     second: object_tiles 1_0
+  - first:
+      213: -5886947803055716310
+    second: object_tiles_0
+  - first:
+      213: 9044413248493611279
+    second: object_tiles_1
+  - first:
+      213: 5217201841378281237
+    second: object_tiles_2
+  - first:
+      213: 6908788023772718775
+    second: object_tiles_1
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -89,7 +101,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: object_tiles 1_0
+      name: object_tiles_0
       rect:
         serializedVersion: 2
         x: 0
@@ -103,8 +115,71 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2fabe203f56acca4abcb2a657dd9c3a7
-      internalID: 1298503268049066318
+      spriteID: d6542a485b1f47e499bdaf7518b897a3
+      internalID: -5886947803055716310
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: object_tiles_3
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 128
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 94e112288d917fe458e5813d4c9f1920
+      internalID: 9044413248493611279
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: object_tiles_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 44c60238810004f4fb2e3ff2b95efc2e
+      internalID: 5217201841378281237
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: object_tiles_1
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d5f05ac8079345d4399cf57bb078c8f8
+      internalID: 6908788023772718775
       vertices: []
       indices: 
       edges: []

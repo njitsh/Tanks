@@ -59,12 +59,21 @@ public class GameManager : MonoBehaviour
 
         MapSystem.Play_Map(tilemapGround, tilemapWall, tilemapObjects, tilemapTop, 1, tile_prefab_array);
 
+        // Find spawnpoints
+        GameObject spawn_p1 = GameObject.Find("PlayerSpawn1(Clone)");
+        GameObject spawn_p2 = GameObject.Find("PlayerSpawn2(Clone)");
+        GameObject spawn_p3 = GameObject.Find("PlayerSpawn3(Clone)");
+        GameObject spawn_p4 = GameObject.Find("PlayerSpawn4(Clone)");
+
         if (cpBinding.getControllerBinding(1) != 0)
         {
             GameObject tank_crosshair_1 = Instantiate(crosshair_1) as GameObject;
-            GameObject spawn_p1 = GameObject.Find("PlayerSpawn(Clone)");
-            GameObject tank = Instantiate(tank_1, spawn_p1.transform.position, Quaternion.identity);
-            Destroy(spawn_p1);
+
+            // Instantiate tank from spawnpoint if available
+            GameObject tank;
+            if (spawn_p1 != null) tank = Instantiate(tank_1, spawn_p1.transform.position, Quaternion.identity);
+            else tank = Instantiate(tank_1);
+
             tank.GetComponent<PlayerController>().SetCrosshair(tank_crosshair_1);
             tank.GetComponent<PlayerController>().SetHealthBar(health_bar_1);
             //tank.GetComponent<PlayerController>().SendPlayerInfo(player_info);
@@ -72,21 +81,36 @@ public class GameManager : MonoBehaviour
         if (cpBinding.getControllerBinding(2) != 0)
         {
             GameObject tank_crosshair_2 = Instantiate(crosshair_2) as GameObject;
-            GameObject tank = Instantiate(tank_2);
+
+            // Instantiate tank from spawnpoint if available
+            GameObject tank;
+            if (spawn_p2 != null) tank = Instantiate(tank_2, spawn_p2.transform.position, Quaternion.identity);
+            else tank = Instantiate(tank_2);
+
             tank.GetComponent<PlayerController>().SetCrosshair(tank_crosshair_2);
             tank.GetComponent<PlayerController>().SetHealthBar(health_bar_2);
         }
         if (cpBinding.getControllerBinding(3) != 0)
         {
             GameObject tank_crosshair_3 = Instantiate(crosshair_3) as GameObject;
-            GameObject tank = Instantiate(tank_3);
+
+            // Instantiate tank from spawnpoint if available
+            GameObject tank;
+            if (spawn_p3 != null) tank = Instantiate(tank_3, spawn_p3.transform.position, Quaternion.identity);
+            else tank = Instantiate(tank_3);
+
             tank.GetComponent<PlayerController>().SetCrosshair(tank_crosshair_3);
             tank.GetComponent<PlayerController>().SetHealthBar(health_bar_3);
         }
         if (cpBinding.getControllerBinding(4) != 0)
         {
             GameObject tank_crosshair_4 = Instantiate(crosshair_4) as GameObject;
-            GameObject tank = Instantiate(tank_4);
+
+            // Instantiate tank from spawnpoint if available
+            GameObject tank;
+            if (spawn_p4 != null) tank = Instantiate(tank_4, spawn_p4.transform.position, Quaternion.identity);
+            else tank = Instantiate(tank_4);
+
             tank.GetComponent<PlayerController>().SetCrosshair(tank_crosshair_4);
             tank.GetComponent<PlayerController>().SetHealthBar(health_bar_4);
         }
@@ -94,6 +118,13 @@ public class GameManager : MonoBehaviour
         tilemapWall.CompressBounds();
         tilemapObjects.CompressBounds();
         tilemapTop.CompressBounds();
+
+        // Destroy spawnpoints
+        if (spawn_p1 != null) Destroy(spawn_p1);
+        if (spawn_p2 != null) Destroy(spawn_p2);
+        if (spawn_p3 != null) Destroy(spawn_p3);
+        if (spawn_p4 != null) Destroy(spawn_p4);
+
         /*
         Vector3 offset = transform.up * (transform.localScale.y / 2f) * -1f;
         Vector3 pos = transform.position + offset; //This is the position

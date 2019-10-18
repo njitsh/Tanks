@@ -25,6 +25,17 @@ public class Editor : MonoBehaviour
     public readonly int maxWidth = 30;
     public readonly int maxHeight = 20;
 
+    [System.Serializable]
+    public class limited_tiles
+    {
+        public TileBase limited_tile;
+        public int limit;
+        public int current_amount;
+    }
+
+    // Tile to prefab array
+    public limited_tiles[] tile_limits;
+
     private void Awake()
     {
         SaveSystem.Init();
@@ -55,12 +66,20 @@ public class Editor : MonoBehaviour
                     // Place tile on active map
                     if (!eraseMode && selectedTile != null && ((currentCell.x >= 0 && currentCell.x < maxWidth && currentCell.y >= 0 && currentCell.y < maxHeight && (activeMap == tilemapGround || activeMap == tilemapObjects || activeMap == tilemapTop)) || (currentCell.x >= 0 && currentCell.x < maxWidth * 2 && currentCell.y >= 0 && currentCell.y < maxHeight * 2 && activeMap == tilemapWall)))
                     {
-                        activeMap.SetTile(currentCell, selectedTile);
-                        activeSelectedMap.SetTile(currentCell, null);
+                        if (!Tile_limit_reached(selectedTile))
+                        {
+                            activeMap.SetTile(currentCell, selectedTile);
+                            activeSelectedMap.SetTile(currentCell, null);
+                        }
+                        else
+                        {
+                            Debug.Log("Tile Limit Has Been Reached!");
+                        }
                     }
                     // Remove tile from active map
                     else if (eraseMode)
                     {
+                        Tile_limit_update(activeMap.GetTile(currentCell));
                         activeMap.SetTile(currentCell, null);
                     }
                     else
@@ -74,11 +93,6 @@ public class Editor : MonoBehaviour
                     selectedTile = null;
                     activeSelectedMap.SetTile(currentCell, null);
                     eraseMode = false;
-                }
-                // Drag screen
-                else if (Input.GetKeyDown(KeyCode.Mouse1))
-                {
-
                 }
                 // Toggle erase mode
                 else if (Input.GetKeyDown(KeyCode.X))
@@ -102,6 +116,45 @@ public class Editor : MonoBehaviour
         tilemapObjects.ResizeBounds();
         tilemapTop.size = new Vector3Int(maxWidth, maxHeight, 1);
         tilemapTop.ResizeBounds();
+    }
+
+    private bool Tile_limit_reached(Tile s_tile)
+    {
+        for (int j = 0; j < tile_limits.GetLength(0); j++)
+        {
+            if (s_tile == tile_limits[j].limited_tile)
+            {
+                if (tile_limits[j].limit <= tile_limits[j].current_amount)
+                {
+                    return true;
+                }
+                else
+                {
+                    tile_limits[j].current_amount++;
+                    return false;
+                }
+            }
+        }
+        return false;
+    }
+
+    private void Tile_limit_update(TileBase removed_tile)
+    {
+        for (int j = 0; j < tile_limits.GetLength(0); j++)
+        {
+            if (removed_tile == tile_limits[j].limited_tile)
+            {
+                tile_limits[j].current_amount--;
+            }
+        }
+    }
+
+    private void Reset_tile_amount()
+    {
+        for (int j = 0; j < tile_limits.GetLength(0); j++)
+        {
+            tile_limits[j].current_amount = 0;
+        }
     }
 
     // Select a tile
@@ -153,11 +206,13 @@ public class Editor : MonoBehaviour
     public void Clear_Map()
     {
         MapSystem.Clear_Whole_Map(tilemapGround, tilemapWall, tilemapObjects, tilemapTop);
+        Reset_tile_amount();
     }
 
     // Clear current layer
     public void Clear_Layer()
     {
         MapSystem.Clear_Layer(activeMap);
+        Reset_tile_amount();
     }
 }

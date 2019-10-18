@@ -1095,8 +1095,17 @@ MonoBehaviour:
   - tile: {fileID: 11400000, guid: e7a66e1b27935db448e70bb4e5343bba, type: 2}
     prefab_object: {fileID: 4584183013309241545, guid: ec63903c6ea8eaf44ac1912c3e0cc6e0,
       type: 3}
-  - tile: {fileID: 11400000, guid: 449eb47a51073eb47a2b43268e8e2b0b, type: 2}
+  - tile: {fileID: 11400000, guid: a7c557821bf78b345874becb4ab98585, type: 2}
     prefab_object: {fileID: 5491207174913870202, guid: 599a4413a1c58c642ba16b89221aba55,
+      type: 3}
+  - tile: {fileID: 11400000, guid: c73993b62149c44489d922b2d3eed147, type: 2}
+    prefab_object: {fileID: 5491207174913870202, guid: 70073b9b910706b4ea1a787e22513619,
+      type: 3}
+  - tile: {fileID: 11400000, guid: 02b7e2fe25d6a314e9353d8a425570a3, type: 2}
+    prefab_object: {fileID: 5491207174913870202, guid: eafa68db3c30f7643875929f9f4fda19,
+      type: 3}
+  - tile: {fileID: 11400000, guid: 86a07d68390f6cc418c2d4ac8a7c7795, type: 2}
+    prefab_object: {fileID: 5491207174913870202, guid: b2f233fa0b176e04592974f038e03ba9,
       type: 3}
 --- !u!20 &519420031
 Camera:
