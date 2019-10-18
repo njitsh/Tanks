@@ -1481,6 +1481,18 @@ MonoBehaviour:
   - limited_tile: {fileID: 11400000, guid: 86a07d68390f6cc418c2d4ac8a7c7795, type: 2}
     limit: 1
     current_amount: 0
+  ground_tiles_array:
+  - {fileID: 11400000, guid: 48ccc7a660b016f469c1374fbda3e2a4, type: 2}
+  - {fileID: 11400000, guid: 1a2171571bdf0644d9979e6278560742, type: 2}
+  wall_tiles_array:
+  - {fileID: 11400000, guid: 953f5b7feb53c2c4d98aaf1fbd12195c, type: 2}
+  - {fileID: 11400000, guid: e7a66e1b27935db448e70bb4e5343bba, type: 2}
+  objects_tiles_array:
+  - {fileID: 11400000, guid: a7c557821bf78b345874becb4ab98585, type: 2}
+  - {fileID: 11400000, guid: c73993b62149c44489d922b2d3eed147, type: 2}
+  - {fileID: 11400000, guid: 02b7e2fe25d6a314e9353d8a425570a3, type: 2}
+  - {fileID: 11400000, guid: 86a07d68390f6cc418c2d4ac8a7c7795, type: 2}
+  top_tiles_array: []
 --- !u!1 &394281898
 GameObject:
   m_ObjectHideFlags: 0

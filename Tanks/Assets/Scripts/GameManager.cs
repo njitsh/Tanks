@@ -25,13 +25,23 @@ public class GameManager : MonoBehaviour
     public Tilemap tilemapWall;
     public Tilemap tilemapObjects;
     public Tilemap tilemapTop;
-
+    
     // Tile to prefab array
     public MapSystem.tile_to_prefab[] tile_prefab_array;
+
+    // Full tiles array
+    public TileBase[] ground_tiles_array;
+    public TileBase[] wall_tiles_array;
+    public TileBase[] objects_tiles_array;
+    public TileBase[] top_tiles_array;
 
     PlayerController player;
     
     public int[,] player_info = new int[4, 3];
+
+    float cameraSizeMax = 14f;
+    float cameraSizeMin = 5f;
+    float cameraSize = 14f;
 
     float xMin;
     float xMax;
@@ -57,7 +67,7 @@ public class GameManager : MonoBehaviour
             }
         }*/
 
-        MapSystem.Play_Map(tilemapGround, tilemapWall, tilemapObjects, tilemapTop, 1, tile_prefab_array);
+        MapSystem.Play_Map(tilemapGround, tilemapWall, tilemapObjects, tilemapTop, 1, tile_prefab_array, ground_tiles_array, wall_tiles_array, objects_tiles_array, top_tiles_array);
 
         // Find spawnpoints
         GameObject spawn_p1 = GameObject.Find("PlayerSpawn1(Clone)");
@@ -147,13 +157,14 @@ public class GameManager : MonoBehaviour
         if (Camera.main.aspect > (xMax - xMin) / (yMax - yMin)) // Map height is higher than screen height compared to width of both
         {
             // Base camera size on map height
-            Camera.main.orthographicSize = (yMax - yMin) / 2 + borderSize * 2;
+            cameraSize = (yMax - yMin) / 2 + borderSize * 2;
         }
         else
         {
             // Base camera size on map width
-            Camera.main.orthographicSize = (xMax - xMin) / 2 + borderSize * 2;
+            cameraSize = (xMax - xMin) / 2 + borderSize * 2;
         }
+        Camera.main.orthographicSize = Mathf.Clamp(cameraSize, cameraSizeMin, cameraSizeMax);
     }
 
     private void setMaxCoordinates(Tilemap tilemapMax)

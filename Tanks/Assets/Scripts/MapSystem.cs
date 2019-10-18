@@ -14,17 +14,40 @@ public static class MapSystem
         public GameObject prefab_object;
     }
 
-    public static void Load_Map(Tilemap tMGround, Tilemap tMWall, Tilemap tMObjects, Tilemap tMTop, int folder)
+    public class SaveObject
+    {
+        // Bounds ground
+        public int bgx;
+        public int bgy;
+        public List<int> tlg;
+
+        // Bounds wall
+        public int bwx;
+        public int bwy;
+        public List<int> tlw;
+
+        // Bounds objects
+        public int box;
+        public int boy;
+        public List<int> tlo;
+
+        // Bounds top
+        public int btx;
+        public int bty;
+        public List<int> tlt;
+    }
+
+    public static void Load_Map(Tilemap tMGround, Tilemap tMWall, Tilemap tMObjects, Tilemap tMTop, int folder, TileBase[] ground_tiles, TileBase[] wall_tiles, TileBase[] object_tiles, TileBase[] top_tiles)
     {
         string mapString = SaveSystem.Load(folder);
         if (mapString != null)
         {
             SaveObject saveObject = JsonUtility.FromJson<SaveObject>(mapString);
 
-            Load_Layer(tMGround, saveObject.tile_list_ground.ToArray(), saveObject.bounds_ground_x, saveObject.bounds_ground_y);
-            Load_Layer(tMWall, saveObject.tile_list_wall.ToArray(), saveObject.bounds_wall_x, saveObject.bounds_wall_y);
-            Load_Layer(tMObjects, saveObject.tile_list_objects.ToArray(), saveObject.bounds_objects_x, saveObject.bounds_objects_y);
-            Load_Layer(tMTop, saveObject.tile_list_top.ToArray(), saveObject.bounds_top_x, saveObject.bounds_top_y);
+            Load_Layer(tMGround, Int_List_To_Tilebase(saveObject.tlg, ground_tiles), saveObject.bgx, saveObject.bgy);
+            Load_Layer(tMWall, Int_List_To_Tilebase(saveObject.tlw, wall_tiles), saveObject.bwx, saveObject.bwy);
+            Load_Layer(tMObjects, Int_List_To_Tilebase(saveObject.tlo, object_tiles), saveObject.box, saveObject.boy);
+            Load_Layer(tMTop, Int_List_To_Tilebase(saveObject.tlt, top_tiles), saveObject.btx, saveObject.bty);
         }
         else Debug.Log("No map was loaded!");
     }
@@ -43,17 +66,17 @@ public static class MapSystem
         }
     }
 
-    public static void Play_Map(Tilemap tMGround, Tilemap tMWall, Tilemap tMObjects, Tilemap tMTop, int folder, tile_to_prefab[] tile_prefab_array)
+    public static void Play_Map(Tilemap tMGround, Tilemap tMWall, Tilemap tMObjects, Tilemap tMTop, int folder, tile_to_prefab[] tile_prefab_array, TileBase[] ground_tiles, TileBase[] wall_tiles, TileBase[] object_tiles, TileBase[] top_tiles)
     {
         string mapString = SaveSystem.Load(folder);
         if (mapString != null)
         {
             SaveObject saveObject = JsonUtility.FromJson<SaveObject>(mapString);
 
-            Load_And_Play_Layer(tMGround, saveObject.tile_list_ground.ToArray(), saveObject.bounds_ground_x, saveObject.bounds_ground_y, tile_prefab_array);
-            Load_And_Play_Layer(tMWall, saveObject.tile_list_wall.ToArray(), saveObject.bounds_wall_x, saveObject.bounds_wall_y, tile_prefab_array);
-            Load_And_Play_Layer(tMObjects, saveObject.tile_list_objects.ToArray(), saveObject.bounds_objects_x, saveObject.bounds_objects_y, tile_prefab_array);
-            Load_And_Play_Layer(tMTop, saveObject.tile_list_top.ToArray(), saveObject.bounds_top_x, saveObject.bounds_top_y, tile_prefab_array);
+            Load_And_Play_Layer(tMGround, Int_List_To_Tilebase(saveObject.tlg, ground_tiles), saveObject.bgx, saveObject.bgy, tile_prefab_array);
+            Load_And_Play_Layer(tMWall, Int_List_To_Tilebase(saveObject.tlw, wall_tiles), saveObject.bwx, saveObject.bwy, tile_prefab_array);
+            Load_And_Play_Layer(tMObjects, Int_List_To_Tilebase(saveObject.tlo, object_tiles), saveObject.box, saveObject.boy, tile_prefab_array);
+            Load_And_Play_Layer(tMTop, Int_List_To_Tilebase(saveObject.tlt, top_tiles), saveObject.btx, saveObject.bty, tile_prefab_array);
         }
         else Debug.Log("No map was loaded!");
     }
@@ -85,59 +108,58 @@ public static class MapSystem
         return false;
     }
 
-    public static void Save_Map(Tilemap tMGround, Tilemap tMWall, Tilemap tMObjects, Tilemap tMTop, int folder)
+    public static void Save_Map(Tilemap tMGround, Tilemap tMWall, Tilemap tMObjects, Tilemap tMTop, int folder, TileBase[] ground_tiles, TileBase[] wall_tiles, TileBase[] object_tiles, TileBase[] top_tiles)
     {
         // Get bounds
-
         // Ground
         BoundsInt bounds_ground = tMGround.cellBounds;
         int bounds_ground_x = bounds_ground.size.x;
         int bounds_ground_y = bounds_ground.size.y;
 
-        TileBase[] allTiles_ground = tMGround.GetTilesBlock(bounds_ground);
+        List<int> allTiles_ground = TileBase_To_Int_List(tMGround.GetTilesBlock(bounds_ground), ground_tiles);
 
         // Wall
         BoundsInt bounds_wall = tMWall.cellBounds;
         int bounds_wall_x = bounds_wall.size.x;
         int bounds_wall_y = bounds_wall.size.y;
 
-        TileBase[] allTiles_wall = tMWall.GetTilesBlock(bounds_wall);
+        List<int> allTiles_wall = TileBase_To_Int_List(tMWall.GetTilesBlock(bounds_wall), wall_tiles);
 
         // Objects
         BoundsInt bounds_objects = tMObjects.cellBounds;
         int bounds_objects_x = bounds_objects.size.x;
         int bounds_objects_y = bounds_objects.size.y;
 
-        TileBase[] allTiles_objects = tMObjects.GetTilesBlock(bounds_objects);
+        List<int> allTiles_objects = TileBase_To_Int_List(tMObjects.GetTilesBlock(bounds_objects), object_tiles);
 
         // Top
         BoundsInt bounds_top = tMTop.cellBounds;
         int bounds_top_x = bounds_top.size.x;
         int bounds_top_y = bounds_top.size.y;
 
-        TileBase[] allTiles_top = tMTop.GetTilesBlock(bounds_top);
+        List<int> allTiles_top = TileBase_To_Int_List(tMTop.GetTilesBlock(bounds_top), top_tiles);
 
         SaveObject saveObject = new SaveObject
         {
             // Ground
-            bounds_ground_x = bounds_ground_x,
-            bounds_ground_y = bounds_ground_y,
-            tile_list_ground = new List<TileBase>(allTiles_ground),
+            bgx = bounds_ground_x,
+            bgy = bounds_ground_y,
+            tlg = new List<int>(allTiles_ground),
 
             // Wall
-            bounds_wall_x = bounds_wall_x,
-            bounds_wall_y = bounds_wall_y,
-            tile_list_wall = new List<TileBase>(allTiles_wall),
+            bwx = bounds_wall_x,
+            bwy = bounds_wall_y,
+            tlw = new List<int>(allTiles_wall),
 
             // Objects
-            bounds_objects_x = bounds_objects_x,
-            bounds_objects_y = bounds_objects_y,
-            tile_list_objects = new List<TileBase>(allTiles_objects),
+            box = bounds_objects_x,
+            boy = bounds_objects_y,
+            tlo = new List<int>(allTiles_objects),
 
             // Top
-            bounds_top_x = bounds_top_x,
-            bounds_top_y = bounds_top_y,
-            tile_list_top = new List<TileBase>(allTiles_top)
+            btx = bounds_top_x,
+            bty = bounds_top_y,
+            tlt = new List<int>(allTiles_top)
         };
 
         string json = JsonUtility.ToJson(saveObject);
@@ -169,26 +191,58 @@ public static class MapSystem
         return map.GetTile(map.WorldToCell(pos));
     }
 
-    public class SaveObject
+    // Convert TileBase array to custom int array
+    public static List<int> TileBase_To_Int_List(TileBase[] input_tile_array, TileBase[] ordered_tile_array)
     {
-        // Ground
-        public int bounds_ground_x;
-        public int bounds_ground_y;
-        public List<TileBase> tile_list_ground;
+        List<int> int_list = new List<int>();
+        bool didSomething;
 
-        // Wall
-        public int bounds_wall_x;
-        public int bounds_wall_y;
-        public List<TileBase> tile_list_wall;
+        // Go through all tiles in array
+        for (int i = 0; i < input_tile_array.Length; i++)
+        {
+            didSomething = false;
+            for (int j = 0; j < ordered_tile_array.Length; j++)
+            {
+                // If tile is empty, skip tile
+                if (input_tile_array[i] == null) j = ordered_tile_array.Length;
 
-        // Objects
-        public int bounds_objects_x;
-        public int bounds_objects_y;
-        public List<TileBase> tile_list_objects;
+                // If both tiles are the same, take the location number of the tile from ordered_tile_array and store it
+                else if (input_tile_array[i] == ordered_tile_array[j])
+                {
+                    int_list.Add(j + 1);
 
-        // Top
-        public int bounds_top_x;
-        public int bounds_top_y;
-        public List<TileBase> tile_list_top;
+                    // Go to the end of the for loop
+                    j = ordered_tile_array.Length;
+                    didSomething = true;
+                }
+            }
+            if (!didSomething) int_list.Add(0);
+        }
+        return int_list;
+    }
+
+    // Convert custom int array to Tilebase array
+    public static TileBase[] Int_List_To_Tilebase(List<int> input_tile_list, TileBase[] ordered_tile_array)
+    {
+        TileBase[] tile_list = new TileBase[input_tile_list.Count];
+
+        // Go through all tiles in list
+        for (int i = 0; i < input_tile_list.Count; i++)
+        {
+            for (int j = 0; j < ordered_tile_array.Length; j++)
+            {
+                // If tile is empty, skip tile
+                if (input_tile_list[i] == 0) j = ordered_tile_array.Length;
+
+                // If the number in the list is the same as the location in an array, get the Tile and add it to the array
+                else if (input_tile_list[i] == (j + 1))
+                {
+                    tile_list[i] = ordered_tile_array[j];
+
+                    j = ordered_tile_array.Length;
+                }
+            }
+        }
+        return tile_list;
     }
 }

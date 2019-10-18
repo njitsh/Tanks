@@ -25,6 +25,7 @@ public class Editor : MonoBehaviour
     public readonly int maxWidth = 30;
     public readonly int maxHeight = 20;
 
+    // Tiles with a limit
     [System.Serializable]
     public class limited_tiles
     {
@@ -33,8 +34,13 @@ public class Editor : MonoBehaviour
         public int current_amount;
     }
 
-    // Tile to prefab array
     public limited_tiles[] tile_limits;
+
+    // Full tiles array
+    public TileBase[] ground_tiles_array;
+    public TileBase[] wall_tiles_array;
+    public TileBase[] objects_tiles_array;
+    public TileBase[] top_tiles_array;
 
     private void Awake()
     {
@@ -88,7 +94,7 @@ public class Editor : MonoBehaviour
                     }
                 }
                 // Deselect active tile
-                else if ((Input.GetKeyDown(KeyCode.Backspace) || Input.GetKeyDown(KeyCode.Delete)) && selectedTile != null)
+                else if ((Input.GetKeyDown(KeyCode.Backspace) || Input.GetKeyDown(KeyCode.Delete) || Input.GetMouseButtonDown(1)) && selectedTile != null)
                 {
                     selectedTile = null;
                     activeSelectedMap.SetTile(currentCell, null);
@@ -186,20 +192,20 @@ public class Editor : MonoBehaviour
     public void SetActiveSelectedMap(Tilemap active_selected_map)
     {
         activeSelectedMap.ClearAllTiles();
-        Debug.Log(activeSelectedMap.cellBounds);
+        Reset_Bounds();
         activeSelectedMap = active_selected_map;
     }
 
     // Load last map (in editor folder)
     public void Load_Map()
     {
-        MapSystem.Load_Map(tilemapGround, tilemapWall, tilemapObjects, tilemapTop, 0);
+        MapSystem.Load_Map(tilemapGround, tilemapWall, tilemapObjects, tilemapTop, 0, ground_tiles_array, wall_tiles_array, objects_tiles_array, top_tiles_array);
     }
 
     // Save map (in editor folder)
     public void Save_Map()
     {
-        MapSystem.Save_Map(tilemapGround, tilemapWall, tilemapObjects, tilemapTop, 0);
+        MapSystem.Save_Map(tilemapGround, tilemapWall, tilemapObjects, tilemapTop, 0, ground_tiles_array, wall_tiles_array, objects_tiles_array, top_tiles_array);
     }
 
     // Clear current map fully
