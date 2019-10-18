@@ -164,6 +164,11 @@ public static class MapSystem
         }
     }
 
+    public static TileBase Get_Tile_Type(Vector3 pos, Tilemap map)
+    {
+        return map.GetTile(map.WorldToCell(pos));
+    }
+
     public class SaveObject
     {
         // Ground

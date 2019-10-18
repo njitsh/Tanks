@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
@@ -38,6 +39,13 @@ public class PlayerController : MonoBehaviour
     public GameObject player_tank_gun;
 
     private PlayerController player;
+
+    private float groundSpeed;
+
+    public Tile sandTile;
+    public Tile grassTile;
+
+    public Tilemap groundmap;
 
     // TODO ?
     // setup custom constructed class with HP, ammo?, and wich class is currently being used. http://ilkinulas.github.io/development/unity/2016/05/30/monobehaviour-constructor.html
@@ -121,8 +129,9 @@ public class PlayerController : MonoBehaviour
         SetControllerNumber(cpBinding.getControllerBinding(tank_number));
         rb = GetComponent<Rigidbody2D>();
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        groundmap = GameObject.Find("Ground").GetComponent<Tilemap>();
     }
-
+    
     // Update is called once per frame
     void Update()
     {
@@ -132,7 +141,10 @@ public class PlayerController : MonoBehaviour
             if (Mathf.Abs(target_angle - angle) < 1)
             {
                 mag = Mathf.Clamp01(new Vector3(Input.GetAxis(horizontalAxis), Input.GetAxis(verticalAxis), 0).magnitude);
-                moveVelocity = moveInput.normalized * speed * mag;
+                if (MapSystem.Get_Tile_Type(transform.position, groundmap) == sandTile) groundSpeed = 0.5f;
+                else if (MapSystem.Get_Tile_Type(transform.position, groundmap) == grassTile) groundSpeed = 0.8f;
+                else groundSpeed = 1;
+                moveVelocity = moveInput.normalized * speed * groundSpeed * mag;
             }
             else moveVelocity = new Vector3(0,0,0);
 
@@ -155,7 +167,7 @@ public class PlayerController : MonoBehaviour
         if ((Input.GetAxisRaw(verticalAxis) != 0) || (Input.GetAxisRaw(horizontalAxis) != 0))
         {
             target_angle = (Mathf.Atan2(Input.GetAxisRaw(verticalAxis), Input.GetAxisRaw(horizontalAxis)) * Mathf.Rad2Deg + 360) % 360;
-            for (int times = 0; times < turn_speed; times++)
+            for (int times = 0; times < turn_speed * groundSpeed; times++)
             {
                 if (Mathf.Abs(target_angle - angle) < 1) times = 3;
                 // Turn clockwise

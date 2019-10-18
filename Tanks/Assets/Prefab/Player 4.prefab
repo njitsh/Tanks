@@ -127,6 +127,9 @@ MonoBehaviour:
   tank_number: 4
   player_tank_crosshair: {fileID: 0}
   player_tank_gun: {fileID: 3353883512101359745}
+  sandTile: {fileID: 11400000, guid: 1a2171571bdf0644d9979e6278560742, type: 2}
+  grassTile: {fileID: 11400000, guid: 48ccc7a660b016f469c1374fbda3e2a4, type: 2}
+  groundmap: {fileID: 0}
 --- !u!61 &9789457075229841
 BoxCollider2D:
   m_ObjectHideFlags: 0
