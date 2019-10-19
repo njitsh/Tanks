@@ -77,12 +77,20 @@ public class GameManager : MonoBehaviour
 
         if (cpBinding.getControllerBinding(1) != 0)
         {
-            GameObject tank_crosshair_1 = Instantiate(crosshair_1) as GameObject;
-
             // Instantiate tank from spawnpoint if available
             GameObject tank;
-            if (spawn_p1 != null) tank = Instantiate(tank_1, spawn_p1.transform.position, Quaternion.identity);
-            else tank = Instantiate(tank_1);
+            GameObject tank_crosshair_1;
+
+            if (spawn_p1 != null)
+            {
+                tank_crosshair_1 = Instantiate(crosshair_1, spawn_p1.transform.position, Quaternion.identity);
+                tank = Instantiate(tank_1, spawn_p1.transform.position, Quaternion.identity);
+            }
+            else
+            {
+                tank_crosshair_1 = Instantiate(crosshair_1);
+                tank = Instantiate(tank_1);
+            }
 
             tank.GetComponent<PlayerController>().SetCrosshair(tank_crosshair_1);
             tank.GetComponent<PlayerController>().SetHealthBar(health_bar_1);
@@ -147,8 +155,8 @@ public class GameManager : MonoBehaviour
         yMax = -1;
 
         setMaxCoordinates(tilemapGround);
-        setMaxCoordinates(tilemapWall);
-        setMaxCoordinates(tilemapObjects);
+        //setMaxCoordinates(tilemapWall); NEEDS TO BE PLACED ON GROUND
+        //setMaxCoordinates(tilemapObjects); NEEDS TO BE PLACED ON GROUND
         setMaxCoordinates(tilemapTop);
 
         Camera.main.transform.position = new Vector3(xMin + (xMax-xMin)/2, yMin + (yMax - yMin) / 2, -10);
