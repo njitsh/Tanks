@@ -28,7 +28,6 @@ public class GameManager : MonoBehaviour
     
     // Tile to prefab array
     public MapSystem.tile_to_prefab[] tile_prefab_array;
-    public int playingPlayers = 0;
 
     // Full tiles array
     public TileBase[] ground_tiles_array;
@@ -36,8 +35,21 @@ public class GameManager : MonoBehaviour
     public TileBase[] objects_tiles_array;
     public TileBase[] top_tiles_array;
 
+    // Amount of players playing
+    public int playingPlayers = 0;
+
     PlayerController player;
-    
+
+    PauseMenu pause;
+
+    int totalAlive = 0;
+
+    int roundsPlayed;
+    public int amountOfRounds = 3;
+
+    GameObject[] players = new GameObject[4];
+    GameObject[] allplayers = new GameObject[4];
+
     public int[,] player_info = new int[4, 3];
 
     float cameraSizeMax = 14f;
@@ -93,6 +105,8 @@ public class GameManager : MonoBehaviour
                 tank = Instantiate(tank_1);
             }
 
+            allplayers[0] = tank;
+
             tank.GetComponent<PlayerController>().SetCrosshair(tank_crosshair_1);
             tank.GetComponent<PlayerController>().SetHealthBar(health_bar_1);
             tank.GetComponent<PlayerController>().SendPlayerInfo(player_info);
@@ -100,12 +114,22 @@ public class GameManager : MonoBehaviour
         }
         if (cpBinding.getControllerBinding(2) != 0)
         {
-            GameObject tank_crosshair_2 = Instantiate(crosshair_2) as GameObject;
-
             // Instantiate tank from spawnpoint if available
             GameObject tank;
-            if (spawn_p2 != null) tank = Instantiate(tank_2, spawn_p2.transform.position, Quaternion.identity);
-            else tank = Instantiate(tank_2);
+            GameObject tank_crosshair_2;
+
+            if (spawn_p2 != null)
+            {
+                tank_crosshair_2 = Instantiate(crosshair_2, spawn_p2.transform.position, Quaternion.identity);
+                tank = Instantiate(tank_2, spawn_p2.transform.position, Quaternion.identity);
+            }
+            else
+            {
+                tank_crosshair_2 = Instantiate(crosshair_2);
+                tank = Instantiate(tank_2);
+            }
+
+            allplayers[1] = tank;
 
             tank.GetComponent<PlayerController>().SetCrosshair(tank_crosshair_2);
             tank.GetComponent<PlayerController>().SetHealthBar(health_bar_2);
@@ -113,12 +137,22 @@ public class GameManager : MonoBehaviour
         }
         if (cpBinding.getControllerBinding(3) != 0)
         {
-            GameObject tank_crosshair_3 = Instantiate(crosshair_3) as GameObject;
-
             // Instantiate tank from spawnpoint if available
             GameObject tank;
-            if (spawn_p3 != null) tank = Instantiate(tank_3, spawn_p3.transform.position, Quaternion.identity);
-            else tank = Instantiate(tank_3);
+            GameObject tank_crosshair_3;
+
+            if (spawn_p3 != null)
+            {
+                tank_crosshair_3 = Instantiate(crosshair_3, spawn_p3.transform.position, Quaternion.identity);
+                tank = Instantiate(tank_3, spawn_p3.transform.position, Quaternion.identity);
+            }
+            else
+            {
+                tank_crosshair_3 = Instantiate(crosshair_3);
+                tank = Instantiate(tank_3);
+            }
+
+            allplayers[2] = tank;
 
             tank.GetComponent<PlayerController>().SetCrosshair(tank_crosshair_3);
             tank.GetComponent<PlayerController>().SetHealthBar(health_bar_3);
@@ -126,12 +160,22 @@ public class GameManager : MonoBehaviour
         }
         if (cpBinding.getControllerBinding(4) != 0)
         {
-            GameObject tank_crosshair_4 = Instantiate(crosshair_4) as GameObject;
-
             // Instantiate tank from spawnpoint if available
             GameObject tank;
-            if (spawn_p4 != null) tank = Instantiate(tank_4, spawn_p4.transform.position, Quaternion.identity);
-            else tank = Instantiate(tank_4);
+            GameObject tank_crosshair_4;
+
+            if (spawn_p2 != null)
+            {
+                tank_crosshair_4 = Instantiate(crosshair_4, spawn_p4.transform.position, Quaternion.identity);
+                tank = Instantiate(tank_4, spawn_p4.transform.position, Quaternion.identity);
+            }
+            else
+            {
+                tank_crosshair_4 = Instantiate(crosshair_4);
+                tank = Instantiate(tank_4);
+            }
+
+            allplayers[3] = tank;
 
             tank.GetComponent<PlayerController>().SetCrosshair(tank_crosshair_4);
             tank.GetComponent<PlayerController>().SetHealthBar(health_bar_4);
@@ -189,5 +233,71 @@ public class GameManager : MonoBehaviour
             if (tilemapMax.CellToWorld(new Vector3Int(0, tilemapMax.cellBounds.yMin, 0)).y < yMin || yMin == -1) yMin = tilemapMax.CellToWorld(new Vector3Int(0, tilemapMax.cellBounds.yMin, 0)).y;
             if (tilemapMax.CellToWorld(new Vector3Int(0, tilemapMax.cellBounds.yMax, 0)).y > yMax || yMax == -1) yMax = tilemapMax.CellToWorld(new Vector3Int(0, tilemapMax.cellBounds.yMax, 0)).y;
         }
+    }
+
+    public void CheckGameOver()
+    {
+        int totalPlayers = GetPlayers();
+        totalAlive = totalPlayers;
+
+        // if there are as many dead players as there are alive -1, that means that there is only 1 player remaining and that means that that player has won.
+
+        // For every player that is currently playing, check if they are dead
+        for (int i = 0; i <= totalPlayers; i++)
+        {
+            // You can easily check if a player is dead by trying to find the player, if you cant find the player, the player is dead or not playing, wich is pretty much the same thing.
+            players[i] = GameObject.Find("Player " + i + "(Clone)");
+            Debug.Log(players[i]);
+            if (players[i] == null)
+            {
+                Debug.Log("This Player Is dead");
+                totalAlive--;
+            }
+            else
+            {
+                Debug.Log("This player is alive");
+            }
+        }
+
+        if (totalAlive < 2) GameOver();
+    }
+
+    void GameOver()
+    {
+        roundsPlayed++;
+
+        // if there are as many rounds played as the amount of rounds that that should be played
+        if (roundsPlayed == amountOfRounds)
+        {
+            pause = FindObjectOfType(typeof(PauseMenu)) as PauseMenu;
+            pause.Pause();
+        }
+        else
+        {
+            StartNewRound();
+        }
+
+    }
+
+    void StartNewRound()
+    {
+        for (int i = 0; i <= playingPlayers; i++)
+        {
+            if (allplayers[i] != null)
+            {
+                //players[i].AddComponent<PlayerController>();
+                allplayers[i].GetComponent<PlayerController>().ResetPlayer();
+                // TODO:: PLACE ALL THE PLAYERS BACK TO THEIR OLD POS
+                // TODO:: ACTIVATE ALL THE PLAYERS AGAIN
+                // TODO:: RESET THEIR HEALTH
+            }
+        }
+    }
+
+    int GetPlayers()
+    {
+        int totalPlayers = playingPlayers;
+
+        return totalPlayers;
     }
 }

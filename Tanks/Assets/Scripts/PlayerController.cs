@@ -6,11 +6,11 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
-    private float speed = 3;
+    private readonly float speed = 3;
 
     private float angle = 0;
     private float target_angle = 0;
-    private float turn_speed = 3;
+    private readonly float turn_speed = 3;
     private float mag;
     private Rigidbody2D rb;
     private Vector3 moveVelocity;
@@ -19,7 +19,6 @@ public class PlayerController : MonoBehaviour
     public int healthMax;
     public bool isDead;
     public GameObject HealthBar;
-    private HealthBar HBar;
 
     public int tank_color;
 
@@ -47,15 +46,8 @@ public class PlayerController : MonoBehaviour
 
     public Tilemap groundmap;
 
-    PauseMenu pause;
     GameManager gameManager;
 
-    int totalDeaths = 0;
-    int totalAlive = 0;
-
-    int roundsPlayed;
-    public int amountOfRounds =2;
-    GameObject[] players = new GameObject[3];
     // TODO ?
     // setup custom constructed class with HP, ammo?, and wich class is currently being used. http://ilkinulas.github.io/development/unity/2016/05/30/monobehaviour-constructor.html
 
@@ -213,71 +205,14 @@ public class PlayerController : MonoBehaviour
     {
         gameObject.SetActive(false);
         player_tank_crosshair.SetActive(false);
-        CheckGameOver();
-        //      Debug.Log(pause);
-
-
+        gameManager.CheckGameOver();
     }
-    void CheckGameOver()
+
+    public void ResetPlayer()
     {
-
-        int totalPlayers = GetPlayers();
-
-        // if there are as many dead players as there are alive -1, that means that there is only 1 player remaining and that means that that player has won.
-        
-        // For every player that is currently playing, check if they are dead
-        for (int i = 1; i <= totalPlayers;)
-        {
-            // You can easily check if a player is dead by trying to find the player, if you cant find the player, the player is dead or not playing, wich is pretty much the same thing.
-            players[i] = GameObject.Find("Player " + i + "(Clone)");
-            Debug.Log(players[i]);
-            if (players[i] == null)
-            {
-                Debug.Log("This Player Is dead");
-                totalDeaths++;
-            }
-            else
-            {
-                Debug.Log("This player is alive");
-                totalAlive++;
-                // if there are more than 2 players alive, there is no point in going on.
-                if (totalAlive >= 2) return;
-            }
-            i++;
-            Debug.Log(i);
-        }
-
-        if (totalDeaths == totalPlayers - 1) GameOver();
-    }
-    void GameOver()
-    {
-        // if there are as many rounds played as the amount of rounds that that should be played
-        if (roundsPlayed == amountOfRounds)
-        {
-            pause = FindObjectOfType(typeof(PauseMenu)) as PauseMenu;
-            pause.Pause();
-        }
-        else
-        {
-            roundsPlayed++;
-            for(int i=1; i<= gameManager.playingPlayers;)
-            {
-                players[i] = GameObject.Find("Player " + i + "(Clone)");
-                players[i].AddComponent<PlayerController>();
-                players[i].SetActive(true);
-                Debug.Log(players[i]);
-                // TODO:: PLACE ALL THE PLAYERS BACK TO THEIR OLD POS
-                // TODO:: ACTIVATE ALL THE PLAYERS AGAIN
-                // TODO:: RESET THEIR HEALTH
-            }
-        }
-        
-    }
-    int GetPlayers()
-    {     
-        int totalPlayers = gameManager.playingPlayers;
-
-        return totalPlayers;
+        gameObject.SetActive(true);
+        player_tank_crosshair.SetActive(true);
+        health = healthMax;
     }
 }
 //if(player2 != null)
