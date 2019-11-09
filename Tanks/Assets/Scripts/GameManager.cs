@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
     
     // Tile to prefab array
     public MapSystem.tile_to_prefab[] tile_prefab_array;
+    public int playingPlayers = 0;
 
     // Full tiles array
     public TileBase[] ground_tiles_array;
@@ -94,7 +95,8 @@ public class GameManager : MonoBehaviour
 
             tank.GetComponent<PlayerController>().SetCrosshair(tank_crosshair_1);
             tank.GetComponent<PlayerController>().SetHealthBar(health_bar_1);
-            //tank.GetComponent<PlayerController>().SendPlayerInfo(player_info);
+            tank.GetComponent<PlayerController>().SendPlayerInfo(player_info);
+            playingPlayers++;
         }
         if (cpBinding.getControllerBinding(2) != 0)
         {
@@ -107,6 +109,7 @@ public class GameManager : MonoBehaviour
 
             tank.GetComponent<PlayerController>().SetCrosshair(tank_crosshair_2);
             tank.GetComponent<PlayerController>().SetHealthBar(health_bar_2);
+            playingPlayers++;
         }
         if (cpBinding.getControllerBinding(3) != 0)
         {
@@ -119,6 +122,7 @@ public class GameManager : MonoBehaviour
 
             tank.GetComponent<PlayerController>().SetCrosshair(tank_crosshair_3);
             tank.GetComponent<PlayerController>().SetHealthBar(health_bar_3);
+            playingPlayers++;
         }
         if (cpBinding.getControllerBinding(4) != 0)
         {
@@ -131,6 +135,7 @@ public class GameManager : MonoBehaviour
 
             tank.GetComponent<PlayerController>().SetCrosshair(tank_crosshair_4);
             tank.GetComponent<PlayerController>().SetHealthBar(health_bar_4);
+            playingPlayers++;
         }
         tilemapGround.CompressBounds();
         tilemapWall.CompressBounds();
