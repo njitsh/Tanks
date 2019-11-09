@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
 
     int totalAlive = 0;
 
-    int roundsPlayed;
+    int currentRound;
     public int amountOfRounds = 3;
 
     GameObject[] players = new GameObject[4];
@@ -264,10 +264,8 @@ public class GameManager : MonoBehaviour
 
     void GameOver()
     {
-        roundsPlayed++;
-
         // if there are as many rounds played as the amount of rounds that that should be played
-        if (roundsPlayed == amountOfRounds)
+        if (currentRound == amountOfRounds)
         {
             pause = FindObjectOfType(typeof(PauseMenu)) as PauseMenu;
             pause.Pause();
@@ -281,6 +279,8 @@ public class GameManager : MonoBehaviour
 
     void StartNewRound()
     {
+        currentRound++;
+
         for (int i = 0; i <= playingPlayers; i++)
         {
             if (allplayers[i] != null)
