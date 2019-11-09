@@ -16,6 +16,9 @@ public static class MapSystem
 
     public class SaveObject
     {
+        // Info
+        public int aSP; // Number of available spawn points
+
         // Bounds ground
         public int bgx;
         public int bgy;
@@ -110,6 +113,9 @@ public static class MapSystem
 
     public static void Save_Map(Tilemap tMGround, Tilemap tMWall, Tilemap tMObjects, Tilemap tMTop, int folder, TileBase[] ground_tiles, TileBase[] wall_tiles, TileBase[] object_tiles, TileBase[] top_tiles)
     {
+        // Set Info
+        int available_spawn_points = TileCounter(tMObjects, object_tiles[0]);
+
         // Get bounds
         // Ground
         BoundsInt bounds_ground = tMGround.cellBounds;
@@ -141,6 +147,9 @@ public static class MapSystem
 
         SaveObject saveObject = new SaveObject
         {
+            // Info
+            aSP = available_spawn_points,
+
             // Ground
             bgx = bounds_ground_x,
             bgy = bounds_ground_y,
@@ -244,5 +253,18 @@ public static class MapSystem
             }
         }
         return tile_list;
+    }
+
+    public static int TileCounter(Tilemap map_to_count_from, TileBase tile_to_count)
+    {
+        int amount_of_tiles = 0;
+        TileBase[] all_countable_tiles = map_to_count_from.GetTilesBlock(map_to_count_from.cellBounds);
+
+        for (int i = 0; i < all_countable_tiles.Length; i++)
+        {
+            if (all_countable_tiles[i] == tile_to_count) amount_of_tiles++;
+        }
+
+        return amount_of_tiles;
     }
 }
