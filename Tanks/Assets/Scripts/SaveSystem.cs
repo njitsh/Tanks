@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using System.Linq;
 
 public static class SaveSystem
 {
-    public static readonly string[] MAP_FOLDER = { Application.dataPath + "/Maps/Editor/", Application.dataPath + "/Maps/Local/" }; // 0. Editor 1. Local
+    public static readonly string[] MAP_FOLDER = { Application.dataPath + "/Maps/Local/", Application.dataPath + "/Maps/Editor/" }; // 0. Local 1. Editor
 
     public static void Init()
     {
@@ -34,8 +35,7 @@ public static class SaveSystem
     // LOAD MAP
     public static string Load(int folder)
     {
-        DirectoryInfo directoryInfo = new DirectoryInfo(MAP_FOLDER[folder]);
-        FileInfo[] mapFiles = directoryInfo.GetFiles("*.json");
+        FileInfo[] mapFiles = GetSavesFromFolder(folder);
         FileInfo mostRecentFile = null;
         foreach (FileInfo fileInfo in mapFiles)
         {
@@ -61,5 +61,11 @@ public static class SaveSystem
         {
             return null;
         }
+    }
+
+    public static FileInfo[] GetSavesFromFolder(int folder)
+    {
+        DirectoryInfo directoryInfo = new DirectoryInfo(MAP_FOLDER[folder]);
+        return directoryInfo.GetFiles("*.json").OrderBy(p => p.CreationTime).ToArray();
     }
 }

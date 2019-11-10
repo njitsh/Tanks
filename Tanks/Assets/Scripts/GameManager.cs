@@ -77,7 +77,7 @@ public class GameManager : MonoBehaviour
             }
         }*/
 
-        MapSystem.Play_Map(tilemapGround, tilemapWall, tilemapObjects, tilemapTop, 1, tile_prefab_array, ground_tiles_array, wall_tiles_array, objects_tiles_array, top_tiles_array);
+        MapSystem.Play_Map(tilemapGround, tilemapWall, tilemapObjects, tilemapTop, 0, tile_prefab_array, ground_tiles_array, wall_tiles_array, objects_tiles_array, top_tiles_array);
 
         PlayerSpawnArray = GameObject.FindGameObjectsWithTag("PlayerSpawn"); // Find all spawnpoints and put them in an array
         player_spawned = new bool[PlayerSpawnArray.Length]; // Array
@@ -143,16 +143,7 @@ public class GameManager : MonoBehaviour
         {
             // You can easily check if a player is dead by trying to find the player, if you cant find the player, the player is dead or not playing, wich is pretty much the same thing.
             players[i] = GameObject.Find("Player " + i + "(Clone)");
-            Debug.Log(players[i]);
-            if (players[i] == null)
-            {
-                Debug.Log("This Player Is dead");
-                totalAlive--;
-            }
-            else
-            {
-                Debug.Log("This player is alive");
-            }
+            if (players[i] == null) totalAlive--;
         }
 
         if (totalAlive < 2) GameOver();

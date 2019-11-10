@@ -1082,10 +1082,10 @@ MonoBehaviour:
   - {fileID: 4571714994961498708, guid: c0adcb90f7412184f935ec8113173fa3, type: 3}
   - {fileID: 7287921620525792703, guid: 10d15a7b65cb8d242badd2b7df73e766, type: 3}
   health_bars:
-  - {fileID: 7388644285898923775, guid: bd74d9e06c8bf0e4890b7d0f69da1693, type: 3}
-  - {fileID: 8275266832440008351, guid: 54fd83c691038d340b3926033eaa7369, type: 3}
-  - {fileID: 3095572969560943003, guid: 125f864981181504f9b881a5ce433cdb, type: 3}
-  - {fileID: 6844267424042303798, guid: 175454f8999f2004da6d66fffd7a8a63, type: 3}
+  - {fileID: 415210181}
+  - {fileID: 895198527}
+  - {fileID: 1497071317}
+  - {fileID: 1764204062}
   tilemapGround: {fileID: 544544392}
   tilemapWall: {fileID: 2051998294}
   tilemapObjects: {fileID: 1878585916}

@@ -8,6 +8,7 @@ ScriptsOnlyBuild:
     - Editor
     - GameManager
     - HealthBar
+    - LevelSelector
     - LobbyMenu
     - MainMenu
     - Options
@@ -174,11 +175,15 @@ ScriptsOnlyBuild:
       Script: {instanceID: 11750}
     - Class: 114
       Script: {instanceID: 11850}
+    - Class: 114
+      Script: {instanceID: 85554}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
       Script: {instanceID: 0}
     - Class: 157
+      Script: {instanceID: 0}
+    - Class: 212
       Script: {instanceID: 0}
     - Class: 213
       Script: {instanceID: 0}
@@ -856,7 +861,7 @@ ScriptsOnlyBuild:
     className: TMP_ColorGradient
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+      Hash: 73e41a4a3dd5c1c45875b27d8e2d41c9
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: LobbyMenu
@@ -944,6 +949,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
+  - hash:
+      serializedVersion: 2
+      Hash: d94278c71f1d6f4190f50c57c4e647cc
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: LevelSelector
   platform: 19
   scenePathNames:
   - Assets/Scenes/MenuScene.unity

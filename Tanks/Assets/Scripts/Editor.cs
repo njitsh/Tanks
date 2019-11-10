@@ -199,13 +199,13 @@ public class Editor : MonoBehaviour
     // Load last map (in editor folder)
     public void Load_Map()
     {
-        MapSystem.Load_Map(tilemapGround, tilemapWall, tilemapObjects, tilemapTop, 0, ground_tiles_array, wall_tiles_array, objects_tiles_array, top_tiles_array);
+        MapSystem.Load_Map(tilemapGround, tilemapWall, tilemapObjects, tilemapTop, 1, ground_tiles_array, wall_tiles_array, objects_tiles_array, top_tiles_array);
     }
 
     // Save map (in editor folder)
     public void Save_Map()
     {
-        MapSystem.Save_Map(tilemapGround, tilemapWall, tilemapObjects, tilemapTop, 0, ground_tiles_array, wall_tiles_array, objects_tiles_array, top_tiles_array);
+        MapSystem.Save_Map(tilemapGround, tilemapWall, tilemapObjects, tilemapTop, 1, ground_tiles_array, wall_tiles_array, objects_tiles_array, top_tiles_array);
     }
 
     // Clear current map fully
