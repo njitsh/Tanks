@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Wall : MonoBehaviour
 {
-    private int health = 100;
+    private int health = 60;
     public bool isWood;
 
     public void Hit(int damage)

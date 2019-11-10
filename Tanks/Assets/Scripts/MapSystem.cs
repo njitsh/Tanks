@@ -75,7 +75,7 @@ public static class MapSystem
         if (mapString != null)
         {
             SaveObject saveObject = JsonUtility.FromJson<SaveObject>(mapString);
-
+           
             Load_And_Play_Layer(tMGround, Int_List_To_Tilebase(saveObject.tlg, ground_tiles), saveObject.bgx, saveObject.bgy, tile_prefab_array);
             Load_And_Play_Layer(tMWall, Int_List_To_Tilebase(saveObject.tlw, wall_tiles), saveObject.bwx, saveObject.bwy, tile_prefab_array);
             Load_And_Play_Layer(tMObjects, Int_List_To_Tilebase(saveObject.tlo, object_tiles), saveObject.box, saveObject.boy, tile_prefab_array);
@@ -90,8 +90,14 @@ public static class MapSystem
         {
             for (int x = 0; x < bounds_x; x++)
             {
+            //    Debug.Log("ladden2");
                 for (int y = 0; y < bounds_y; y++)
                 {
+                 //   Debug.Log("ladden3");
+                //    Debug.Log(tilemap);
+                   // Debug.Log(map);
+                 
+     
                     if (!Placed_Prefab(map[x + y * bounds_x], tile_prefab_array, x, y, tilemap)) tilemap.SetTile(new Vector3Int(x, y, 0), map[x + y * bounds_x]);
                 }
             }
@@ -104,9 +110,11 @@ public static class MapSystem
         {
             if (tile == tile_prefab_array[i].tile)
             {
+                Debug.Log(tile);
                 UnityEngine.Object.Instantiate(tile_prefab_array[i].prefab_object, tilemap.CellToWorld(new Vector3Int(x, y, 0)) + new Vector3(0.25f, 0.25f, 0.25f), Quaternion.identity);
                 return true;
             }
+           // Debug.Log(tile);
         }
         return false;
     }

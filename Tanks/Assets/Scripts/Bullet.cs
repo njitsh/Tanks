@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    private readonly float vel = 7f;
+    private readonly float vel = 10f;
     private Rigidbody2D rb;
     private float angle_shot;
     private float angle;
 
-    private int bullet_damage = 10;
+    private int bullet_damage = 20;
 
     public float activation_period = 0.03f;
     private float activation_moment;

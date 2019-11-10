@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
-    private readonly float speed = 3;
+    public float speed = 6;
 
     private float angle = 0;
     private float target_angle = 0;
