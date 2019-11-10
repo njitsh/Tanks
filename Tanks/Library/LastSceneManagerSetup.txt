@@ -1,13 +1,5 @@
 sceneSetups:
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-- path: Assets/Scenes/LocalGameScene.unity
-=======
-- path: Assets/Scenes/LocalLobbyScene.unity
->>>>>>> Stashed changes
-=======
 - path: Assets/Scenes/MenuScene.unity
->>>>>>> Stashed changes
   isLoaded: 1
   isActive: 1
   isSubScene: 0
