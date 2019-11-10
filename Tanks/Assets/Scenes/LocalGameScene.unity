@@ -1071,22 +1071,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f8aa105c7fc1cd4198fd08134ec79a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tank_1: {fileID: 7041584878639639367, guid: cd3970ec8cfc8054191c0869982c74e0, type: 3}
-  crosshair_1: {fileID: 8776704701158478537, guid: 9f46e02e49d07b246b46fd5f1af018a3,
-    type: 3}
-  health_bar_1: {fileID: 415210181}
-  tank_2: {fileID: 5669739813627114657, guid: 51557e511508fbb43ad6eab7f8183f42, type: 3}
-  crosshair_2: {fileID: 8977999664593589895, guid: 6c05f8e81e276324fbf795f5acafc125,
-    type: 3}
-  health_bar_2: {fileID: 895198527}
-  tank_3: {fileID: 6724812254292285677, guid: c593939b55e4a2f4da702a732fdcfe4e, type: 3}
-  crosshair_3: {fileID: 4571714994961498708, guid: c0adcb90f7412184f935ec8113173fa3,
-    type: 3}
-  health_bar_3: {fileID: 1497071317}
-  tank_4: {fileID: 3353883511180823317, guid: 35fdd477e8e2ef84bbb564b74396f550, type: 3}
-  crosshair_4: {fileID: 7287921620525792703, guid: 10d15a7b65cb8d242badd2b7df73e766,
-    type: 3}
-  health_bar_4: {fileID: 1764204062}
+  tanks:
+  - {fileID: 7041584878639639367, guid: cd3970ec8cfc8054191c0869982c74e0, type: 3}
+  - {fileID: 5669739813627114657, guid: 51557e511508fbb43ad6eab7f8183f42, type: 3}
+  - {fileID: 6724812254292285677, guid: c593939b55e4a2f4da702a732fdcfe4e, type: 3}
+  - {fileID: 3353883511180823317, guid: 35fdd477e8e2ef84bbb564b74396f550, type: 3}
+  crosshairs:
+  - {fileID: 8776704701158478537, guid: 9f46e02e49d07b246b46fd5f1af018a3, type: 3}
+  - {fileID: 8977999664593589895, guid: 6c05f8e81e276324fbf795f5acafc125, type: 3}
+  - {fileID: 4571714994961498708, guid: c0adcb90f7412184f935ec8113173fa3, type: 3}
+  - {fileID: 7287921620525792703, guid: 10d15a7b65cb8d242badd2b7df73e766, type: 3}
+  health_bars:
+  - {fileID: 7388644285898923775, guid: bd74d9e06c8bf0e4890b7d0f69da1693, type: 3}
+  - {fileID: 8275266832440008351, guid: 54fd83c691038d340b3926033eaa7369, type: 3}
+  - {fileID: 3095572969560943003, guid: 125f864981181504f9b881a5ce433cdb, type: 3}
+  - {fileID: 6844267424042303798, guid: 175454f8999f2004da6d66fffd7a8a63, type: 3}
   tilemapGround: {fileID: 544544392}
   tilemapWall: {fileID: 2051998294}
   tilemapObjects: {fileID: 1878585916}
@@ -1097,15 +1096,6 @@ MonoBehaviour:
       type: 3}
   - tile: {fileID: 11400000, guid: a7c557821bf78b345874becb4ab98585, type: 2}
     prefab_object: {fileID: 5491207174913870202, guid: 599a4413a1c58c642ba16b89221aba55,
-      type: 3}
-  - tile: {fileID: 0}
-    prefab_object: {fileID: 5491207174913870202, guid: 70073b9b910706b4ea1a787e22513619,
-      type: 3}
-  - tile: {fileID: 0}
-    prefab_object: {fileID: 5491207174913870202, guid: eafa68db3c30f7643875929f9f4fda19,
-      type: 3}
-  - tile: {fileID: 0}
-    prefab_object: {fileID: 5491207174913870202, guid: b2f233fa0b176e04592974f038e03ba9,
       type: 3}
   ground_tiles_array:
   - {fileID: 11400000, guid: 48ccc7a660b016f469c1374fbda3e2a4, type: 2}

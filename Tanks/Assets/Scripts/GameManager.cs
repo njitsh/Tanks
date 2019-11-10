@@ -6,19 +6,10 @@ using UnityEngine.Tilemaps;
 
 public class GameManager : MonoBehaviour
 {
-    // Linked tanks
-    public GameObject tank_1;
-    public GameObject crosshair_1;
-    public GameObject health_bar_1;
-    public GameObject tank_2;
-    public GameObject crosshair_2;
-    public GameObject health_bar_2;
-    public GameObject tank_3;
-    public GameObject crosshair_3;
-    public GameObject health_bar_3;
-    public GameObject tank_4;
-    public GameObject crosshair_4;
-    public GameObject health_bar_4;
+    // Linked tanks, crosshairs and health bars
+    public GameObject[] tanks;
+    public GameObject[] crosshairs;
+    public GameObject[] health_bars;
 
     // Tilemaps
     public Tilemap tilemapGround;
@@ -63,6 +54,9 @@ public class GameManager : MonoBehaviour
 
     float borderSize = 1f;
 
+    GameObject[] PlayerSpawnArray;
+    bool[] player_spawned;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -82,115 +76,19 @@ public class GameManager : MonoBehaviour
 
         MapSystem.Play_Map(tilemapGround, tilemapWall, tilemapObjects, tilemapTop, 1, tile_prefab_array, ground_tiles_array, wall_tiles_array, objects_tiles_array, top_tiles_array);
 
-        // Find spawnpoints
-        GameObject spawn_p1 = GameObject.Find("PlayerSpawn1(Clone)");
-        GameObject spawn_p2 = GameObject.Find("PlayerSpawn2(Clone)");
-        GameObject spawn_p3 = GameObject.Find("PlayerSpawn3(Clone)");
-        GameObject spawn_p4 = GameObject.Find("PlayerSpawn4(Clone)");
+        PlayerSpawnArray = GameObject.FindGameObjectsWithTag("PlayerSpawn"); // Find all spawnpoints and put them in an array
+        player_spawned = new bool[PlayerSpawnArray.Length]; // Array
 
-        if (cpBinding.getControllerBinding(1) != 0)
-        {
-            // Instantiate tank from spawnpoint if available
-            GameObject tank;
-            GameObject tank_crosshair_1;
+        spawnPlayers(cpBinding);
 
-            if (spawn_p1 != null)
-            {
-                tank_crosshair_1 = Instantiate(crosshair_1, spawn_p1.transform.position, Quaternion.identity);
-                tank = Instantiate(tank_1, spawn_p1.transform.position, Quaternion.identity);
-            }
-            else
-            {
-                tank_crosshair_1 = Instantiate(crosshair_1);
-                tank = Instantiate(tank_1);
-            }
+        // Destroy all Spawns
+        for (int i = 0; i < PlayerSpawnArray.Length; i++) Destroy(PlayerSpawnArray[i]);
 
-            allplayers[0] = tank;
-
-            tank.GetComponent<PlayerController>().SetCrosshair(tank_crosshair_1);
-            tank.GetComponent<PlayerController>().SetHealthBar(health_bar_1);
-            tank.GetComponent<PlayerController>().SendPlayerInfo(player_info);
-            playingPlayers++;
-        }
-        if (cpBinding.getControllerBinding(2) != 0)
-        {
-            // Instantiate tank from spawnpoint if available
-            GameObject tank;
-            GameObject tank_crosshair_2;
-
-            if (spawn_p2 != null)
-            {
-                tank_crosshair_2 = Instantiate(crosshair_2, spawn_p2.transform.position, Quaternion.identity);
-                tank = Instantiate(tank_2, spawn_p2.transform.position, Quaternion.identity);
-            }
-            else
-            {
-                tank_crosshair_2 = Instantiate(crosshair_2);
-                tank = Instantiate(tank_2);
-            }
-
-            allplayers[1] = tank;
-
-            tank.GetComponent<PlayerController>().SetCrosshair(tank_crosshair_2);
-            tank.GetComponent<PlayerController>().SetHealthBar(health_bar_2);
-            playingPlayers++;
-        }
-        if (cpBinding.getControllerBinding(3) != 0)
-        {
-            // Instantiate tank from spawnpoint if available
-            GameObject tank;
-            GameObject tank_crosshair_3;
-
-            if (spawn_p3 != null)
-            {
-                tank_crosshair_3 = Instantiate(crosshair_3, spawn_p3.transform.position, Quaternion.identity);
-                tank = Instantiate(tank_3, spawn_p3.transform.position, Quaternion.identity);
-            }
-            else
-            {
-                tank_crosshair_3 = Instantiate(crosshair_3);
-                tank = Instantiate(tank_3);
-            }
-
-            allplayers[2] = tank;
-
-            tank.GetComponent<PlayerController>().SetCrosshair(tank_crosshair_3);
-            tank.GetComponent<PlayerController>().SetHealthBar(health_bar_3);
-            playingPlayers++;
-        }
-        if (cpBinding.getControllerBinding(4) != 0)
-        {
-            // Instantiate tank from spawnpoint if available
-            GameObject tank;
-            GameObject tank_crosshair_4;
-
-            if (spawn_p2 != null)
-            {
-                tank_crosshair_4 = Instantiate(crosshair_4, spawn_p4.transform.position, Quaternion.identity);
-                tank = Instantiate(tank_4, spawn_p4.transform.position, Quaternion.identity);
-            }
-            else
-            {
-                tank_crosshair_4 = Instantiate(crosshair_4);
-                tank = Instantiate(tank_4);
-            }
-
-            allplayers[3] = tank;
-
-            tank.GetComponent<PlayerController>().SetCrosshair(tank_crosshair_4);
-            tank.GetComponent<PlayerController>().SetHealthBar(health_bar_4);
-            playingPlayers++;
-        }
+        // Compress the tilemaps so the size equals the actual filled space
         tilemapGround.CompressBounds();
         tilemapWall.CompressBounds();
         tilemapObjects.CompressBounds();
         tilemapTop.CompressBounds();
-
-        // Destroy spawnpoints
-        if (spawn_p1 != null) Destroy(spawn_p1);
-        if (spawn_p2 != null) Destroy(spawn_p2);
-        if (spawn_p3 != null) Destroy(spawn_p3);
-        if (spawn_p4 != null) Destroy(spawn_p4);
 
         /*
         Vector3 offset = transform.up * (transform.localScale.y / 2f) * -1f;
@@ -299,5 +197,50 @@ public class GameManager : MonoBehaviour
         int totalPlayers = playingPlayers;
 
         return totalPlayers;
+    }
+
+    int RandomPlayerSpawn()
+    {
+        while (true)
+        {
+            // Get a random number
+            int possible_spawn = Random.Range(0, PlayerSpawnArray.Length);
+
+            // Check if player already spawned in this spot
+            if (!player_spawned[possible_spawn])
+            {
+                player_spawned[possible_spawn] = true;
+
+                // Return spawn
+                return possible_spawn;
+            }
+        }
+    }
+
+    void spawnPlayers(ControllerPlayerBinding playerControllerBinding)
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            if (playerControllerBinding.getControllerBinding(i + 1) != 0 && PlayerSpawnArray.Length > i)
+            {
+                // Create GameObjects
+                GameObject tank;
+                GameObject tank_crosshair;
+
+                // Get random spawn spot
+                int spawn_spot = RandomPlayerSpawn();
+
+                // Spawn crosshair and tank on player spawn
+                tank_crosshair = Instantiate(crosshairs[i], PlayerSpawnArray[spawn_spot].transform.position, Quaternion.identity);
+                tank = Instantiate(tanks[i], PlayerSpawnArray[spawn_spot].transform.position, Quaternion.identity);
+
+                allplayers[i] = tank;
+
+                tank.GetComponent<PlayerController>().SetCrosshair(tank_crosshair);
+                tank.GetComponent<PlayerController>().SetHealthBar(health_bars[i]);
+                //tank.GetComponent<PlayerController>().SendPlayerInfo(player_info);
+                playingPlayers++;
+            }
+        }
     }
 }
