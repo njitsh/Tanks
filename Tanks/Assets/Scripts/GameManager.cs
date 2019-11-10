@@ -60,6 +60,9 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        SaveSystem.Init();
+
+        // Get player controller bindings
         GameObject PCBinding = GameObject.Find("PCBinding");
         ControllerPlayerBinding cpBinding = PCBinding.GetComponent<ControllerPlayerBinding>();
 
@@ -90,11 +93,6 @@ public class GameManager : MonoBehaviour
         tilemapObjects.CompressBounds();
         tilemapTop.CompressBounds();
 
-        /*
-        Vector3 offset = transform.up * (transform.localScale.y / 2f) * -1f;
-        Vector3 pos = transform.position + offset; //This is the position
-        */
-
         // Center camera
         xMin = -1;
         xMax = -1;
@@ -102,8 +100,8 @@ public class GameManager : MonoBehaviour
         yMax = -1;
 
         setMaxCoordinates(tilemapGround);
-        //setMaxCoordinates(tilemapWall); NEEDS TO BE PLACED ON GROUND
-        //setMaxCoordinates(tilemapObjects); NEEDS TO BE PLACED ON GROUND
+        //setMaxCoordinates(tilemapWall); MAY ONLY BE PLACED ON GROUND --> EDIT EDITOR
+        //setMaxCoordinates(tilemapObjects); MAY ONLY BE PLACED ON GROUND --> EDIT EDITOR
         setMaxCoordinates(tilemapTop);
 
         Camera.main.transform.position = new Vector3(xMin + (xMax-xMin)/2, yMin + (yMax - yMin) / 2, -10);

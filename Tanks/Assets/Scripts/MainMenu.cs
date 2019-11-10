@@ -40,6 +40,7 @@ public class MainMenu : MonoBehaviour
 
     void Start()
     {
+        SaveSystem.Init();
         Cursor.lockState = CursorLockMode.Confined;
     }
 

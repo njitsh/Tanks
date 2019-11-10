@@ -11,15 +11,22 @@ public class Crosshair : MonoBehaviour
     public string horizontalRightAxis;
     public string verticalRightAxis;
 
-    private float x_co = 0, y_co = 0;
+    private float x_co, y_co;
     private bool isKeyboard = false;
-    private int crosshairSize = 50;
+    private int crosshairSize = 35;
 
     public void SetCrosshairControls(string hRightAxis, string vRightAxis, bool isKB)
     {
         horizontalRightAxis = hRightAxis;
         verticalRightAxis = vRightAxis;
         isKeyboard = isKB;
+    }
+
+    void Start()
+    {
+        // Set crosshairs to the middle of the screen
+        x_co = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width / 2, 0)).x;
+        y_co = Camera.main.ScreenToWorldPoint(new Vector2(0, Screen.height / 2)).y;
     }
 
     // Update is called once per frame
@@ -38,16 +45,17 @@ public class Crosshair : MonoBehaviour
                 //Variable crosshair speed
                 crosshairMag = Mathf.Clamp01(new Vector2(Input.GetAxisRaw(horizontalRightAxis), Input.GetAxisRaw(verticalRightAxis)).magnitude);
                 moveCrosshairVelocity = moveCrosshairInput.normalized * crosshairSpeed * crosshairMag * Time.fixedDeltaTime;
-                //moveCrosshairVelocity = moveCrosshairInput.normalized * crosshairSpeed * Time.fixedDeltaTime;
-                if ((x_co + moveCrosshairVelocity.x < Camera.main.ScreenToWorldPoint(new Vector2(Screen.width - (crosshairSize / 2), Screen.height)).x) && (x_co + moveCrosshairVelocity.x > Camera.main.ScreenToWorldPoint(new Vector2((crosshairSize / 2), 0)).x))
-                {
-                    x_co += moveCrosshairVelocity.x;
-                }
-                if ((y_co + moveCrosshairVelocity.y < Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height - (crosshairSize / 2))).y) && (y_co + moveCrosshairVelocity.y > Camera.main.ScreenToWorldPoint(new Vector2(0, (crosshairSize / 2))).y))
-                {
-                    y_co += moveCrosshairVelocity.y;
-                }
+
+                // Add velocity to position
+                x_co += moveCrosshairVelocity.x;
+                y_co += moveCrosshairVelocity.y;
             }
+
+            // Limit the crosshair to the screen
+            x_co = Mathf.Clamp(x_co, Camera.main.ScreenToWorldPoint(new Vector2((crosshairSize / 2), 0)).x, Camera.main.ScreenToWorldPoint(new Vector2(Screen.width - (crosshairSize / 2), 0)).x);
+            y_co = Mathf.Clamp(y_co, Camera.main.ScreenToWorldPoint(new Vector2(0, (crosshairSize / 2))).y, Camera.main.ScreenToWorldPoint(new Vector2(0, Screen.height - (crosshairSize / 2))).y);
+
+            // Set new crosshair position
             transform.position = new Vector2(x_co, y_co);
         }
     }

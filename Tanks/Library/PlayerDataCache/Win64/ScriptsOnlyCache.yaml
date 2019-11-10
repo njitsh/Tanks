@@ -484,7 +484,7 @@ ScriptsOnlyBuild:
     className: TestResultRendererCallback
   - hash:
       serializedVersion: 2
-      Hash: d0961f1e05b0a7fd2c41150987580402
+      Hash: 92c049e29cf2bdde3cdf590dd69ad74d
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerController
@@ -604,7 +604,7 @@ ScriptsOnlyBuild:
     className: ControlPlayableAsset
   - hash:
       serializedVersion: 2
-      Hash: c4c40d99ae27cb49e44a460a042270a4
+      Hash: 100f75f83b210920a9b991e5d5527fd7
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameManager
