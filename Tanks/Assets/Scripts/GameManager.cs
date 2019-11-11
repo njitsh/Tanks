@@ -77,7 +77,7 @@ public class GameManager : MonoBehaviour
             }
         }*/
 
-        MapSystem.Play_Map(tilemapGround, tilemapWall, tilemapObjects, tilemapTop, 0, tile_prefab_array, ground_tiles_array, wall_tiles_array, objects_tiles_array, top_tiles_array);
+        MapSystem.Play_Selected_Map(tilemapGround, tilemapWall, tilemapObjects, tilemapTop, cpBinding.getLevelPath(), tile_prefab_array, ground_tiles_array, wall_tiles_array, objects_tiles_array, top_tiles_array);
 
         PlayerSpawnArray = GameObject.FindGameObjectsWithTag("PlayerSpawn"); // Find all spawnpoints and put them in an array
         player_spawned = new bool[PlayerSpawnArray.Length]; // Array

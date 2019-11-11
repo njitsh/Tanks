@@ -63,6 +63,13 @@ public static class SaveSystem
         }
     }
 
+    // LOAD MAP
+    public static string LoadFromPath(string path)
+    {
+        string mapString = File.ReadAllText(path);
+        return mapString;
+    }
+
     public static FileInfo[] GetSavesFromFolder(int folder)
     {
         DirectoryInfo directoryInfo = new DirectoryInfo(MAP_FOLDER[folder]);
