@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
 
     PlayerController player;
 
-    PauseMenu pause;
+    public GameObject canvasUI;
 
     int totalAlive = 0;
 
@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
     public int amountOfRounds = 3;
 
     GameObject[] players = new GameObject[4];
-    GameObject[] allplayers = new GameObject[4];
+    public GameObject[] allplayers = new GameObject[4];
 
     public int[,] player_info = new int[4, 3];
 
@@ -120,6 +120,7 @@ public class GameManager : MonoBehaviour
             cameraSize = (xMax - xMin) / 2 + borderSize * 2;
         }
         Camera.main.orthographicSize = Mathf.Clamp(cameraSize, cameraSizeMin, cameraSizeMax);
+        PauseMenu.GameIsPaused = false;
     }
 
     private void setMaxCoordinates(Tilemap tilemapMax)
@@ -156,8 +157,7 @@ public class GameManager : MonoBehaviour
         // if there are as many rounds played as the amount of rounds that that should be played
         if (currentRound == amountOfRounds)
         {
-            pause = FindObjectOfType(typeof(PauseMenu)) as PauseMenu;
-            pause.Pause();
+            canvasUI.GetComponent<Scoreboard>().ShowScoreboard();
         }
         else
         {

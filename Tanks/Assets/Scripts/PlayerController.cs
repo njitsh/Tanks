@@ -48,6 +48,11 @@ public class PlayerController : MonoBehaviour
 
     GameManager gameManager;
 
+    // Player stats
+    public int kills = 0;
+    public int deaths = 0;
+
+
     // TODO ?
     // setup custom constructed class with HP, ammo?, and wich class is currently being used. http://ilkinulas.github.io/development/unity/2016/05/30/monobehaviour-constructor.html
 
@@ -155,7 +160,7 @@ public class PlayerController : MonoBehaviour
         }
         if (health <= 0)
         {
-            Die();
+            Die(0);
         }
 
     }
@@ -189,20 +194,22 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void Hit(int damage)
+    public void Hit(int damage, int fired_by)
     {
         if (health > damage) health -= damage;
         else
         {
             health = 0;
-            Die();
+            Die(fired_by);
         }
         HealthBar HBar = HealthBar.GetComponent<HealthBar>();
         HBar.SetHealthState((float)health / healthMax);
     }
 
-    void Die()
+    void Die(int fired_by)
     {
+        deaths++; // Increase deaths for player that died
+        if (fired_by > 0) gameManager.allplayers[fired_by - 1].GetComponent<PlayerController>().kills++; // Increase kills for player that killed this player if it was a player
         gameObject.SetActive(false);
         player_tank_crosshair.SetActive(false);
         gameManager.CheckGameOver();

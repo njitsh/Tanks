@@ -19,6 +19,7 @@ public class LevelSelector : MonoBehaviour
 
     void Start()
     {
+        LevelBlockList.Clear();
         listLevels(SaveSystem.GetSavesFromFolder(0));
         listLevels(SaveSystem.GetSavesFromFolder(1));
     }
