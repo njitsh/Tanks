@@ -49,6 +49,7 @@ public class Editor : MonoBehaviour
 
         activeMap = tilemapGround;
         activeSelectedMap = tilemapSelectedGround;
+        PauseMenu.GameIsPaused = false;
     }
 
     // Update is called once per frame
