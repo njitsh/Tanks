@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
 
     int totalAlive = 0;
 
-    int currentRound;
+    int currentRound = 1;
     public int amountOfRounds = 3;
 
     GameObject[] players = new GameObject[4];

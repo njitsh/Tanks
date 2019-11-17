@@ -16,17 +16,7 @@ public class Scoreboard : MonoBehaviour
 
     public GameObject pauseMenuUI;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    public static bool scoreboardIsEnabled = false;
 
     public void ShowScoreboard()
     {
@@ -35,16 +25,18 @@ public class Scoreboard : MonoBehaviour
         Time.timeScale = 0f;
         PauseMenu.GameIsPaused = true;
         Cursor.visible = true;
+        scoreboardIsEnabled = true;
         SetScoreboard();
     }
 
-    public void HideScoreboard()
+    /*public void HideScoreboard()
     {
         scoreboardUI.SetActive(false);
         Time.timeScale = 1f;
         PauseMenu.GameIsPaused = false;
         Cursor.visible = false;
-    }
+        scoreboardIsEnabled = false;
+    }*/
 
     public void SetScoreboard()
     {
@@ -63,6 +55,7 @@ public class Scoreboard : MonoBehaviour
         scoreboardUI.SetActive(false);
         Time.timeScale = 1f;
         PauseMenu.GameIsPaused = false;
+        scoreboardIsEnabled = false;
         SceneManager.LoadScene("MenuScene");
     }
 }
