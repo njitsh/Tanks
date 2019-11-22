@@ -17,6 +17,7 @@ ScriptsOnlyBuild:
     - PlayerGun
     - PlayerToControllerAssigner
     - Scoreboard
+    - SetCountdown
     - SteamManager
     - Wall
     Unity.2D.Tilemap.Editor.dll:
@@ -99,25 +100,27 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 10644}
     - Class: 114
-      Script: {instanceID: 10864}
+      Script: {instanceID: 10670}
     - Class: 114
-      Script: {instanceID: 10966}
+      Script: {instanceID: 10850}
     - Class: 114
-      Script: {instanceID: 11116}
+      Script: {instanceID: 10868}
     - Class: 114
-      Script: {instanceID: 11274}
+      Script: {instanceID: 10970}
     - Class: 114
-      Script: {instanceID: 11340}
+      Script: {instanceID: 11120}
     - Class: 114
-      Script: {instanceID: 11418}
+      Script: {instanceID: 11278}
     - Class: 114
-      Script: {instanceID: 11714}
+      Script: {instanceID: 11344}
     - Class: 114
-      Script: {instanceID: 11854}
+      Script: {instanceID: 11422}
     - Class: 114
-      Script: {instanceID: 11920}
+      Script: {instanceID: 11718}
     - Class: 114
-      Script: {instanceID: 18446}
+      Script: {instanceID: 11858}
+    - Class: 114
+      Script: {instanceID: 11924}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -172,25 +175,25 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 10624}
     - Class: 114
-      Script: {instanceID: 10722}
+      Script: {instanceID: 10724}
     - Class: 114
-      Script: {instanceID: 10864}
+      Script: {instanceID: 10868}
     - Class: 114
-      Script: {instanceID: 10966}
+      Script: {instanceID: 10970}
     - Class: 114
-      Script: {instanceID: 11116}
+      Script: {instanceID: 11120}
     - Class: 114
-      Script: {instanceID: 11340}
+      Script: {instanceID: 11344}
     - Class: 114
-      Script: {instanceID: 11418}
+      Script: {instanceID: 11422}
     - Class: 114
-      Script: {instanceID: 11714}
+      Script: {instanceID: 11718}
     - Class: 114
-      Script: {instanceID: 11754}
+      Script: {instanceID: 11758}
     - Class: 114
-      Script: {instanceID: 11854}
+      Script: {instanceID: 11858}
     - Class: 114
-      Script: {instanceID: 11908}
+      Script: {instanceID: 11912}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -239,19 +242,19 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 10406}
     - Class: 114
-      Script: {instanceID: 10864}
+      Script: {instanceID: 10868}
     - Class: 114
-      Script: {instanceID: 11060}
+      Script: {instanceID: 11064}
     - Class: 114
-      Script: {instanceID: 11116}
+      Script: {instanceID: 11120}
     - Class: 114
-      Script: {instanceID: 11274}
+      Script: {instanceID: 11278}
     - Class: 114
-      Script: {instanceID: 11340}
+      Script: {instanceID: 11344}
     - Class: 114
-      Script: {instanceID: 11418}
+      Script: {instanceID: 11422}
     - Class: 114
-      Script: {instanceID: 11854}
+      Script: {instanceID: 11858}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -314,29 +317,29 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 10624}
     - Class: 114
-      Script: {instanceID: 10858}
+      Script: {instanceID: 10862}
     - Class: 114
-      Script: {instanceID: 10864}
+      Script: {instanceID: 10868}
     - Class: 114
-      Script: {instanceID: 11116}
+      Script: {instanceID: 11120}
     - Class: 114
-      Script: {instanceID: 11130}
+      Script: {instanceID: 11134}
     - Class: 114
-      Script: {instanceID: 11296}
+      Script: {instanceID: 11300}
     - Class: 114
-      Script: {instanceID: 11340}
+      Script: {instanceID: 11344}
     - Class: 114
-      Script: {instanceID: 11418}
+      Script: {instanceID: 11422}
     - Class: 114
-      Script: {instanceID: 11608}
+      Script: {instanceID: 11612}
     - Class: 114
-      Script: {instanceID: 11650}
+      Script: {instanceID: 11654}
     - Class: 114
-      Script: {instanceID: 11854}
+      Script: {instanceID: 11858}
     - Class: 114
-      Script: {instanceID: 11874}
+      Script: {instanceID: 11878}
     - Class: 114
-      Script: {instanceID: 11898}
+      Script: {instanceID: 11902}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -381,19 +384,19 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 10406}
     - Class: 114
-      Script: {instanceID: 10864}
+      Script: {instanceID: 10868}
     - Class: 114
-      Script: {instanceID: 11116}
+      Script: {instanceID: 11120}
     - Class: 114
-      Script: {instanceID: 11274}
+      Script: {instanceID: 11278}
     - Class: 114
-      Script: {instanceID: 11340}
+      Script: {instanceID: 11344}
     - Class: 114
-      Script: {instanceID: 11418}
+      Script: {instanceID: 11422}
     - Class: 114
-      Script: {instanceID: 11714}
+      Script: {instanceID: 11718}
     - Class: 114
-      Script: {instanceID: 11854}
+      Script: {instanceID: 11858}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -681,6 +684,12 @@ ScriptsOnlyBuild:
     className: SignalTrack
   - hash:
       serializedVersion: 2
+      Hash: 36501ff4cc350243e9ec6aa1afbb2d65
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Scoreboard
+  - hash:
+      serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Unity.Analytics.Editor.dll
     namespaceName: UnityEditor.Analytics
@@ -715,6 +724,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TextContainer
+  - hash:
+      serializedVersion: 2
+      Hash: 62e040979f1bcc5cfdb183bf34b809bf
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: SetCountdown
   - hash:
       serializedVersion: 2
       Hash: 3c810e7272c44f2d47e6ac1fe95e8d52
@@ -967,12 +982,6 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
-  - hash:
-      serializedVersion: 2
-      Hash: 36501ff4cc350243e9ec6aa1afbb2d65
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: Scoreboard
   platform: 19
   scenePathNames:
   - Assets/Scenes/MenuScene.unity

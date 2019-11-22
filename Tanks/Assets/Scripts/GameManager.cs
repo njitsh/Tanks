@@ -58,9 +58,15 @@ public class GameManager : MonoBehaviour
     GameObject[] PlayerSpawnArray;
     bool[] player_spawned;
 
+    public static bool countDownDone = false;
+
+    public GameObject countdownUI;
+
     // Start is called before the first frame update
     void Start()
     {
+        countdownUI.SetActive(true);
+
         SaveSystem.Init();
 
         // Get player controller bindings
@@ -120,7 +126,6 @@ public class GameManager : MonoBehaviour
             cameraSize = (xMax - xMin) / 2 + borderSize * 2;
         }
         Camera.main.orthographicSize = Mathf.Clamp(cameraSize, cameraSizeMin, cameraSizeMax);
-        PauseMenu.GameIsPaused = false;
     }
 
     private void setMaxCoordinates(Tilemap tilemapMax)
@@ -181,6 +186,8 @@ public class GameManager : MonoBehaviour
                 // TODO:: RESET THEIR HEALTH
             }
         }
+
+        countdownUI.SetActive(true);
     }
 
     int GetPlayers()

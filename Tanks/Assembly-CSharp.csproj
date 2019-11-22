@@ -84,6 +84,7 @@
     <Compile Include="Assets\Scripts\PlayerToControllerAssigner.cs" />
     <Compile Include="Assets\Scripts\SaveSystem.cs" />
     <Compile Include="Assets\Scripts\Scoreboard.cs" />
+    <Compile Include="Assets\Scripts\SetCountdown.cs" />
     <Compile Include="Assets\Scripts\Steamworks.NET\SteamManager.cs" />
     <Compile Include="Assets\Scripts\TestBulletScript.cs" />
     <Compile Include="Assets\Scripts\Wall.cs" />
