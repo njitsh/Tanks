@@ -11,7 +11,7 @@ public class PauseMenu : MonoBehaviour
 
     void Update()
     {
-        if (!Scoreboard.scoreboardIsEnabled && GameManager.countDownDone)
+        if (!Scoreboard.scoreboardIsEnabled && (GameManager.countDownDone || SceneManager.GetActiveScene().name != "LocalGameScene"))
         {
             for (int i = 1; i <= 4; i++)
             {

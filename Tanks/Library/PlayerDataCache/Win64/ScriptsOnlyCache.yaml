@@ -624,7 +624,7 @@ ScriptsOnlyBuild:
     className: ControlPlayableAsset
   - hash:
       serializedVersion: 2
-      Hash: 42e341108a5651559ddb4ac27a236908
+      Hash: b55f78c793ca9acf77c86b6830a965f2
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameManager
@@ -989,4 +989,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/LocalGameScene.unity
   - Assets/Scenes/OnlineGameScene.unity
   - Assets/Scenes/MapEditorScene.unity
-  playerPath: D:/Tanks/Build/Tanks.exe
+  playerPath: C:/Users/s.harks/Documents/Github/Tanks/Build/Tanks.exe

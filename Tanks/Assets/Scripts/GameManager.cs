@@ -197,6 +197,13 @@ public class GameManager : MonoBehaviour
     {
         while (true)
         {
+            bool allSpawnsUsed = true;
+            for (int i = 0; i < player_spawned.Length; i++)
+            {
+                if (player_spawned[i] == false) allSpawnsUsed = false;
+            }
+            if (allSpawnsUsed) return -1;
+
             // Get a random number
             int possible_spawn = Random.Range(0, PlayerSpawnArray.Length);
             if (possible_spawn > PlayerSpawnArray.Length - 1) possible_spawn = 0;
@@ -209,13 +216,6 @@ public class GameManager : MonoBehaviour
                 // Return spawn
                 return possible_spawn;
             }
-
-            bool allSpawnsUsed = true;
-            for (int i = 0; i < player_spawned.Length; i++)
-            {
-                if (player_spawned[possible_spawn] == false) allSpawnsUsed = false;
-            }
-            if (allSpawnsUsed) return -1;
         }
     }
 
@@ -255,7 +255,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        // If not enough players joined return to the main men
+        // If not enough players joined return to the main menu
         if (playingPlayers < 2) SceneManager.LoadScene("MenuScene");
 
         // Destroy all Spawns

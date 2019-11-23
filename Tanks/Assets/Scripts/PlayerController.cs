@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
 
     private float angle = 0;
     private float target_angle = 0;
-    private readonly float turn_speed = 3;
+    private readonly float turn_speed = 5;
     private float mag;
     private Rigidbody2D rb;
     private Vector3 moveVelocity;
