@@ -86,7 +86,6 @@
     <Compile Include="Assets\Scripts\Scoreboard.cs" />
     <Compile Include="Assets\Scripts\SetCountdown.cs" />
     <Compile Include="Assets\Scripts\Steamworks.NET\SteamManager.cs" />
-    <Compile Include="Assets\Scripts\TestBulletScript.cs" />
     <Compile Include="Assets\Scripts\Wall.cs" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />

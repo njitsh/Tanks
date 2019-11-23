@@ -45,7 +45,7 @@ public static class MapSystem
         Clear_Whole_Map(tMGround, tMWall, tMObjects, tMTop);
 
         string[] mapString = SaveSystem.Load(level_index);
-        if (mapString[0] != null)
+        if (mapString != null)
         {
             SaveObject saveObject = JsonUtility.FromJson<SaveObject>(mapString[0]);
 
@@ -54,7 +54,8 @@ public static class MapSystem
             Load_Layer(tMObjects, Int_List_To_Tilebase(saveObject.tlo, object_tiles), saveObject.box, saveObject.boy);
             Load_Layer(tMTop, Int_List_To_Tilebase(saveObject.tlt, top_tiles), saveObject.btx, saveObject.bty);
         }
-        else Debug.Log("No map was loaded!");
+        else return -1;
+
         return int.Parse(mapString[1]);
     }
 
@@ -77,7 +78,7 @@ public static class MapSystem
         Clear_Whole_Map(tMGround, tMWall, tMObjects, tMTop);
 
         string[] mapString = SaveSystem.Load(level_index);
-        if (mapString[0] != null)
+        if (mapString != null)
         {
             SaveObject saveObject = JsonUtility.FromJson<SaveObject>(mapString[0]);
 
@@ -86,7 +87,8 @@ public static class MapSystem
             Load_And_Play_Layer(tMObjects, Int_List_To_Tilebase(saveObject.tlo, object_tiles), saveObject.box, saveObject.boy, tile_prefab_array);
             Load_And_Play_Layer(tMTop, Int_List_To_Tilebase(saveObject.tlt, top_tiles), saveObject.btx, saveObject.bty, tile_prefab_array);
         }
-        else Debug.Log("No map was loaded!");
+        else return -1;
+
         return int.Parse(mapString[1]);
     }
 

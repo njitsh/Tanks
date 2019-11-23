@@ -93,9 +93,19 @@ public class GameManager : MonoBehaviour
         else SceneManager.LoadScene("MenuScene");
         */
         currentLevelIndex = MapSystem.Play_Map(tilemapGround, tilemapWall, tilemapObjects, tilemapTop, -1, tile_prefab_array, ground_tiles_array, wall_tiles_array, objects_tiles_array, top_tiles_array);
-        
+        if (currentLevelIndex == -1)
+        {
+            Debug.Log("Couldn't find a map to load. (2)");
+            SceneManager.LoadScene("MenuScene");
+        }
+
         spawnPlayersFromLobby(cpBinding);
 
+        centerCamera();
+    }
+
+    private void centerCamera()
+    {
         // Compress the tilemaps so the size equals the actual filled space
         tilemapGround.CompressBounds();
         tilemapWall.CompressBounds();
@@ -113,7 +123,7 @@ public class GameManager : MonoBehaviour
         //setMaxCoordinates(tilemapObjects); MAY ONLY BE PLACED ON GROUND --> EDIT EDITOR
         setMaxCoordinates(tilemapTop);
 
-        Camera.main.transform.position = new Vector3(xMin + (xMax-xMin)/2, yMin + (yMax - yMin) / 2, -10);
+        Camera.main.transform.position = new Vector3(xMin + (xMax - xMin) / 2, yMin + (yMax - yMin) / 2, -10);
 
         // Zoom camera
         if (Camera.main.aspect > (xMax - xMin) / (yMax - yMin)) // Map height is higher than screen height compared to width of both
@@ -180,7 +190,15 @@ public class GameManager : MonoBehaviour
 
         if (!randomLevelOrder) currentLevelIndex = MapSystem.Play_Map(tilemapGround, tilemapWall, tilemapObjects, tilemapTop, currentLevelIndex, tile_prefab_array, ground_tiles_array, wall_tiles_array, objects_tiles_array, top_tiles_array);
         else currentLevelIndex = MapSystem.Play_Map(tilemapGround, tilemapWall, tilemapObjects, tilemapTop, -1, tile_prefab_array, ground_tiles_array, wall_tiles_array, objects_tiles_array, top_tiles_array);
-        
+
+        if (currentLevelIndex == -1)
+        {
+            Debug.Log("Couldn't find a map to load. (2)");
+            SceneManager.LoadScene("MenuScene");
+        }
+
+        centerCamera();
+
         spawnPlayers();
 
         countdownUI.SetActive(true);
@@ -201,6 +219,7 @@ public class GameManager : MonoBehaviour
             for (int i = 0; i < player_spawned.Length; i++)
             {
                 if (player_spawned[i] == false) allSpawnsUsed = false;
+                Debug.Log("Spawns used: " + player_spawned[i] + " " + i);
             }
             if (allSpawnsUsed) return -1;
 
@@ -229,7 +248,11 @@ public class GameManager : MonoBehaviour
             if (playerControllerBinding.getControllerBinding(i + 1) != 0 && PlayerSpawnArray.Length > 0)
             {
                 // If not enough spawnpoints for players return to the main menu
-                if (PlayerSpawnArray.Length <= playingPlayers) SceneManager.LoadScene("MenuScene");
+                if (PlayerSpawnArray.Length <= playingPlayers)
+                {
+                    Debug.Log("PlayerSpawnArray length is too short for the amount of players. (1)");
+                    SceneManager.LoadScene("MenuScene");
+                }
                 else
                 {
                     playingPlayers++;
@@ -240,7 +263,11 @@ public class GameManager : MonoBehaviour
 
                     // Get random spawn spot
                     int spawn_spot = RandomPlayerSpawn();
-                    if (spawn_spot == -1) SceneManager.LoadScene("MenuScene");
+                    if (spawn_spot == -1)
+                    {
+                        Debug.Log("Couldn't get free spawn_spot. (1) Level index: " + currentLevelIndex);
+                        SceneManager.LoadScene("MenuScene");
+                    }
 
                     // Spawn crosshair and tank on player spawn
                     tank_crosshair = Instantiate(crosshairs[i], PlayerSpawnArray[spawn_spot].transform.position, Quaternion.identity);
@@ -253,10 +280,15 @@ public class GameManager : MonoBehaviour
                     //tank.GetComponent<PlayerController>().SendPlayerInfo(player_info);
                 }
             }
+            else health_bars[i].SetActive(false);
         }
 
         // If not enough players joined return to the main menu
-        if (playingPlayers < 2) SceneManager.LoadScene("MenuScene");
+        if (playingPlayers < 2)
+        {
+            Debug.Log("Not enough players joined (less than 2)");
+            SceneManager.LoadScene("MenuScene");
+        }
 
         // Destroy all Spawns
         for (int i = 0; i < PlayerSpawnArray.Length; i++) Destroy(PlayerSpawnArray[i]);
@@ -268,13 +300,21 @@ public class GameManager : MonoBehaviour
         player_spawned = new bool[PlayerSpawnArray.Length]; // Array
 
         // If not enough spawnpoints for players return to the main menu
-        if (PlayerSpawnArray.Length < playingPlayers) SceneManager.LoadScene("MenuScene");
+        if (PlayerSpawnArray.Length < playingPlayers)
+        {
+            Debug.Log("PlayerSpawnArray length is too short for the amount of players. (2)");
+            SceneManager.LoadScene("MenuScene");
+        }
 
         for (int i = 0; i <= playingPlayers; i++)
         {
             // Get random spawn spot
             int spawn_spot = RandomPlayerSpawn();
-            if (spawn_spot == -1) SceneManager.LoadScene("MenuScene");
+            if (spawn_spot == -1)
+            {
+                Debug.Log("Couldn't get free spawn_spot. (2) Level index: " + currentLevelIndex);
+                SceneManager.LoadScene("MenuScene");
+            }
 
             if (allplayers[i] != null && player_spawned.Length >= playingPlayers) allplayers[i].GetComponent<PlayerController>().ResetPlayer(PlayerSpawnArray[spawn_spot].transform.position);
         }

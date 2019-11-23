@@ -15,6 +15,9 @@ public class Bullet : MonoBehaviour
     private float activation_moment;
     public int tank_number;
 
+    private int maxBounces = 3;
+    private int timesBounced;
+
     LayerMask mask;
 
     // Start is called before the first frame update
@@ -37,10 +40,10 @@ public class Bullet : MonoBehaviour
             //Debug.DrawRay(new Vector2(transform.position.x, transform.position.y) + new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * 0.15f, new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)), Color.red);
 
             // Create RAY
-            Ray ray = new Ray(new Vector2(transform.position.x, transform.position.y) + new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * 0.15f, new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)));
+            Ray ray = new Ray(new Vector2(transform.position.x, transform.position.y) + new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * 0.25f, new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)));
 
             // Create RAY HIT
-            RaycastHit2D hit = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y) + new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * 0.15f, new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)));
+            RaycastHit2D hit = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y) + new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * 0.25f, new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)));
 
             // Check if the ray hits something
             if (hit)
@@ -48,6 +51,9 @@ public class Bullet : MonoBehaviour
                 // Check if the ray hits a wall within a distance of 0.15f
                 if (hit.distance < 0.15f && hit.transform.tag == "Wall")
                 {
+                    if (timesBounced >= maxBounces) Destroy(gameObject);
+                    else timesBounced++;
+
                     // Reflect bullet
                     Vector2 reflectDir = Vector2.Reflect(ray.direction, hit.normal);
                     angle = Mathf.Atan2(reflectDir.y, reflectDir.x);
