@@ -137,7 +137,7 @@ public class PlayerController : MonoBehaviour
         SetControllerNumber(cpBinding.getControllerBinding(tank_number));
         rb = GetComponent<Rigidbody2D>();
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-        groundmap = GameObject.Find("Ground").GetComponent<Tilemap>();
+        groundmap = GameObject.Find("GroundGrid").GetComponent<Tilemap>();
     }
     
     // Update is called once per frame
@@ -202,8 +202,7 @@ public class PlayerController : MonoBehaviour
             health = 0;
             Die(fired_by);
         }
-        HealthBar HBar = HealthBar.GetComponent<HealthBar>();
-        HBar.SetHealthState((float)health / healthMax);
+        setHealthState(health);
     }
 
     void Die(int fired_by)
@@ -215,20 +214,18 @@ public class PlayerController : MonoBehaviour
         gameManager.CheckGameOver();
     }
 
-    public void ResetPlayer()
+    public void ResetPlayer(Vector2 respawnPos)
     {
         gameObject.SetActive(true);
         player_tank_crosshair.SetActive(true);
+        transform.position = respawnPos;
         health = healthMax;
+        setHealthState(health);
+    }
+
+    private void setHealthState(int health)
+    {
+        HealthBar HBar = HealthBar.GetComponent<HealthBar>();
+        HBar.SetHealthState((float)health / healthMax);
     }
 }
-//if(player2 != null)
-//            {
-//                if (player3 != null)
-//                {
-//                    if (player4 != null)
-//                    {
-
-//                    }
-//                }
-//            }

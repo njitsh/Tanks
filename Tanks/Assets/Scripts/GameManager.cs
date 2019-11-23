@@ -62,6 +62,9 @@ public class GameManager : MonoBehaviour
 
     public GameObject countdownUI;
 
+    private int currentLevelIndex;
+    public bool randomLevelOrder;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -84,16 +87,14 @@ public class GameManager : MonoBehaviour
             }
         }*/
 
+        // Used to load specific map
+        /*
         if (cpBinding.getLevelPath() != null) MapSystem.Play_Selected_Map(tilemapGround, tilemapWall, tilemapObjects, tilemapTop, cpBinding.getLevelPath(), tile_prefab_array, ground_tiles_array, wall_tiles_array, objects_tiles_array, top_tiles_array);
         else SceneManager.LoadScene("MenuScene");
-
-        PlayerSpawnArray = GameObject.FindGameObjectsWithTag("PlayerSpawn"); // Find all spawnpoints and put them in an array
-        player_spawned = new bool[PlayerSpawnArray.Length]; // Array
-
-        spawnPlayers(cpBinding);
-
-        // Destroy all Spawns
-        for (int i = 0; i < PlayerSpawnArray.Length; i++) Destroy(PlayerSpawnArray[i]);
+        */
+        currentLevelIndex = MapSystem.Play_Map(tilemapGround, tilemapWall, tilemapObjects, tilemapTop, -1, tile_prefab_array, ground_tiles_array, wall_tiles_array, objects_tiles_array, top_tiles_array);
+        
+        spawnPlayersFromLobby(cpBinding);
 
         // Compress the tilemaps so the size equals the actual filled space
         tilemapGround.CompressBounds();
@@ -160,32 +161,27 @@ public class GameManager : MonoBehaviour
     void GameOver()
     {
         // if there are as many rounds played as the amount of rounds that that should be played
-        if (currentRound == amountOfRounds)
+        /*if (currentRound == amountOfRounds)
         {
             canvasUI.GetComponent<Scoreboard>().ShowScoreboard();
         }
         else
         {
             StartNewRound();
-        }
+        }*/
 
+        StartNewRound();
     }
 
     void StartNewRound()
     {
         currentRound++;
+        currentLevelIndex++;
 
-        for (int i = 0; i <= playingPlayers; i++)
-        {
-            if (allplayers[i] != null)
-            {
-                //players[i].AddComponent<PlayerController>();
-                allplayers[i].GetComponent<PlayerController>().ResetPlayer();
-                // TODO:: PLACE ALL THE PLAYERS BACK TO THEIR OLD POS
-                // TODO:: ACTIVATE ALL THE PLAYERS AGAIN
-                // TODO:: RESET THEIR HEALTH
-            }
-        }
+        if (!randomLevelOrder) currentLevelIndex = MapSystem.Play_Map(tilemapGround, tilemapWall, tilemapObjects, tilemapTop, currentLevelIndex, tile_prefab_array, ground_tiles_array, wall_tiles_array, objects_tiles_array, top_tiles_array);
+        else currentLevelIndex = MapSystem.Play_Map(tilemapGround, tilemapWall, tilemapObjects, tilemapTop, -1, tile_prefab_array, ground_tiles_array, wall_tiles_array, objects_tiles_array, top_tiles_array);
+        
+        spawnPlayers();
 
         countdownUI.SetActive(true);
     }
@@ -203,6 +199,7 @@ public class GameManager : MonoBehaviour
         {
             // Get a random number
             int possible_spawn = Random.Range(0, PlayerSpawnArray.Length);
+            if (possible_spawn > PlayerSpawnArray.Length - 1) possible_spawn = 0;
 
             // Check if player already spawned in this spot
             if (!player_spawned[possible_spawn])
@@ -212,33 +209,85 @@ public class GameManager : MonoBehaviour
                 // Return spawn
                 return possible_spawn;
             }
+
+            bool allSpawnsUsed = true;
+            for (int i = 0; i < player_spawned.Length; i++)
+            {
+                if (player_spawned[possible_spawn] == false) allSpawnsUsed = false;
+            }
+            if (allSpawnsUsed) return -1;
         }
     }
 
-    void spawnPlayers(ControllerPlayerBinding playerControllerBinding)
+    void spawnPlayersFromLobby(ControllerPlayerBinding playerControllerBinding)
     {
+        PlayerSpawnArray = GameObject.FindGameObjectsWithTag("PlayerSpawn"); // Find all spawnpoints and put them in an array
+        player_spawned = new bool[PlayerSpawnArray.Length]; // Array
+
         for (int i = 0; i < 4; i++)
         {
-            if (playerControllerBinding.getControllerBinding(i + 1) != 0 && PlayerSpawnArray.Length > i)
+            if (playerControllerBinding.getControllerBinding(i + 1) != 0 && PlayerSpawnArray.Length > 0)
             {
-                // Create GameObjects
-                GameObject tank;
-                GameObject tank_crosshair;
+                // If not enough spawnpoints for players return to the main menu
+                if (PlayerSpawnArray.Length <= playingPlayers) SceneManager.LoadScene("MenuScene");
+                else
+                {
+                    playingPlayers++;
 
-                // Get random spawn spot
-                int spawn_spot = RandomPlayerSpawn();
+                    // Create GameObjects
+                    GameObject tank;
+                    GameObject tank_crosshair;
 
-                // Spawn crosshair and tank on player spawn
-                tank_crosshair = Instantiate(crosshairs[i], PlayerSpawnArray[spawn_spot].transform.position, Quaternion.identity);
-                tank = Instantiate(tanks[i], PlayerSpawnArray[spawn_spot].transform.position, Quaternion.identity);
+                    // Get random spawn spot
+                    int spawn_spot = RandomPlayerSpawn();
+                    if (spawn_spot == -1) SceneManager.LoadScene("MenuScene");
 
-                allplayers[i] = tank;
+                    // Spawn crosshair and tank on player spawn
+                    tank_crosshair = Instantiate(crosshairs[i], PlayerSpawnArray[spawn_spot].transform.position, Quaternion.identity);
+                    tank = Instantiate(tanks[i], PlayerSpawnArray[spawn_spot].transform.position, Quaternion.identity);
 
-                tank.GetComponent<PlayerController>().SetCrosshair(tank_crosshair);
-                tank.GetComponent<PlayerController>().SetHealthBar(health_bars[i]);
-                //tank.GetComponent<PlayerController>().SendPlayerInfo(player_info);
-                playingPlayers++;
+                    allplayers[i] = tank;
+
+                    tank.GetComponent<PlayerController>().SetCrosshair(tank_crosshair);
+                    tank.GetComponent<PlayerController>().SetHealthBar(health_bars[i]);
+                    //tank.GetComponent<PlayerController>().SendPlayerInfo(player_info);
+                }
             }
         }
+
+        // If not enough players joined return to the main men
+        if (playingPlayers < 2) SceneManager.LoadScene("MenuScene");
+
+        // Destroy all Spawns
+        for (int i = 0; i < PlayerSpawnArray.Length; i++) Destroy(PlayerSpawnArray[i]);
+    }
+
+    void spawnPlayers()
+    {
+        PlayerSpawnArray = GameObject.FindGameObjectsWithTag("PlayerSpawn"); // Find all spawnpoints and put them in an array
+        player_spawned = new bool[PlayerSpawnArray.Length]; // Array
+
+        // If not enough spawnpoints for players return to the main menu
+        if (PlayerSpawnArray.Length < playingPlayers) SceneManager.LoadScene("MenuScene");
+
+        for (int i = 0; i <= playingPlayers; i++)
+        {
+            // Get random spawn spot
+            int spawn_spot = RandomPlayerSpawn();
+            if (spawn_spot == -1) SceneManager.LoadScene("MenuScene");
+
+            if (allplayers[i] != null && player_spawned.Length >= playingPlayers) allplayers[i].GetComponent<PlayerController>().ResetPlayer(PlayerSpawnArray[spawn_spot].transform.position);
+        }
+
+        // Destroy all Spawns
+        for (int i = 0; i < PlayerSpawnArray.Length; i++) Destroy(PlayerSpawnArray[i]);
+    }
+
+    public static void DestroyAllObjects()
+    {
+        GameObject[] walls = GameObject.FindGameObjectsWithTag("Wall");
+        foreach (GameObject wall in walls) if (wall.name != "WallGrid") Destroy(wall);
+        GameObject[] bullets = GameObject.FindGameObjectsWithTag("Bullet");
+        foreach (GameObject bullet in bullets) Destroy(bullet);
     }
 }

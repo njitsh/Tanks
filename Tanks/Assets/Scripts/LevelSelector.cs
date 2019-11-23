@@ -30,7 +30,7 @@ public class LevelSelector : MonoBehaviour
         GameObject.Find("LobbyCanvas").GetComponent<LobbyMenu>().StartLocalGame();
     }
 
-    void listLevels(FileInfo[] mapFiles)
+    void listLevels(List<FileInfo> mapFiles)
     {
         foreach (FileInfo mapFile in mapFiles)
         {

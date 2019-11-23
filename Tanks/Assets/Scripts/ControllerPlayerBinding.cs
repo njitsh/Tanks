@@ -14,7 +14,7 @@ public class ControllerPlayerBinding : MonoBehaviour
     public static void TempControllerBinding()
     {
         player_info = GameObject.Find("Player_To_Controller_Assigner").GetComponent<PlayerToControllerAssigner>().player_controller_array;
-        level_file_path = GameObject.Find("LevelSelectorCanvas").GetComponent<LevelSelector>().level_path;
+        //level_file_path = GameObject.Find("LevelSelectorCanvas").GetComponent<LevelSelector>().level_path;
     }
 
     public int getControllerBinding(int number)

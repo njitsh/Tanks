@@ -33,34 +33,33 @@ public static class SaveSystem
     }
 
     // LOAD MAP
-    public static string Load(int folder)
+    public static string[] Load(int level_index)
     {
-        FileInfo[] mapFiles = GetSavesFromFolder(folder);
-        FileInfo mostRecentFile = null;
-        foreach (FileInfo fileInfo in mapFiles)
+        List<FileInfo> mapFiles = new List<FileInfo>();
+        for (int i = 0; i < MAP_FOLDER.Length; i++)
         {
-            if (mostRecentFile == null)
-            {
-                mostRecentFile = fileInfo;
-            }
-            else
-            {
-                if (fileInfo.LastWriteTime > mostRecentFile.LastWriteTime)
-                {
-                    mostRecentFile = fileInfo;
-                }
-            }
+            mapFiles = mapFiles.Union(GetSavesFromFolder(i)).ToList();
         }
 
-        if (mostRecentFile != null)
+        // Return null if there are no maps available
+        if (mapFiles.Count == 0) return null;
+
+        FileInfo chosenFile;
+
+        if (level_index > mapFiles.Count - 1) level_index = 0; // Set index to 0 if index is too heigh
+        if (level_index < 0) level_index = Random.Range(0, mapFiles.Count); // Set random level index
+
+        // Set chosen file
+        chosenFile = mapFiles[level_index];
+
+        if (chosenFile != null)
         {
-            string mapString = File.ReadAllText(mostRecentFile.FullName);
+            string[] mapString = new string[2];
+            mapString[0] = File.ReadAllText(chosenFile.FullName);
+            mapString[1] = level_index.ToString();
             return mapString;
         }
-        else
-        {
-            return null;
-        }
+        else return null;
     }
 
     // LOAD MAP
@@ -70,9 +69,9 @@ public static class SaveSystem
         return mapString;
     }
 
-    public static FileInfo[] GetSavesFromFolder(int folder)
+    public static List<FileInfo> GetSavesFromFolder(int folder)
     {
         DirectoryInfo directoryInfo = new DirectoryInfo(MAP_FOLDER[folder]);
-        return directoryInfo.GetFiles("*.json").OrderBy(p => p.CreationTime).ToArray();
+        return directoryInfo.GetFiles("*.json").OrderBy(p => p.CreationTime).ToList();
     }
 }

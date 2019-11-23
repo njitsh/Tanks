@@ -26,6 +26,7 @@ public class LobbyMenu : MonoBehaviour
         Cursor.visible = false;
     }
 
+    /*
     public void ToLevelSelect()
     {
         if (ptocAssigner.GetPlayerAmount() >= 1)
@@ -35,6 +36,7 @@ public class LobbyMenu : MonoBehaviour
             LevelSelectionM.SetActive(true);
         }
     }
+    */
 
     public void BackToLobby()
     {

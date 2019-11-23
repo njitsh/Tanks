@@ -42,6 +42,7 @@ public class MainMenu : MonoBehaviour
     {
         SaveSystem.Init();
         Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
     }
 
     public void LocalGameLobby()

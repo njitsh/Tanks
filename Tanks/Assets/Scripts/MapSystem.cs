@@ -40,12 +40,14 @@ public static class MapSystem
         public List<int> tlt;
     }
 
-    public static void Load_Map(Tilemap tMGround, Tilemap tMWall, Tilemap tMObjects, Tilemap tMTop, int folder, TileBase[] ground_tiles, TileBase[] wall_tiles, TileBase[] object_tiles, TileBase[] top_tiles)
+    public static int Load_Map(Tilemap tMGround, Tilemap tMWall, Tilemap tMObjects, Tilemap tMTop, int level_index, TileBase[] ground_tiles, TileBase[] wall_tiles, TileBase[] object_tiles, TileBase[] top_tiles)
     {
-        string mapString = SaveSystem.Load(folder);
-        if (mapString != null)
+        Clear_Whole_Map(tMGround, tMWall, tMObjects, tMTop);
+
+        string[] mapString = SaveSystem.Load(level_index);
+        if (mapString[0] != null)
         {
-            SaveObject saveObject = JsonUtility.FromJson<SaveObject>(mapString);
+            SaveObject saveObject = JsonUtility.FromJson<SaveObject>(mapString[0]);
 
             Load_Layer(tMGround, Int_List_To_Tilebase(saveObject.tlg, ground_tiles), saveObject.bgx, saveObject.bgy);
             Load_Layer(tMWall, Int_List_To_Tilebase(saveObject.tlw, wall_tiles), saveObject.bwx, saveObject.bwy);
@@ -53,6 +55,7 @@ public static class MapSystem
             Load_Layer(tMTop, Int_List_To_Tilebase(saveObject.tlt, top_tiles), saveObject.btx, saveObject.bty);
         }
         else Debug.Log("No map was loaded!");
+        return int.Parse(mapString[1]);
     }
 
     private static void Load_Layer(Tilemap tilemap, TileBase[] map, int bounds_x, int bounds_y)
@@ -69,12 +72,14 @@ public static class MapSystem
         }
     }
 
-    public static void Play_Map(Tilemap tMGround, Tilemap tMWall, Tilemap tMObjects, Tilemap tMTop, int folder, tile_to_prefab[] tile_prefab_array, TileBase[] ground_tiles, TileBase[] wall_tiles, TileBase[] object_tiles, TileBase[] top_tiles)
+    public static int Play_Map(Tilemap tMGround, Tilemap tMWall, Tilemap tMObjects, Tilemap tMTop, int level_index, tile_to_prefab[] tile_prefab_array, TileBase[] ground_tiles, TileBase[] wall_tiles, TileBase[] object_tiles, TileBase[] top_tiles)
     {
-        string mapString = SaveSystem.Load(folder);
-        if (mapString != null)
+        Clear_Whole_Map(tMGround, tMWall, tMObjects, tMTop);
+
+        string[] mapString = SaveSystem.Load(level_index);
+        if (mapString[0] != null)
         {
-            SaveObject saveObject = JsonUtility.FromJson<SaveObject>(mapString);
+            SaveObject saveObject = JsonUtility.FromJson<SaveObject>(mapString[0]);
 
             Load_And_Play_Layer(tMGround, Int_List_To_Tilebase(saveObject.tlg, ground_tiles), saveObject.bgx, saveObject.bgy, tile_prefab_array);
             Load_And_Play_Layer(tMWall, Int_List_To_Tilebase(saveObject.tlw, wall_tiles), saveObject.bwx, saveObject.bwy, tile_prefab_array);
@@ -82,9 +87,10 @@ public static class MapSystem
             Load_And_Play_Layer(tMTop, Int_List_To_Tilebase(saveObject.tlt, top_tiles), saveObject.btx, saveObject.bty, tile_prefab_array);
         }
         else Debug.Log("No map was loaded!");
+        return int.Parse(mapString[1]);
     }
 
-    public static void Play_Selected_Map(Tilemap tMGround, Tilemap tMWall, Tilemap tMObjects, Tilemap tMTop, string filepath, tile_to_prefab[] tile_prefab_array, TileBase[] ground_tiles, TileBase[] wall_tiles, TileBase[] object_tiles, TileBase[] top_tiles)
+    /*public static void Play_Selected_Map(Tilemap tMGround, Tilemap tMWall, Tilemap tMObjects, Tilemap tMTop, string filepath, tile_to_prefab[] tile_prefab_array, TileBase[] ground_tiles, TileBase[] wall_tiles, TileBase[] object_tiles, TileBase[] top_tiles)
     {
         string mapString = SaveSystem.LoadFromPath(filepath);
         if (mapString != null)
@@ -97,7 +103,7 @@ public static class MapSystem
             Load_And_Play_Layer(tMTop, Int_List_To_Tilebase(saveObject.tlt, top_tiles), saveObject.btx, saveObject.bty, tile_prefab_array);
         }
         else Debug.Log("No map was loaded!");
-    }
+    }*/
 
     private static void Load_And_Play_Layer(Tilemap tilemap, TileBase[] map, int bounds_x, int bounds_y, tile_to_prefab[] tile_prefab_array)
     {
@@ -196,6 +202,9 @@ public static class MapSystem
         Clear_Layer(tMWall);
         Clear_Layer(tMObjects);
         Clear_Layer(tMTop);
+
+        // Destroy prefabs
+        GameManager.DestroyAllObjects();
     }
 
     public static void Clear_Layer(Tilemap layer_to_clear)
