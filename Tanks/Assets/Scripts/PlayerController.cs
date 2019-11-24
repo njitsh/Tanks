@@ -33,10 +33,10 @@ public class PlayerController : MonoBehaviour
     private int controllerNumber;
     private bool isKeyboard;
     public int tank_number;
-
+    public Sprite player_tank_sniper_gun;
     public GameObject player_tank_crosshair;
     public GameObject player_tank_gun;
-
+    
     private PlayerController player;
 
     private float groundSpeed;
@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour
     public Tile grassTile;
 
     public Tilemap groundmap;
-
+    PlayerGun player_tank_gun_script;
     GameManager gameManager;
 
     // Player stats
@@ -121,7 +121,8 @@ public class PlayerController : MonoBehaviour
         if (cpBinding.getControllerBinding(tank_number) == 5) isKeyboard = true;
         player_tank_crosshair_script.SetCrosshairControls(horizontalRightAxis, verticalRightAxis, isKeyboard);
 
-        PlayerGun player_tank_gun_script = player_tank_gun.GetComponent<PlayerGun>();
+        player_tank_gun_script = player_tank_gun.GetComponent<PlayerGun>();
+        print(player_tank_gun_script);
         player_tank_gun_script.SetGunController(xButton, rightTriggerButton);
     }
 
@@ -221,6 +222,17 @@ public class PlayerController : MonoBehaviour
         transform.position = respawnPos;
         health = healthMax;
         setHealthState(health);
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.ToString() == "Objects (UnityEngine.GameObject)")
+        {
+            collision.gameObject.SetActive(false);
+            player_tank_gun_script.PickUpGun();
+            
+            print(player_tank_gun.GetComponent<SpriteRenderer>().sprite = player_tank_sniper_gun);
+
+        }
     }
 
     private void setHealthState(int health)

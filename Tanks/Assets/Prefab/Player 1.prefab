@@ -117,14 +117,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c4aeb02951c6404b8f0df2cd726ea1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 6
   health: 0
   healthMax: 0
+  isDead: 0
   HealthBar: {fileID: 7388644285898923775, guid: bd74d9e06c8bf0e4890b7d0f69da1693,
     type: 3}
   tank_color: 0
   horizontalRightAxis: 
   verticalRightAxis: 
   tank_number: 1
+  player_tank_sniper_gun: {fileID: 21300000, guid: fb74cb53161922d4b8c8cef2091cba36,
+    type: 3}
   player_tank_crosshair: {fileID: 0}
   player_tank_gun: {fileID: 7041584879932866226}
   sandTile: {fileID: 11400000, guid: 1a2171571bdf0644d9979e6278560742, type: 2}

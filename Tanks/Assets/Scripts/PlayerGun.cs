@@ -22,7 +22,7 @@ public class PlayerGun : MonoBehaviour
 
     private string xButton;
     public string rightTriggerButton;
-
+    Bullet bulletScript;
     public void SetGunController(string xControllerButton, string rightControllerTriggerButton)
     {
         xButton = xControllerButton;
@@ -72,7 +72,13 @@ public class PlayerGun : MonoBehaviour
             var rAngle = angle * Mathf.Deg2Rad;
             bulletPos += new Vector2(Mathf.Cos(rAngle) * barrel_length, Mathf.Sin(rAngle) * barrel_length);
             GameObject bullet = Instantiate(Bullet, bulletPos, Quaternion.AngleAxis(angle, transform.forward));
-            bullet.GetComponent<Bullet>().setTankNumber(tank_number);
+            bullet.GetComponent<Bullet>().setTankNumber(tank_number);          
         }
+    }
+    public void PickUpGun()
+    {
+        bulletScript = Bullet.GetComponent<Bullet>();
+        bulletScript.vel = 20;
+        fireRate = 1.5f;
     }
 }
