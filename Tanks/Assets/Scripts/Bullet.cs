@@ -40,13 +40,13 @@ public class Bullet : MonoBehaviour
             //Debug.DrawRay(new Vector2(transform.position.x, transform.position.y) + new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * 0.15f, new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)), Color.red);
 
             // Create RAY
-            Ray ray = new Ray(new Vector2(transform.position.x, transform.position.y) + new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * 0.25f, new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)));
+            //Ray ray = new Ray(new Vector2(transform.position.x, transform.position.y) + new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * 0.25f, new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)));
 
             // Create RAY HIT
-            RaycastHit2D hit = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y) + new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * 0.25f, new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)));
+            //RaycastHit2D hit = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y) + new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * 0.25f, new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)));
 
             // Check if the ray hits something
-            if (hit)
+            /*if (hit)
             {
                 // Check if the ray hits a wall within a distance of 0.15f
                 if (hit.distance < 0.15f && hit.transform.tag == "Wall")
@@ -75,6 +75,25 @@ public class Bullet : MonoBehaviour
                         Destroy(gameObject); // Destroy Bullet
                     }
                 }
+            }*/
+
+            Ray ray3D = new Ray(new Vector2(transform.position.x, transform.position.y) + new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * 0.25f, new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)));
+
+            int layerMaskCrate = 1 << 10;
+
+            RaycastHit hit3D;
+
+            if (Physics.Raycast(new Vector2(transform.position.x, transform.position.y) + new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * 0.25f, new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)), out hit3D, layerMaskCrate) && hit3D.distance < 0.15)
+            {
+                if (timesBounced >= maxBounces) Destroy(gameObject);
+                else timesBounced++;
+
+                // Reflect bullet
+                Vector2 reflectDir = Vector2.Reflect(ray3D.direction, hit3D.normal);
+                angle = Mathf.Atan2(reflectDir.y, reflectDir.x);
+                transform.rotation = Quaternion.AngleAxis(angle * Mathf.Rad2Deg, Vector3.forward);
+
+                if (hit3D.transform.name == "CrateWood(Clone)") hit3D.transform.gameObject.GetComponent<Wall>().Hit(bullet_damage); // Hit wall with 10 damage
             }
         }
     }

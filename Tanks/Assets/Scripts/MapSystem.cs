@@ -127,7 +127,7 @@ public static class MapSystem
         {
             if (tile == tile_prefab_array[i].tile)
             {
-                UnityEngine.Object.Instantiate(tile_prefab_array[i].prefab_object, tilemap.CellToWorld(new Vector3Int(x, y, 0)) + new Vector3(0.25f, 0.25f, 0.25f), Quaternion.identity);
+                UnityEngine.Object.Instantiate(tile_prefab_array[i].prefab_object, tilemap.CellToWorld(new Vector3Int(x, y, 0)) + new Vector3(0.25f, 0.25f, -0.25f), Quaternion.identity);
                 return true;
             }
         }

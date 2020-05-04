@@ -182,7 +182,7 @@ public class PlayerController : MonoBehaviour
             target_angle = (Mathf.Atan2(Input.GetAxisRaw(verticalAxis), Input.GetAxisRaw(horizontalAxis)) * Mathf.Rad2Deg + 360) % 360;
             for (int times = 0; times < turn_speed * groundSpeed; times++)
             {
-                if (Mathf.Abs(target_angle - angle) < 1) times = 3;
+                if (Mathf.Abs(target_angle - angle) < 1) times = (int) (turn_speed * groundSpeed);
                 // Turn clockwise
                 else if (((angle > target_angle) && (angle - target_angle <= 180)) || ((angle < target_angle) && (target_angle - angle >= 180))) angle = (angle - 1 + 360) % 360;
                 // Turn anti-clockwise

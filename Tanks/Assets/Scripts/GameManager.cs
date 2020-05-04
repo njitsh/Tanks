@@ -123,7 +123,7 @@ public class GameManager : MonoBehaviour
         //setMaxCoordinates(tilemapObjects); MAY ONLY BE PLACED ON GROUND --> EDIT EDITOR
         setMaxCoordinates(tilemapTop);
 
-        Camera.main.transform.position = new Vector3(xMin + (xMax - xMin) / 2, yMin + (yMax - yMin) / 2, -10);
+        Camera.main.transform.position = new Vector3(xMin + (xMax - xMin) / 2, yMin + (yMax - yMin) / 2, -10) + new Vector3(-3, -4.5f, 0);
 
         // Zoom camera
         if (Camera.main.aspect > (xMax - xMin) / (yMax - yMin)) // Map height is higher than screen height compared to width of both
@@ -284,7 +284,7 @@ public class GameManager : MonoBehaviour
         }
 
         // If not enough players joined return to the main menu
-        if (playingPlayers < 2)
+        if (playingPlayers < 1) // CHANGE BACK TO 2!!!!!!!!!!!!!!!!!!!!!!!
         {
             Debug.Log("Not enough players joined (less than 2)");
             SceneManager.LoadScene("MenuScene");
