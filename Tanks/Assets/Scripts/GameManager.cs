@@ -39,6 +39,8 @@ public class GameManager : MonoBehaviour
     int currentRound = 1;
     public int amountOfRounds = 3;
 
+    private int minPlayers = 2;
+
     GameObject[] players = new GameObject[4];
     public GameObject[] allplayers = new GameObject[4];
 
@@ -284,7 +286,7 @@ public class GameManager : MonoBehaviour
         }
 
         // If not enough players joined return to the main menu
-        if (playingPlayers < 2)
+        if (playingPlayers < minPlayers)
         {
             Debug.Log("Not enough players joined (less than 2)");
             SceneManager.LoadScene("MenuScene");
